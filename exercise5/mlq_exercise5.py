@@ -39,23 +39,18 @@ def _schedule(jobs: Iterable[Job], mode: str) -> list[Segment]:
     if mode not in {"semaphore", "monitor", "both"}:
         raise ValueError("mode must be semaphore, monitor, or both")
 
-    queues = {1: deque(), 2: deque(), 3: deque()}
-    # Semaphore protects queue insertion/removal in semaphore modes.
-    queue_lock = Semaphore(1)
-    # Condition is the monitor: it protects queue state and signals availability.
-    monitor = Condition()
-    # In 'both', admission is bounded separately while the monitor protects state.
-    capacity = Semaphore(max(1, len(list(jobs)))) if mode == "both" else None
     job_list = list(jobs)
+    queues = {1: deque(), 2: deque(), 3: deque()}
+    queue_lock = Semaphore(1)
+    # A Condition plus its lock acts as a monitor for shared queue state.
+    monitor = Condition()
+    # In the combined variant, the semaphore gates admissions and the monitor
+    # protects the queues. Capacity is sized to avoid blocking this serial demo.
+    capacity = Semaphore(max(1, len(job_list))) if mode == "both" else None
 
-    # The queue state is initialized before the scheduling loop; all jobs are ready.
     for job in job_list:
         if mode == "semaphore":
-            queue_lock.acquire()
-            try:
-                queues[job.queue].append(job)
-            finally:
-                queue_lock.release()
+            with_semaphore(queue_lock, queues[job.queue], job)
         elif mode == "monitor":
             with monitor:
                 queues[job.queue].append(job)
@@ -63,10 +58,12 @@ def _schedule(jobs: Iterable[Job], mode: str) -> list[Segment]:
         else:
             assert capacity is not None
             capacity.acquire()
-            with monitor:
-                queues[job.queue].append(job)
-                monitor.notify_all()
-            capacity.release()
+            try:
+                with monitor:
+                    queues[job.queue].append(job)
+                    monitor.notify_all()
+            finally:
+                capacity.release()
 
     timeline: list[Segment] = []
     now = 0
@@ -78,7 +75,6 @@ def _schedule(jobs: Iterable[Job], mode: str) -> list[Segment]:
             finally:
                 queue_lock.release()
         else:
-            # Monitor mode uses Condition's lock for the entire queue selection.
             with monitor:
                 job = next((queues[q].popleft() for q in (1, 2, 3) if queues[q]), None)
 
@@ -87,6 +83,14 @@ def _schedule(jobs: Iterable[Job], mode: str) -> list[Segment]:
         timeline.append(Segment(job.pid, job.queue, now, now + job.burst))
         now += job.burst
     return timeline
+
+
+def with_semaphore(lock: Semaphore, queue: deque, job: Job) -> None:
+    lock.acquire()
+    try:
+        queue.append(job)
+    finally:
+        lock.release()
 
 
 def schedule_with_semaphore(jobs: Iterable[Job]) -> list[Segment]:
@@ -118,8 +122,7 @@ def demo() -> None:
     ]
     for title, scheduler in variants:
         print(f"\n=== MLQ with {title} ===")
-        timeline = scheduler(jobs)
-        print_gantt(timeline)
+        print_gantt(scheduler(jobs))
 
 
 if __name__ == "__main__":
