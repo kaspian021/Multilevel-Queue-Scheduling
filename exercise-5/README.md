@@ -24,6 +24,7 @@ Requires Python 3.10+; no third-party packages are needed.
 python exercise-5/mlq_sync_demo.py --mode semaphore --gantt exercise-5/gantt-semaphore.svg
 python exercise-5/mlq_sync_demo.py --mode monitor --gantt exercise-5/gantt-monitor.svg
 python exercise-5/mlq_sync_demo.py --mode both --gantt exercise-5/gantt-both.svg
+python exercise-5/mlq_sync_demo.py --all --gantt exercise-5/gantt.svg
 python -m unittest discover -s exercise-5 -p 'mlq_sync_demo.py' -v
 python -m unittest discover -s exercise-5 -p 'test_*.py' -v
 ```
