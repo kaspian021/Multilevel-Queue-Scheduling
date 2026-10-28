@@ -1,5 +1,7 @@
 # Exercise 5 — MLQ Scheduling with Synchronization
 
+![MLQ semaphore, monitor, and combined comparison](assets/mlq_sync_comparison.svg)
+
 This folder adds three synchronization variants to the existing Multilevel Queue (MLQ) scheduling project.
 
 ## Queue policy used in the experiment
@@ -23,6 +25,7 @@ python exercise-5/mlq_sync_demo.py --mode semaphore --gantt exercise-5/gantt-sem
 python exercise-5/mlq_sync_demo.py --mode monitor --gantt exercise-5/gantt-monitor.svg
 python exercise-5/mlq_sync_demo.py --mode both --gantt exercise-5/gantt-both.svg
 python -m unittest discover -s exercise-5 -p 'mlq_sync_demo.py' -v
+python -m unittest discover -s exercise-5 -p 'test_*.py' -v
 ```
 
 Each command prints the simulated Gantt trace and per-process completion, waiting, and turnaround metrics. The SVG chart is generated from the actual trace, not hand-drawn example timings.
@@ -91,7 +94,9 @@ flowchart TD
 - **T2 — RR quantum:** each Q1 time slice is no longer than 2 units.
 - **T3 — Queue priority:** Q1 is exhausted before Q2 starts; Q2 is exhausted before Q3 starts.
 - **T4 — Completion:** every process reaches zero remaining burst.
-- **T5 — Input validation:** invalid queue IDs and non-positive burst times are rejected.
+- **T5 — Input validation:** invalid queue IDs, non-positive burst times, invalid modes/quantums, and duplicate process IDs are rejected.
+- **T6 — Empty workload:** no processes produces an empty trace without errors.
+- **T7 — Gantt output:** chart generation writes a valid SVG containing task and queue labels.
 
 Run the unit tests with the command above. The three variants are educational synchronization designs around a deterministic simulation, not a kernel scheduler or a benchmark of parallel speed. The monitor uses a condition lock to guard the shared state; the combined mode demonstrates a semaphore gate plus the monitor. Because the workload is deterministic and runs in one scheduler thread, equal traces are expected and do not by themselves measure concurrent race behavior.
 
