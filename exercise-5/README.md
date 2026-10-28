@@ -22,7 +22,7 @@ Requires Python 3.10+; no third-party packages are needed.
 python exercise-5/mlq_sync_demo.py --mode semaphore --gantt exercise-5/gantt-semaphore.svg
 python exercise-5/mlq_sync_demo.py --mode monitor --gantt exercise-5/gantt-monitor.svg
 python exercise-5/mlq_sync_demo.py --mode both --gantt exercise-5/gantt-both.svg
-python -m unittest exercise-5/mlq_sync_demo.py -v
+python -m unittest discover -s exercise-5 -p 'mlq_sync_demo.py' -v
 ```
 
 Each command prints the simulated Gantt trace and per-process completion, waiting, and turnaround metrics. The SVG chart is generated from the actual trace, not hand-drawn example timings.
