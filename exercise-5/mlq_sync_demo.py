@@ -165,6 +165,7 @@ def example_processes() -> list[Process]:
 
 def render_gantt(timeline: list[Slice], output: Path) -> None:
     """Write a standalone SVG Gantt chart from the actual simulated trace."""
+    output.parent.mkdir(parents=True, exist_ok=True)
     scale, left, top, height = 55, 55, 50, 44
     width = left * 2 + max((s.end for s in timeline), default=1) * scale
     colors = {1: "#8ecae6", 2: "#ffd166", 3: "#b7e4c7"}
@@ -190,19 +191,24 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mode", choices=GUARDS, default="semaphore", help="synchronization implementation")
     parser.add_argument("--gantt", default="", help="optional path to write a Gantt chart SVG")
+    parser.add_argument("--all", action="store_true", help="run all three synchronization modes")
     args = parser.parse_args()
-    scheduler = MLQScheduler(example_processes(), args.mode)
-    timeline = scheduler.run()
-    print(f"Mode: {args.mode}")
-    print("Gantt: " + " | ".join(f"{s.start}-{s.end}:{s.pid}(Q{s.queue})" for s in timeline))
-    print("PID  Queue  Burst  Completion  Waiting  Turnaround")
-    metrics = scheduler.metrics()
-    for pid, m in metrics.items():
-        print(f"{pid:<4} {m['queue']:<6} {m['burst']:<6} {m['completion']:<11} {m['waiting']:<8} {m['turnaround']}")
-    if args.gantt:
-        path = Path(args.gantt)
-        render_gantt(timeline, path)
-        print(f"Gantt SVG written to: {path}")
+    modes = tuple(GUARDS) if args.all else (args.mode,)
+    for mode in modes:
+        scheduler = MLQScheduler(example_processes(), mode)
+        timeline = scheduler.run()
+        print(f"Mode: {mode}")
+        print("Gantt: " + " | ".join(f"{s.start}-{s.end}:{s.pid}(Q{s.queue})" for s in timeline))
+        print("PID  Queue  Burst  Completion  Waiting  Turnaround")
+        metrics = scheduler.metrics()
+        for pid, m in metrics.items():
+            print(f"{pid:<4} {m['queue']:<6} {m['burst']:<6} {m['completion']:<11} {m['waiting']:<8} {m['turnaround']}")
+        if args.gantt:
+            path = Path(args.gantt)
+            if args.all:
+                path = path.with_name(f"{path.stem}-{mode}{path.suffix or '.svg'}")
+            render_gantt(timeline, path)
+            print(f"Gantt SVG written to: {path}")
 
 
 class SchedulerTests(unittest.TestCase):
