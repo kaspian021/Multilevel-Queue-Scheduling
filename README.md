@@ -77,3 +77,11 @@ These numbers are only for explaining how to read a Gantt chart. They are not be
 ## Repository
 
 [Multilevel-Queue-Scheduling on GitHub](https://github.com/kaspian021/Multilevel-Queue-Scheduling)
+
+## Exercise 5 — MLQ Synchronization
+
+The `exercise-5/` folder compares MLQ scheduling with a semaphore, a monitor, and both mechanisms together. It includes flowcharts, the generated Gantt trace, and unit tests.
+
+![Exercise 5 MLQ synchronization comparison](exercise-5/assets/mlq_sync_comparison.svg)
+
+See [Exercise 5 documentation](exercise-5/README.md) for run commands, assumptions, and test coverage.
