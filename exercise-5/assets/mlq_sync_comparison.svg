@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1620" height="1320" viewBox="0 0 1620 1320">
+<defs>
+  <style>
+    .title{font:700 30px Arial,sans-serif;fill:#fff}.subtitle{font:500 17px Arial,sans-serif;fill:#e4edf8}
+    .cardtitle{font:700 19px Arial,sans-serif}.desc{font:14px Arial,sans-serif;fill:#263d51}
+    .section{font:700 14px Arial,sans-serif}.node{font:600 12px Arial,sans-serif;fill:#17324d;text-anchor:middle}
+    .code{font:12px Consolas,'Courier New',monospace;fill:#263d51}.tick{font:10px Arial,sans-serif;fill:#526b80;text-anchor:middle}
+    .arrow{fill:none;stroke:#39546e;stroke-width:1.6;marker-end:url(#arrow)}
+  </style>
+  <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#39546e"/></marker>
+  <g id="gantt">
+    <rect x="20" y="325" width="54" height="36" fill="#8ecae6" stroke="#263238"/><text x="47" y="340" class="node">P1</text><text x="47" y="353" class="tick">Q1</text>
+    <rect x="74" y="325" width="54" height="36" fill="#8ecae6" stroke="#263238"/><text x="101" y="340" class="node">P2</text><text x="101" y="353" class="tick">Q1</text>
+    <rect x="128" y="325" width="54" height="36" fill="#8ecae6" stroke="#263238"/><text x="155" y="340" class="node">P1</text><text x="155" y="353" class="tick">Q1</text>
+    <rect x="182" y="325" width="27" height="36" fill="#8ecae6" stroke="#263238"/><text x="195.5" y="340" font-size="9" font-family="Arial" text-anchor="middle">P2</text><text x="195.5" y="353" font-size="8" font-family="Arial" text-anchor="middle">Q1</text>
+    <rect x="209" y="325" width="27" height="36" fill="#8ecae6" stroke="#263238"/><text x="222.5" y="340" font-size="9" font-family="Arial" text-anchor="middle">P1</text><text x="222.5" y="353" font-size="8" font-family="Arial" text-anchor="middle">Q1</text>
+    <rect x="236" y="325" width="108" height="36" fill="#ffd166" stroke="#263238"/><text x="290" y="340" class="node">P3</text><text x="290" y="353" class="tick">Q2</text>
+    <rect x="344" y="325" width="54" height="36" fill="#ffd166" stroke="#263238"/><text x="371" y="340" class="node">P4</text><text x="371" y="353" class="tick">Q2</text>
+    <rect x="398" y="325" width="81" height="36" fill="#b7e4c7" stroke="#263238"/><text x="438.5" y="340" class="node">P5</text><text x="438.5" y="353" class="tick">Q3</text>
+    <path d="M20 362v5 M74 362v5 M128 362v5 M182 362v5 M236 362v5 M290 362v5 M344 362v5 M398 362v5 M452 362v5 M479 362v5" stroke="#526b80"/>
+    <text x="20" y="378" class="tick">0</text><text x="74" y="378" class="tick">2</text><text x="128" y="378" class="tick">4</text><text x="182" y="378" class="tick">6</text><text x="236" y="378" class="tick">8</text><text x="290" y="378" class="tick">10</text><text x="344" y="378" class="tick">12</text><text x="398" y="378" class="tick">14</text><text x="452" y="378" class="tick">16</text><text x="479" y="378" class="tick">17</text>
+  </g>
+</defs>
+<rect width="1620" height="1320" fill="#f3f6fa"/>
+<rect x="20" y="18" width="1580" height="92" rx="13" fill="#12345a"/>
+<text x="810" y="55" class="title" text-anchor="middle">MULTILEVEL QUEUE (MLQ) SCHEDULING</text>
+<text x="810" y="84" class="subtitle" text-anchor="middle">EXERCISE 5  |  Semaphore, Monitor, and Combined Synchronization</text>
+
+<!-- Blue card -->
+<g transform="translate(20,0)">
+  <rect x="0" y="130" width="500" height="1110" rx="13" fill="#f7fbff" stroke="#72b8e5" stroke-width="2"/>
+  <rect x="0" y="130" width="500" height="55" rx="13" fill="#d9efff" stroke="#72b8e5" stroke-width="1.5"/>
+  <text x="17" y="164" class="cardtitle" fill="#2878b5">1. MLQ with Semaphore</text>
+  <rect x="12" y="197" width="476" height="75" rx="8" fill="#fff" stroke="#9bcde9"/>
+  <text x="25" y="221" class="desc">Binary semaphore protects the shared ready queues</text><text x="25" y="241" class="desc">during selection and updates. It is released after</text><text x="25" y="261" class="desc">each simulated CPU slice.</text>
+  <text x="18" y="300" class="section" fill="#2878b5">GANTT CHART (SIMULATED TRACE)</text><rect x="12" y="307" width="476" height="80" rx="7" fill="#fff" stroke="#9bcde9"/><use href="#gantt"/>
+  <text x="18" y="414" class="section" fill="#2878b5">FLOWCHART</text>
+  <rect x="178" y="425" width="144" height="25" rx="13" fill="#d9efff" stroke="#2878b5"/><text x="250" y="442" class="node">START</text>
+  <path d="M250 450V459" class="arrow"/>
+  <rect x="50" y="460" width="400" height="28" rx="6" fill="#fff" stroke="#72b8e5"/><text x="250" y="478" class="node">Initialize tasks and queues Q1, Q2, Q3</text>
+  <path d="M250 488V495" class="arrow"/>
+  <rect x="50" y="496" width="400" height="28" rx="6" fill="#fff" stroke="#72b8e5"/><text x="250" y="514" class="node">Assign fixed priorities: Q1 &gt; Q2 &gt; Q3</text>
+  <path d="M250 524V531" class="arrow"/>
+  <rect x="50" y="532" width="400" height="28" rx="6" fill="#d9efff" stroke="#2878b5"/><text x="250" y="550" class="node">Acquire binary semaphore</text>
+  <path d="M250 560V568" class="arrow"/>
+  <polygon points="250,568 350,590 250,612 150,590" fill="#e5f6df" stroke="#51916a" stroke-width="1.5"/><text x="250" y="594" class="node">Any ready process?</text>
+  <path d="M250 612V620" class="arrow"/><text x="264" y="619" font-size="10" fill="#27804a">YES</text>
+  <rect x="50" y="621" width="400" height="28" rx="6" fill="#fff" stroke="#72b8e5"/><text x="250" y="639" class="node">Choose highest-priority non-empty queue</text>
+  <path d="M250 649V656" class="arrow"/>
+  <rect x="50" y="657" width="400" height="30" rx="6" fill="#fff" stroke="#72b8e5"/><text x="250" y="676" class="node">Run Q1 RR (quantum 2); Q2 and Q3 use FCFS</text>
+  <path d="M250 687V694" class="arrow"/>
+  <rect x="50" y="695" width="400" height="28" rx="6" fill="#fff" stroke="#72b8e5"/><text x="250" y="713" class="node">Update burst and append Gantt segment</text>
+  <path d="M250 723V730" class="arrow"/>
+  <rect x="50" y="731" width="400" height="28" rx="6" fill="#d9efff" stroke="#2878b5"/><text x="250" y="749" class="node">Release semaphore</text>
+  <path d="M450 745H477V546H450" class="arrow"/>
+  <path d="M350 590H465V795H430" class="arrow"/><text x="385" y="582" font-size="10" fill="#ad4a36">NO</text>
+  <rect x="70" y="780" width="360" height="32" rx="6" fill="#e8f2ff" stroke="#72b8e5"/><text x="250" y="800" class="node">Release guard, calculate metrics + Gantt</text>
+  <path d="M250 812V820" class="arrow"/><rect x="182" y="821" width="136" height="25" rx="13" fill="#d9efff" stroke="#2878b5"/><text x="250" y="838" class="node">END</text>
+  <text x="18" y="878" class="section" fill="#2878b5">PSEUDOCODE</text><rect x="12" y="890" width="476" height="318" rx="8" fill="#fff" stroke="#9bcde9"/>
+  <text x="27" y="919" class="code">for each process p: enqueue(p)</text><text x="27" y="946" class="code">while ready queues are not empty:</text><text x="27" y="973" class="code">    semaphore.acquire()</text><text x="27" y="1000" class="code">    p = pop_next(Q1, Q2, Q3)</text><text x="27" y="1027" class="code">    run_slice(p, Q1_RR_else_FCFS)</text><text x="27" y="1054" class="code">    update_burst_and_trace(p)</text><text x="27" y="1081" class="code">    semaphore.release()</text><text x="27" y="1108" class="code">calculate_metrics()</text><text x="27" y="1135" class="code">render_gantt_chart()</text>
+  <path d="M18 1166H482" stroke="#9bcde9"/><text x="27" y="1190" font-size="12" font-weight="700" fill="#2878b5">Simple mutual exclusion using a binary semaphore.</text>
+</g>
+
+<!-- Green card -->
+<g transform="translate(560,0)">
+  <rect x="0" y="130" width="500" height="1110" rx="13" fill="#f8fdf9" stroke="#81c9a1" stroke-width="2"/>
+  <rect x="0" y="130" width="500" height="55" rx="13" fill="#dff6e8" stroke="#81c9a1" stroke-width="1.5"/>
+  <text x="17" y="164" class="cardtitle" fill="#22845b">2. MLQ with Monitor</text>
+  <rect x="12" y="197" width="476" height="75" rx="8" fill="#fff" stroke="#a8d9bc"/>
+  <text x="25" y="221" class="desc">A monitor-style Condition lock protects queue state</text><text x="25" y="241" class="desc">and notifies condition waiters after a state update.</text><text x="25" y="261" class="desc">All example processes arrive at time 0.</text>
+  <text x="18" y="300" class="section" fill="#22845b">GANTT CHART (SIMULATED TRACE)</text><rect x="12" y="307" width="476" height="80" rx="7" fill="#fff" stroke="#a8d9bc"/><use href="#gantt" transform="translate(540,0)"/>
+  <text x="18" y="414" class="section" fill="#22845b">FLOWCHART</text>
+  <rect x="178" y="425" width="144" height="25" rx="13" fill="#dff6e8" stroke="#22845b"/><text x="250" y="442" class="node">START</text>
+  <path d="M250 450V459" class="arrow"/><rect x="50" y="460" width="400" height="28" rx="6" fill="#fff" stroke="#81c9a1"/><text x="250" y="478" class="node">Initialize monitor and queues Q1, Q2, Q3</text>
+  <path d="M250 488V495" class="arrow"/><rect x="50" y="496" width="400" height="28" rx="6" fill="#fff" stroke="#81c9a1"/><text x="250" y="514" class="node">Assign fixed priorities: Q1 &gt; Q2 &gt; Q3</text>
+  <path d="M250 524V531" class="arrow"/><rect x="50" y="532" width="400" height="28" rx="6" fill="#dff6e8" stroke="#22845b"/><text x="250" y="550" class="node">Enter monitor critical section</text>
+  <path d="M250 560V568" class="arrow"/><polygon points="250,568 350,590 250,612 150,590" fill="#e5f6df" stroke="#51916a" stroke-width="1.5"/><text x="250" y="594" class="node">Any ready process?</text>
+  <path d="M250 612V620" class="arrow"/><text x="264" y="619" font-size="10" fill="#27804a">YES</text><rect x="50" y="621" width="400" height="28" rx="6" fill="#fff" stroke="#81c9a1"/><text x="250" y="639" class="node">Choose highest-priority non-empty queue</text>
+  <path d="M250 649V656" class="arrow"/><rect x="50" y="657" width="400" height="30" rx="6" fill="#fff" stroke="#81c9a1"/><text x="250" y="676" class="node">Run Q1 RR (quantum 2); Q2 and Q3 use FCFS</text>
+  <path d="M250 687V694" class="arrow"/><rect x="50" y="695" width="400" height="28" rx="6" fill="#fff" stroke="#81c9a1"/><text x="250" y="713" class="node">Update burst and append Gantt segment</text>
+  <path d="M250 723V730" class="arrow"/><rect x="50" y="731" width="400" height="28" rx="6" fill="#dff6e8" stroke="#22845b"/><text x="250" y="749" class="node">Notify condition + leave monitor</text>
+  <path d="M450 745H477V546H450" class="arrow"/><path d="M350 590H465V795H430" class="arrow"/><text x="385" y="582" font-size="10" fill="#ad4a36">NO</text>
+  <rect x="70" y="780" width="360" height="32" rx="6" fill="#e8f2ff" stroke="#81c9a1"/><text x="250" y="800" class="node">Release monitor, calculate metrics + Gantt</text>
+  <path d="M250 812V820" class="arrow"/><rect x="182" y="821" width="136" height="25" rx="13" fill="#dff6e8" stroke="#22845b"/><text x="250" y="838" class="node">END</text>
+  <text x="18" y="878" class="section" fill="#22845b">PSEUDOCODE</text><rect x="12" y="890" width="476" height="318" rx="8" fill="#fff" stroke="#a8d9bc"/>
+  <text x="27" y="919" class="code">with monitor:</text><text x="27" y="946" class="code">    enqueue(p); monitor.notify_all()</text><text x="27" y="973" class="code">while ready queues are not empty:</text><text x="27" y="1000" class="code">    with monitor:</text><text x="27" y="1027" class="code">        p = pop_next(Q1, Q2, Q3)</text><text x="27" y="1054" class="code">        run_slice(p, Q1_RR_else_FCFS)</text><text x="27" y="1081" class="code">        update_burst_and_trace(p)</text><text x="27" y="1108" class="code"># exiting the monitor notifies waiters</text><text x="27" y="1135" class="code">calculate_metrics(); render_gantt()</text>
+  <path d="M18 1166H482" stroke="#a8d9bc"/><text x="27" y="1190" font-size="12" font-weight="700" fill="#22845b">Mutual exclusion plus condition notification.</text>
+</g>
+
+<!-- Purple card -->
+<g transform="translate(1100,0)">
+  <rect x="0" y="130" width="500" height="1110" rx="13" fill="#fcfaff" stroke="#b19be0" stroke-width="2"/>
+  <rect x="0" y="130" width="500" height="55" rx="13" fill="#ebe2ff" stroke="#b19be0" stroke-width="1.5"/>
+  <text x="17" y="164" font-size="18" font-weight="700" fill="#7650b8">3. MLQ with Monitor + Semaphore</text>
+  <rect x="12" y="197" width="476" height="75" rx="8" fill="#fff" stroke="#c8b8ea"/>
+  <text x="25" y="221" class="desc">Semaphore gate and monitor lock are combined for</text><text x="25" y="241" class="desc">layered protection. Acquire locks in a consistent</text><text x="25" y="261" class="desc">order: semaphore first, monitor second.</text>
+  <text x="18" y="300" class="section" fill="#7650b8">GANTT CHART (SIMULATED TRACE)</text><rect x="12" y="307" width="476" height="80" rx="7" fill="#fff" stroke="#c8b8ea"/><use href="#gantt" transform="translate(1080,0)"/>
+  <text x="18" y="414" class="section" fill="#7650b8">FLOWCHART</text>
+  <rect x="178" y="425" width="144" height="25" rx="13" fill="#ebe2ff" stroke="#7650b8"/><text x="250" y="442" class="node">START</text>
+  <path d="M250 450V459" class="arrow"/><rect x="50" y="460" width="400" height="28" rx="6" fill="#fff" stroke="#b19be0"/><text x="250" y="478" class="node">Initialize semaphore, monitor, and queues</text>
+  <path d="M250 488V495" class="arrow"/><rect x="50" y="496" width="400" height="28" rx="6" fill="#fff" stroke="#b19be0"/><text x="250" y="514" class="node">Assign fixed priorities: Q1 &gt; Q2 &gt; Q3</text>
+  <path d="M250 524V531" class="arrow"/><rect x="50" y="532" width="400" height="28" rx="6" fill="#ebe2ff" stroke="#7650b8"/><text x="250" y="550" class="node">Acquire semaphore, then enter monitor</text>
+  <path d="M250 560V568" class="arrow"/><polygon points="250,568 350,590 250,612 150,590" fill="#e5f6df" stroke="#51916a" stroke-width="1.5"/><text x="250" y="594" class="node">Any ready process?</text>
+  <path d="M250 612V620" class="arrow"/><text x="264" y="619" font-size="10" fill="#27804a">YES</text><rect x="50" y="621" width="400" height="28" rx="6" fill="#fff" stroke="#b19be0"/><text x="250" y="639" class="node">Choose highest-priority non-empty queue</text>
+  <path d="M250 649V656" class="arrow"/><rect x="50" y="657" width="400" height="30" rx="6" fill="#fff" stroke="#b19be0"/><text x="250" y="676" class="node">Run Q1 RR (quantum 2); Q2 and Q3 use FCFS</text>
+  <path d="M250 687V694" class="arrow"/><rect x="50" y="695" width="400" height="28" rx="6" fill="#fff" stroke="#b19be0"/><text x="250" y="713" class="node">Update burst and append Gantt segment</text>
+  <path d="M250 723V730" class="arrow"/><rect x="50" y="731" width="400" height="28" rx="6" fill="#ebe2ff" stroke="#7650b8"/><text x="250" y="749" class="node">Notify, leave monitor, release semaphore</text>
+  <path d="M450 745H477V546H450" class="arrow"/><path d="M350 590H465V795H430" class="arrow"/><text x="385" y="582" font-size="10" fill="#ad4a36">NO</text>
+  <rect x="70" y="780" width="360" height="32" rx="6" fill="#e8f2ff" stroke="#b19be0"/><text x="250" y="800" class="node">Release locks, calculate metrics + Gantt</text>
+  <path d="M250 812V820" class="arrow"/><rect x="182" y="821" width="136" height="25" rx="13" fill="#ebe2ff" stroke="#7650b8"/><text x="250" y="838" class="node">END</text>
+  <text x="18" y="878" class="section" fill="#7650b8">PSEUDOCODE</text><rect x="12" y="890" width="476" height="318" rx="8" fill="#fff" stroke="#c8b8ea"/>
+  <text x="27" y="919" class="code">with semaphore:</text><text x="27" y="946" class="code">    with monitor: enqueue(p)</text><text x="27" y="973" class="code">while ready queues are not empty:</text><text x="27" y="1000" class="code">    acquire semaphore, then monitor</text><text x="27" y="1027" class="code">    p = pop_next(Q1, Q2, Q3)</text><text x="27" y="1054" class="code">    run_slice(p, Q1_RR_else_FCFS)</text><text x="27" y="1081" class="code">    update_burst_and_trace(p)</text><text x="27" y="1108" class="code">    notify; release monitor and semaphore</text><text x="27" y="1135" class="code">calculate_metrics(); render_gantt()</text>
+  <path d="M18 1166H482" stroke="#c8b8ea"/><text x="27" y="1190" font-size="12" font-weight="700" fill="#7650b8">Layered guards with consistent lock ordering.</text>
+</g>
+
+<rect x="20" y="1255" width="1580" height="50" rx="10" fill="#e4edf7" stroke="#a9bfd4"/>
+<text x="40" y="1277" font-size="13" font-weight="700" fill="#12345a">KEY POINTS</text>
+<text x="175" y="1277" font-size="12" fill="#12345a">MLQ = fixed queue assignment  •  Q1: Round Robin, q=2  •  Q2/Q3: FCFS</text>
+<text x="175" y="1295" font-size="11" fill="#314f6a">Semaphore = mutual exclusion  •  Monitor = lock + condition notification  •  Combined = semaphore gate + monitor</text>
+<text x="1580" y="1277" font-size="13" text-anchor="end" font-weight="700" fill="#12345a">Exercise 5</text><text x="1580" y="1295" font-size="11" text-anchor="end" fill="#526b80">Educational simulation</text>
+</svg>
