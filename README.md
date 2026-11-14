@@ -1,5 +1,9 @@
 # Exercise 4 — Dekker, Peterson, Semaphore and Monitor
 
+![Critical section lifecycle](docs/figures/critical-section-lifecycle.svg)
+
+> نقشه مطالعه تصویری، نمودارهای Readers-Writers و توضیح تفاوت اثبات مدل و بنچمارک در [docs/README.md](docs/README.md) آمده است.
+
 **Branch:** `Exercise-4-Dekker-Peterson-Semaphore-Monitor`
 
 **Branch layout:** every file of this exercise sits at the **root of the branch**
@@ -240,3 +244,25 @@ The content modules live in `tools/content/ex4_fa.py` and
   Computing Surveys, 1971.
 * Silberschatz, A., Galvin, P. B., & Gagne, G. — *Operating System Concepts*,
   chapters on Process Synchronization and Deadlocks.
+
+---
+
+## Visual guide / راهنمای تصویری
+
+برای فهم چرخه ناحیه بحرانی، سیاست‌های Readers-Writers و شواهد مدل‌بررسی، [راهنمای تصویری docs](docs/README.md) را ببینید.
+
+![Critical section lifecycle](docs/figures/critical-section-lifecycle.svg)
+
+### Correctness and fairness figures
+
+![State spaces](diagrams/fig_state_spaces.png)
+
+![Property matrix](diagrams/fig_property_matrix.png)
+
+![Readers and writers](diagrams/chart_readers_writers.png)
+
+![Deadlock wait-for graph](diagrams/fig_deadlock.png)
+
+![Monitor timeline](diagrams/fig_monitor_timeline.png)
+
+نمودارهای صحت مدل و نتایج بنچمارک دو نوع مدرک متفاوت‌اند؛ برای تفسیر آن‌ها به محدودیت‌های گزارش و راهنمای docs مراجعه کنید.
