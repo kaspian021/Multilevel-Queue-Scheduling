@@ -65,3 +65,104 @@ def test_trace_matches_simulation(algo):
     lg = trace(TS, algo)
     got = [None if c is None else c[0] for _, _, c in lg]
     assert got == [None if x is None else TS[x].name for x in tl]
+
+
+# ---------------------------------------------------------------- extensions
+def test_rm_schedulability_is_false_and_shows_rta():
+    r = rm_schedulability(TS)
+    assert r["feasible"] is False
+    assert r["concluded_by_bound"] is False
+    assert r["response_times"]["T1"] == {"R": 1, "D": 4, "ok": True}
+    assert r["response_times"]["T2"] == {"R": 4, "D": 8, "ok": True}
+    assert r["response_times"]["T3"] == {"R": 14, "D": 12, "ok": False}
+    assert r["liu_layland_bound"] == pytest.approx(0.7798, abs=1e-4)
+
+
+def test_rm_schedulability_true_when_bound_satisfied():
+    ts = [Task("A", 1, 5, 5)]
+    assert rm_schedulability(ts)["feasible"] is True
+    assert rm_schedulability(ts)["concluded_by_bound"] is True
+
+
+def test_edf_schedulability():
+    assert edf_schedulability(TS)["feasible"] is True
+    assert edf_schedulability(TS)["implicit_deadlines"] is True
+    over = [Task("A", 3, 4, 4), Task("B", 3, 4, 4)]
+    assert edf_schedulability(over)["feasible"] is False
+
+
+@pytest.mark.parametrize("algo", ["EDF", "RM"])
+def test_summarize_matches_simulation(algo):
+    s = summarize(TS, algo)
+    assert s["horizon"] == 24
+    assert s["job_count"] == 11
+    assert s["busy"] == 23 and s["idle"] == 1
+    assert s["total_demand"] == 23
+    assert s["utilization"] == pytest.approx(23 / 24, abs=1e-6)
+    assert s["timeline"] == " ".join(EDF_HAND if algo == "EDF" else RM_HAND)
+    assert s["deadline_misses"] == (0 if algo == "EDF" else 1)
+    assert s["missed_jobs"] == ([] if algo == "EDF"
+                                else [("T3", 0, 0, 12, 14)])
+
+
+def test_summarize_per_task():
+    e = summarize(TS, "EDF")["per_task"]
+    assert e["T1"]["avg_response"] == pytest.approx(1.0)
+    assert e["T2"]["min_response"] == 4 and e["T2"]["max_response"] == 6
+    assert e["T3"]["min_response"] == 10 and e["T3"]["max_response"] == 11
+    m = summarize(TS, "RM")["per_task"]
+    assert m["T2"]["avg_response"] == pytest.approx(4.0)
+    assert m["T3"]["max_response"] == 14 and m["T3"]["misses"] == 1
+
+
+@pytest.mark.parametrize("algo", ["EDF", "RM"])
+def test_step_rows_cover_one_hyperperiod(algo):
+    rows = step_rows(TS, algo)
+    assert len(rows) == 24
+    expected = EDF_HAND if algo == "EDF" else RM_HAND
+    got = ["-" if r["ran"] == "IDLE" else r["ran"].split("_")[0] for r in rows]
+    assert got == expected
+    for r in rows:
+        assert r["interval"].count("-") == 1
+        assert r["reason"]
+
+
+def test_step_rows_language_and_idle_reason():
+    fa = step_rows(TS, "EDF", "fa")[-1]
+    en = step_rows(TS, "EDF", "en")[-1]
+    assert fa["ran"] == "IDLE" and "هیچ کار" in fa["reason"]
+    assert "no ready job" in en["reason"]
+
+
+def test_step_rows_ready_detail_mentions_job_and_deadline():
+    rows = step_rows(TS, "EDF", "en")
+    assert "T1_0(d=4,rem=1)" in rows[0]["ready_detail"]
+    assert "T3_0(d=12,rem=4)" in rows[0]["ready_detail"]
+
+
+def test_format_summary_is_stable():
+    for algo in ("EDF", "RM"):
+        text = format_summary(summarize(TS, algo))
+        assert text.startswith(f"algorithm: {algo}")
+        assert "deadline misses:" in text
+        assert "timeline:" in text
+
+
+def test_cli_writes_json_and_table(tmp_path):
+    jf = tmp_path / "out.json"
+    tf = tmp_path / "table.txt"
+    rc = main_cli(["--tasks", "T1:1:4:4,T2:3:8:8,T3:4:12:12",
+                   "--json", str(jf), "--table", str(tf), "--lang", "en"])
+    assert rc == 0
+    data = json.loads(jf.read_text(encoding="utf-8"))
+    assert data["hyperperiod"] == 24
+    assert data["edf"]["feasible"] is True and data["rm"]["feasible"] is False
+    assert data["measured"]["RM"]["deadline_misses"] == 1
+    body = tf.read_text(encoding="utf-8")
+    assert "=== EDF ===" in body and "=== RM ===" in body
+    assert "T1_0" in body
+
+
+def test_cli_accepts_phase():
+    rc = main_cli(["--tasks", "T1:1:4:4:2", "--lang", "fa"])
+    assert rc == 0

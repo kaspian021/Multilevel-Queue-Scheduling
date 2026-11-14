@@ -1,0 +1,313 @@
+{
+  "demand_in_hyperperiod": 23,
+  "edf": {
+    "feasible": true,
+    "implicit_deadlines": true,
+    "method": "U <= 1 (necessary and sufficient for implicit deadlines)",
+    "utilization": 0.9583333333333333
+  },
+  "hyperperiod": 24,
+  "measured": {
+    "EDF": {
+      "algorithm": "EDF",
+      "busy": 23,
+      "deadline_misses": 0,
+      "horizon": 24,
+      "idle": 1,
+      "job_count": 11,
+      "missed_jobs": [],
+      "offered_utilization": 0.958333,
+      "per_task": {
+        "T1": {
+          "C": 1,
+          "D": 4,
+          "T": 4,
+          "avg_response": 1.0,
+          "finished": 6,
+          "jitter": 0.0,
+          "jobs": 6,
+          "max_response": 1,
+          "min_response": 1,
+          "misses": 0
+        },
+        "T2": {
+          "C": 3,
+          "D": 8,
+          "T": 8,
+          "avg_response": 4.6667,
+          "finished": 3,
+          "jitter": 0.9428,
+          "jobs": 3,
+          "max_response": 6,
+          "min_response": 4,
+          "misses": 0
+        },
+        "T3": {
+          "C": 4,
+          "D": 12,
+          "T": 12,
+          "avg_response": 10.5,
+          "finished": 2,
+          "jitter": 0.5,
+          "jobs": 2,
+          "max_response": 11,
+          "min_response": 10,
+          "misses": 0
+        }
+      },
+      "segments": [
+        [
+          0,
+          1,
+          "T1"
+        ],
+        [
+          1,
+          4,
+          "T2"
+        ],
+        [
+          4,
+          5,
+          "T1"
+        ],
+        [
+          5,
+          8,
+          "T3"
+        ],
+        [
+          8,
+          9,
+          "T1"
+        ],
+        [
+          9,
+          10,
+          "T3"
+        ],
+        [
+          10,
+          12,
+          "T2"
+        ],
+        [
+          12,
+          13,
+          "T1"
+        ],
+        [
+          13,
+          14,
+          "T2"
+        ],
+        [
+          14,
+          16,
+          "T3"
+        ],
+        [
+          16,
+          17,
+          "T1"
+        ],
+        [
+          17,
+          20,
+          "T2"
+        ],
+        [
+          20,
+          21,
+          "T1"
+        ],
+        [
+          21,
+          23,
+          "T3"
+        ],
+        [
+          23,
+          24,
+          "IDLE"
+        ]
+      ],
+      "timeline": "T1 T2 T2 T2 T1 T3 T3 T3 T1 T3 T2 T2 T1 T2 T3 T3 T1 T2 T2 T2 T1 T3 T3 -",
+      "total_demand": 23,
+      "utilization": 0.958333
+    },
+    "RM": {
+      "algorithm": "RM",
+      "busy": 23,
+      "deadline_misses": 1,
+      "horizon": 24,
+      "idle": 1,
+      "job_count": 11,
+      "missed_jobs": [
+        [
+          "T3",
+          0,
+          0,
+          12,
+          14
+        ]
+      ],
+      "offered_utilization": 0.958333,
+      "per_task": {
+        "T1": {
+          "C": 1,
+          "D": 4,
+          "T": 4,
+          "avg_response": 1.0,
+          "finished": 6,
+          "jitter": 0.0,
+          "jobs": 6,
+          "max_response": 1,
+          "min_response": 1,
+          "misses": 0
+        },
+        "T2": {
+          "C": 3,
+          "D": 8,
+          "T": 8,
+          "avg_response": 4.0,
+          "finished": 3,
+          "jitter": 0.0,
+          "jobs": 3,
+          "max_response": 4,
+          "min_response": 4,
+          "misses": 0
+        },
+        "T3": {
+          "C": 4,
+          "D": 12,
+          "T": 12,
+          "avg_response": 12.5,
+          "finished": 2,
+          "jitter": 1.5,
+          "jobs": 2,
+          "max_response": 14,
+          "min_response": 11,
+          "misses": 1
+        }
+      },
+      "segments": [
+        [
+          0,
+          1,
+          "T1"
+        ],
+        [
+          1,
+          4,
+          "T2"
+        ],
+        [
+          4,
+          5,
+          "T1"
+        ],
+        [
+          5,
+          8,
+          "T3"
+        ],
+        [
+          8,
+          9,
+          "T1"
+        ],
+        [
+          9,
+          12,
+          "T2"
+        ],
+        [
+          12,
+          13,
+          "T1"
+        ],
+        [
+          13,
+          16,
+          "T3"
+        ],
+        [
+          16,
+          17,
+          "T1"
+        ],
+        [
+          17,
+          20,
+          "T2"
+        ],
+        [
+          20,
+          21,
+          "T1"
+        ],
+        [
+          21,
+          23,
+          "T3"
+        ],
+        [
+          23,
+          24,
+          "IDLE"
+        ]
+      ],
+      "timeline": "T1 T2 T2 T2 T1 T3 T3 T3 T1 T2 T2 T2 T1 T3 T3 T3 T1 T2 T2 T2 T1 T3 T3 -",
+      "total_demand": 23,
+      "utilization": 0.958333
+    }
+  },
+  "rm": {
+    "concluded_by_bound": false,
+    "feasible": false,
+    "liu_layland_bound": 0.7797631496846196,
+    "response_times": {
+      "T1": {
+        "D": 4,
+        "R": 1,
+        "ok": true
+      },
+      "T2": {
+        "D": 8,
+        "R": 4,
+        "ok": true
+      },
+      "T3": {
+        "D": 12,
+        "R": 14,
+        "ok": false
+      }
+    },
+    "utilization": 0.9583333333333333
+  },
+  "tasks": [
+    {
+      "C": 1,
+      "D": 4,
+      "T": 4,
+      "name": "T1",
+      "phase": 0
+    },
+    {
+      "C": 3,
+      "D": 8,
+      "T": 8,
+      "name": "T2",
+      "phase": 0
+    },
+    {
+      "C": 4,
+      "D": 12,
+      "T": 12,
+      "name": "T3",
+      "phase": 0
+    }
+  ],
+  "utilization": 0.9583333333333333
+}

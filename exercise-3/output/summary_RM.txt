@@ -1,0 +1,10 @@
+algorithm: RM
+  horizon=24  jobs=11  busy=23  idle=1
+  utilization=95.83%  (offered 95.83%)  demand=23
+  deadline misses: 1
+    miss -> task=T3 job=0 release=0 deadline=12 finish=14
+  timeline: T1 T2 T2 T2 T1 T3 T3 T3 T1 T2 T2 T2 T1 T3 T3 T3 T1 T2 T2 T2 T1 T3 T3 -
+  task    C   T   D  jobs  miss  minR    avgR  maxR  jitter
+  T1      1   4   4     6     0     1   1.000     1   0.000
+  T2      3   8   8     3     0     4   4.000     4   0.000
+  T3      4  12  12     2     1    11  12.500    14   1.500

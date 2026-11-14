@@ -182,7 +182,7 @@ img {{ width: 100%; }} .keep {{ break-inside: avoid; }} .pb {{ page-break-before
     hp = os.path.join(OUT, "manual_solution_fa.html")
     with open(hp, "w", encoding="utf-8") as f:
         f.write(html)
-    pdf = os.path.join(OUT, "MANUAL_SOLUTION_FA.pdf")
+    pdf = os.path.join(OUT, "HAND_WORKSHEET_FA.pdf")
     subprocess.run(["google-chrome", "--headless=new", "--no-sandbox", "--disable-gpu", "--no-pdf-header-footer",
                     f"--print-to-pdf={pdf}", "file://" + os.path.abspath(hp)], check=True,
                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)

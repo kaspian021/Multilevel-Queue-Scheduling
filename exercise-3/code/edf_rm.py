@@ -161,3 +161,179 @@ def trace(tasks: List[Task], algo: str):
         log.append((now, sorted(map(view, ready), key=lambda v: (v[0], v[1])), view(j)))
         j.remaining -= 1
     return log
+
+
+# --------------------------------------------------------------------------
+# Exercise-3 extensions: schedulability tests, metrics, step tables, CLI
+# --------------------------------------------------------------------------
+
+import argparse                                                     # noqa: E402
+import json                                                         # noqa: E402
+import statistics                                                   # noqa: E402
+
+
+def rm_schedulability(tasks: List[Task]) -> dict:
+    """Liu and Layland sufficient bound plus the exact response-time test."""
+    U = utilization(tasks)
+    bound = rm_bound(len(tasks))
+    rta = response_time_analysis(tasks)
+    verdict = {name: {"R": r, "D": next(t.D for t in tasks if t.name == name),
+                      "ok": r <= next(t.D for t in tasks if t.name == name)}
+               for name, r in rta.items()}
+    return {"utilization": U, "liu_layland_bound": bound,
+            "concluded_by_bound": U <= bound,
+            "response_times": verdict,
+            "feasible": all(v["ok"] for v in verdict.values())}
+
+
+def edf_schedulability(tasks: List[Task]) -> dict:
+    """U <= 1 is necessary and sufficient for EDF with implicit deadlines."""
+    U = utilization(tasks)
+    implicit = all(t.D == t.T for t in tasks)
+    if implicit:
+        return {"utilization": U, "implicit_deadlines": True,
+                "feasible": U <= 1,
+                "method": "U <= 1 (necessary and sufficient for implicit deadlines)"}
+    return {"utilization": U, "implicit_deadlines": False,
+            "feasible": U <= 1,
+            "method": "U <= 1 is necessary but NOT sufficient for constrained deadlines; "
+                      "the processor-demand criterion is required"}
+
+
+def summarize(tasks: List[Task], algo: str) -> dict:
+    """All measured numbers for one algorithm over one hyperperiod."""
+    validate(tasks)
+    H = hyperperiod(tasks)
+    tl, jobs, misses = simulate(tasks, algo, H)
+    busy = sum(1 for x in tl if x is not None)
+    per = {}
+    for i, t in enumerate(tasks):
+        js = [j for j in jobs if j.task == i]
+        fin = [j for j in js if j.finish is not None]
+        resp = [j.finish - j.release for j in fin]
+        per[t.name] = {
+            "C": t.C, "T": t.T, "D": t.D,
+            "jobs": len(js),
+            "finished": len(fin),
+            "misses": sum(1 for j in js
+                          if j.finish is None or j.finish > j.deadline),
+            "avg_response": round(statistics.fmean(resp), 4) if resp else None,
+            "max_response": max(resp) if resp else None,
+            "min_response": min(resp) if resp else None,
+            "jitter": round(statistics.pstdev(resp), 4) if len(resp) > 1 else 0.0,
+        }
+    return {
+        "algorithm": algo,
+        "horizon": H,
+        "timeline": format_timeline(tasks, tl),
+        "segments": [(s, e, (tasks[x].name if x is not None else "IDLE"))
+                     for s, e, x in segments(tl)],
+        "busy": busy,
+        "idle": H - busy,
+        "utilization": round(busy / H, 6),
+        "offered_utilization": round(utilization(tasks), 6),
+        "total_demand": sum(t.C * (H // t.T) for t in tasks),
+        "job_count": len(jobs),
+        "deadline_misses": len(misses),
+        "missed_jobs": [(tasks[j.task].name, j.k, j.release, j.deadline, j.finish)
+                        for j in misses],
+        "per_task": per,
+    }
+
+
+REASON_EDF = "کمترین مهلت پایان مطلق"
+REASON_RM = "بالاترین اولویت ثابت"
+
+
+def step_rows(tasks: List[Task], algo: str, lang: str = "fa") -> List[dict]:
+    """One row per tick: what was ready, what ran, and why."""
+    log = trace(tasks, algo)
+    rows = []
+    for t, ready, chosen in log:
+        if chosen is None:
+            rows.append({"interval": f"{t}-{t + 1}", "ready": "-", "ran": "IDLE",
+                         "reason": "هیچ کار آماده‌ای وجود ندارد" if lang == "fa"
+                                   else "no ready job",
+                         "ready_detail": ""})
+            continue
+        rd = ", ".join(f"{v[0]}_{v[1]}(d={v[2]},rem={v[3]})" for v in ready)
+        if algo == "EDF":
+            key = chosen[2]
+            ties = [v for v in ready if v[2] == key]
+            reason = f"d={key}"
+            if len(ties) > 1:
+                reason += ("؛ تساوی، شاخص وظیفه کوچک‌تر" if lang == "fa"
+                           else "; tie, lower task index")
+        else:
+            T = {tt.name: tt.T for tt in tasks}[chosen[0]]
+            reason = f"T={T}" + ("؛ اولویت ثابت" if lang == "fa" else "; fixed priority")
+        rows.append({"interval": f"{t}-{t + 1}", "ready": str(len(ready)),
+                     "ran": f"{chosen[0]}_{chosen[1]}", "reason": reason,
+                     "ready_detail": rd})
+    return rows
+
+
+def format_summary(s: dict) -> str:
+    L = [f"algorithm: {s['algorithm']}",
+         f"  horizon={s['horizon']}  jobs={s['job_count']}  busy={s['busy']}"
+         f"  idle={s['idle']}",
+         f"  utilization={s['utilization'] * 100:.2f}%  (offered "
+         f"{s['offered_utilization'] * 100:.2f}%)  demand={s['total_demand']}",
+         f"  deadline misses: {s['deadline_misses']}"]
+    for row in s["missed_jobs"]:
+        L.append("    miss -> task={0} job={1} release={2} deadline={3} finish={4}"
+                 .format(*row))
+    L.append(f"  timeline: {s['timeline']}")
+    L.append(f"  {'task':<6}{'C':>3}{'T':>4}{'D':>4}{'jobs':>6}{'miss':>6}"
+             f"{'minR':>6}{'avgR':>8}{'maxR':>6}{'jitter':>8}")
+    for name, p in s["per_task"].items():
+        L.append(f"  {name:<6}{p['C']:>3}{p['T']:>4}{p['D']:>4}{p['jobs']:>6}"
+                 f"{p['misses']:>6}{p['min_response']:>6}{p['avg_response']:>8.3f}"
+                 f"{p['max_response']:>6}{p['jitter']:>8.3f}")
+    return "\n".join(L)
+
+
+def main_cli(argv=None):
+    ap = argparse.ArgumentParser(description="EDF and RM simulator for exercise 3")
+    ap.add_argument("--tasks", default="T1:1:4:4,T2:3:8:8,T3:4:12:12",
+                    help="comma separated name:C:T:D[:phase]")
+    ap.add_argument("--json", dest="json_out", help="write every metric as JSON")
+    ap.add_argument("--table", help="write the tick-by-tick decision table")
+    ap.add_argument("--lang", default="fa", choices=("fa", "en"))
+    a = ap.parse_args(argv)
+
+    tasks = []
+    for item in a.tasks.split(","):
+        parts = item.split(":")
+        name, C, T, D = parts[0], int(parts[1]), int(parts[2]), int(parts[3])
+        phase = int(parts[4]) if len(parts) > 4 else 0
+        tasks.append(Task(name, C, T, D, phase))
+
+    out = {"tasks": [{"name": t.name, "C": t.C, "T": t.T, "D": t.D, "phase": t.phase}
+                     for t in tasks],
+           "hyperperiod": hyperperiod(tasks),
+           "utilization": utilization(tasks),
+           "rm": rm_schedulability(tasks),
+           "edf": edf_schedulability(tasks),
+           "measured": {alg: summarize(tasks, alg) for alg in ("EDF", "RM")}}
+
+    print(f"U = {out['utilization']:.6f}   H = {out['hyperperiod']}")
+    print("RM :", json.dumps(out["rm"], ensure_ascii=False, sort_keys=True))
+    print("EDF:", json.dumps(out["edf"], ensure_ascii=False, sort_keys=True))
+    for alg in ("EDF", "RM"):
+        print()
+        print(format_summary(out["measured"][alg]))
+
+    if a.table:
+        with open(a.table, "w", encoding="utf-8") as f:
+            for alg in ("EDF", "RM"):
+                f.write(f"=== {alg} ===\n")
+                f.write(f"{'interval':<10}{'ran':<10}{'#ready':<8}reason\n")
+                for row in step_rows(tasks, alg, a.lang):
+                    f.write(f"{row['interval']:<10}{row['ran']:<10}{row['ready']:<8}"
+                            f"{row['reason']}\n")
+                f.write("\n")
+    if a.json_out:
+        with open(a.json_out, "w", encoding="utf-8") as f:
+            json.dump(out, f, indent=2, ensure_ascii=False, sort_keys=True)
+    return 0

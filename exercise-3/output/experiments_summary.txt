@@ -1,0 +1,31 @@
+Exercise 3 — experiment summary (code/run_experiments.py)
+
+task set: T1(C=1,T=4,D=4), T2(C=3,T=8,D=8), T3(C=4,T=12,D=12)
+utilization U = 0.958333 = 23/24
+hyperperiod H = 24
+total demand in [0,H) = 23
+
+RM : {"concluded_by_bound": false, "feasible": false, "liu_layland_bound": 0.7797631496846196, "response_times": {"T1": {"D": 4, "R": 1, "ok": true}, "T2": {"D": 8, "R": 4, "ok": true}, "T3": {"D": 12, "R": 14, "ok": false}}, "utilization": 0.9583333333333333}
+EDF: {"feasible": true, "implicit_deadlines": true, "method": "U <= 1 (necessary and sufficient for implicit deadlines)", "utilization": 0.9583333333333333}
+
+algorithm: EDF
+  horizon=24  jobs=11  busy=23  idle=1
+  utilization=95.83%  (offered 95.83%)  demand=23
+  deadline misses: 0
+  timeline: T1 T2 T2 T2 T1 T3 T3 T3 T1 T3 T2 T2 T1 T2 T3 T3 T1 T2 T2 T2 T1 T3 T3 -
+  task    C   T   D  jobs  miss  minR    avgR  maxR  jitter
+  T1      1   4   4     6     0     1   1.000     1   0.000
+  T2      3   8   8     3     0     4   4.667     6   0.943
+  T3      4  12  12     2     0    10  10.500    11   0.500
+
+algorithm: RM
+  horizon=24  jobs=11  busy=23  idle=1
+  utilization=95.83%  (offered 95.83%)  demand=23
+  deadline misses: 1
+    miss -> task=T3 job=0 release=0 deadline=12 finish=14
+  timeline: T1 T2 T2 T2 T1 T3 T3 T3 T1 T2 T2 T2 T1 T3 T3 T3 T1 T2 T2 T2 T1 T3 T3 -
+  task    C   T   D  jobs  miss  minR    avgR  maxR  jitter
+  T1      1   4   4     6     0     1   1.000     1   0.000
+  T2      3   8   8     3     0     4   4.000     4   0.000
+  T3      4  12  12     2     1    11  12.500    14   1.500
+
