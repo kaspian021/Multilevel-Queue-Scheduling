@@ -1,46 +1,29 @@
-# Exercise 3 — Manual Scheduling of EDF and RM
-**Three jobs, step-by-step paper-style solution.**
+# Exercise 3 — EDF and RM scheduling of three tasks, hand solution
 
-## Task set
-All jobs are released at t=0. For the EDF example, the jobs have absolute deadlines shown below. For the RM example, periods define fixed priorities.
+**Printable Persian hand solution:** [`output/MANUAL_SOLUTION_FA.pdf`](output/MANUAL_SOLUTION_FA.pdf) (8 pages, A4, Vazirmatn font; includes blank grids for hand re-writing).
 
-| Job | Execution C | EDF relative deadline D | RM period T |
+## Task set (periodic, single preemptive CPU, phase 0)
+| Task | C | T | D |
 |---|---:|---:|---:|
-| A | 3 | 7 | 4 |
-| B | 2 | 4 | 6 |
-| C | 1 | 5 | 8 |
+| T1 | 1 | 4 | 4 |
+| T2 | 3 | 8 | 8 |
+| T3 | 4 | 12 | 12 |
 
-Total execution = 6 time units. No context-switch cost; single preemptive processor. Since all three jobs are released at zero and no new jobs arrive in this one-shot illustration, no preemption is needed after the initial choice. This is a hand-worked priority-order illustration, not a periodic feasibility proof.
+U = 23/24 ≈ 0.9583, hyperperiod 24, idle = 1 unit in [0,24).
+- **EDF:** no deadline miss (U ≤ 1 is necessary and sufficient for implicit deadlines).
+- **RM:** the Liu–Layland bound for n=3 is 0.7798 < U, so that test is inconclusive; exact response-time analysis gives R(T3)=14 > 12, and the simulation shows T3's first job missing its deadline at t=12 (finishes at 14).
 
-## EDF hand calculation
-At t=0, deadlines are B=4, C=5, A=7. Choose B (earliest), run 0–2. Remaining ready jobs: C deadline 5, A deadline 7. Run C 2–3. Run A 3–6. All complete before their deadlines.
+Tie rule (EDF): equal absolute deadlines → lower task index first. A missed job keeps running (not aborted).
 
-Gantt:
-```text
-0       2   3       6
-|   B   | C |   A   |
+## Run
+```bash
+cd exercise-3/code
+python3 edf_rm.py            # small demo
+python3 make_figures.py      # writes ../diagrams/gantt_edf.png, gantt_rm.png
+python3 build_manual_pdf.py  # needs google-chrome and the Vazirmatn font
+python3 -m pytest ../tests -q
 ```
+Tests: 16 passed (hand-solved timelines for both algorithms, response-time analysis, validation, trace vs. simulation).
 
-| Job | Start | Finish | Completion | Turnaround | Waiting | Deadline | Result |
-|---|---:|---:|---:|---:|---:|---:|---|
-| A | 3 | 6 | 6 | 6 | 3 | 7 | on time |
-| B | 0 | 2 | 2 | 2 | 0 | 4 | on time |
-| C | 2 | 3 | 3 | 3 | 2 | 5 | on time |
-
-## RM hand calculation
-RM priority is inversely related to period: A(T=4) has highest priority, B(T=6) second, C(T=8) third. Run A 0–3, B 3–5, C 5–6.
-
-Gantt:
-```text
-0       3     5   6
-|   A   |  B  | C |
-```
-
-| Job | Priority | Start | Finish | Completion | Turnaround | Waiting |
-|---|---:|---:|---:|---:|---:|---:|
-| A | 1 | 0 | 3 | 3 | 3 | 0 |
-| B | 2 | 3 | 5 | 5 | 5 | 3 |
-| C | 3 | 5 | 6 | 6 | 6 | 5 |
-
-## Interpretation
-EDF minimizes the current absolute deadline; RM uses a static priority assigned from period. The different orders are expected. These examples use one job per task only. To establish periodic schedulability, release subsequent jobs at multiples of T, define deadlines, and analyze the full hyperperiod or use a valid schedulability test. An actual handwritten-paper photo is not fabricated here; this Markdown contains the transparent calculation and Gantt diagrams and can be printed or exported to PDF.
+## Limits
+One synchronous task set analysed over one hyperperiod. This is not a general claim that EDF beats RM; it ignores context-switch cost and non-periodic effects. The earlier one-shot illustration remains in `code/manual_solution.py` for reference. No scan of handwriting is provided.
