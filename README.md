@@ -1,79 +1,111 @@
-# Multilevel Queue Scheduling
+# Exercise 6 — Research Paper and Seminar
 
-A small educational project demonstrating **Multilevel Queue (MLQ) Scheduling** by organizing programs/commands into three queues and running them according to the project's queue policy. The program also measures elapsed execution time for the commands it runs.
+Bilingual research paper and two ready-to-present seminar decks on multilevel
+queue scheduling, the real-time algorithms EDF and RM, and mutual exclusion.
+The paper is a synthesis of Exercises 1 to 4: every number in it is read from
+those exercises' `output/experiments.json` files at build time, so none of them
+is typed by hand.
 
-> **Scope note:** This is a user-space demonstration, not a replacement for the operating system's kernel scheduler. The Gantt chart below is an illustrative example; it is not measured benchmark data from a particular run.
+## Deliverables
 
-## Overview
+| File | What it is | Measured pages |
+|---|---|---|
+| `PAPER_EN.md` / `docs/PAPER_EN.docx` / `docs/PAPER_EN.pdf` | the paper, English | **33** |
+| `PAPER_FA.md` / `docs/PAPER_FA.docx` / `docs/PAPER_FA.pdf` | the paper, Persian | **31** |
+| `docs/SEMINAR_EN.pptx` | seminar deck, English | 26 slides |
+| `docs/SEMINAR_FA.pptx` | seminar deck, Persian | 26 slides |
 
-Multilevel Queue Scheduling divides the ready work into separate queues. Each queue represents a category or priority level. In this project, the queues are numbered from 1 to 3:
+Page counts are the PDF page counts reported by the build, not an estimate.
+Both decks carry speaker notes on all 26 slides.
 
-- **Queue 1:** highest-priority queue
-- **Queue 2:** medium-priority queue
-- **Queue 3:** lowest-priority queue
+- [Seminar slide outline](SEMINAR_SLIDES.md) — the 26 slides, slide by slide
+- [References](REFERENCES.md) — seven verified entries, plus textbooks listed
+  without unverified metadata
 
-The program accepts commands/programs, associates them with a queue, executes them according to its queue-order policy, and reports elapsed runtime/status. The exact runtime depends on the commands and the machine on which the project is run.
+## What the paper claims, and how
 
-## Workflow
+Two methods, kept strictly apart and labelled as such throughout:
 
-![Project workflow and runtime measurement](assets/mlq-workflow.svg)
+| Question | Method | Where |
+|---|---|---|
+| How fast / how fair / how predictable | discrete-event simulation, deterministic given a scenario file | Exercises 1, 2, 3 |
+| Is it correct | exhaustive model checking over every reachable interleaving | Exercise 4 |
 
-1. Provide the commands/programs and their queue assignments.
-2. The project groups the work into three queues.
-3. Commands are launched according to the implemented queue policy.
-4. The program measures elapsed time and reports execution results.
+The headline results:
 
-## Gantt Chart
+- **MLQ has no notion of a deadline.** Measured against EDF and RM on four
+  workloads, it behaves inconsistently for exactly that reason — it beats RM on
+  the aperiodic workload and loses to it under stress.
+- **The RM/EDF gap is a cliff, not a slope.** Across 2 329 random task sets
+  (seed 20250101), RM schedulability stays at 100 % below 0.70 utilisation and
+  falls to 17.8 % in the top band, while EDF stays at 100 % throughout.
+- **Analysis and simulation agree in both directions.** Where the exact test
+  says feasible, the simulator reports zero misses; where it says infeasible,
+  the simulator finds misses. Exercise 3 confirms both against a hand-worked
+  three-task solution, down to the identity and the instant of the single RM
+  miss.
+- **Three of eight mutual-exclusion algorithms fail, each differently**: the
+  lock variable loses safety, announce-then-spin loses progress, and
+  test-and-set loses fairness. A correct semaphore used in the wrong order
+  deadlocks with no property violated at all.
 
-The following chart illustrates queue-order execution with **made-up example tasks and durations**. Replace the example values with actual output from your own run before presenting them as experimental results.
+## Repository layout on this branch
 
-![Illustrative Gantt chart](assets/mlq-gantt-example.svg)
+```
+README.md                 this file
+PAPER_EN.md  PAPER_FA.md  the paper, markdown form
+REFERENCES.md             verified bibliography
+SEMINAR_SLIDES.md         slide-by-slide outline of both decks
+code/build_deck.py        builds docs/SEMINAR_EN.pptx and docs/SEMINAR_FA.pptx
+diagrams/                 five figures, all regenerable
+docs/                     the deliverables: DOCX, PDF, PPTX
+output/deck_numbers.json  the figures the slides quote (generated)
+tests/test_deck.py        17 tests over the two decks
+```
 
-Example timeline:
+## Running it
 
-| Task | Queue | Example start | Example finish | Example duration |
-|---|---:|---:|---:|---:|
-| P1 | 1 | 0 | 2 | 2 |
-| P2 | 1 | 2 | 4 | 2 |
-| P3 | 2 | 4 | 7 | 3 |
-| P4 | 3 | 7 | 8 | 1 |
+From this folder:
 
-These numbers are only for explaining how to read a Gantt chart. They are not benchmark results from the repository.
+```bash
+pip install -r requirements.txt
 
-## Comparison with EDF and RM
+python3 code/build_deck.py     # rebuild both seminar decks
+python3 -m pytest tests -q     # 17 tests
+```
 
-**EDF (Earliest Deadline First)** and **RM (Rate Monotonic)** are real-time scheduling algorithms designed around task deadlines and periodicity. MLQ organizes work into predefined priority queues. They solve related but different scheduling problems, so a fair quantitative comparison requires the same workload and relevant task parameters.
+`code/build_deck.py` reads `output/deck_numbers.json` instead of recomputing
+anything, because the other exercises' data files are not on this branch. To
+regenerate the figures **and** that file after an experiment changes, run from
+the repository root on the working branch:
 
-| Property | This MLQ project | EDF | RM |
-|---|---|---|---|
-| Main decision rule | Queue assignment and queue policy | Run the ready task with the earliest absolute deadline | Fixed priority based on period; shorter period gets higher priority |
-| Priority | Based on queue/category | Dynamic; can change as deadlines approach | Fixed for a task set |
-| Needs deadlines? | Not inherently | Yes | Usually uses task periods; deadlines are often assumed equal to periods in the classical model |
-| Best fit | Demonstrating queue-based organization of commands | Dynamic-priority real-time workloads | Periodic real-time workloads with fixed priorities |
-| Main limitation | Lower queues may wait longer depending on the inter-queue policy; not a kernel scheduler | Scheduling overhead and deadline misses when workload is infeasible | Can miss deadlines for some task sets that EDF could schedule |
-| Meaningful evaluation | Queue order, elapsed runtime, and fairness under a defined workload | Deadline-miss rate, response times, utilization | Deadline-miss rate, response times, utilization |
+```bash
+python3 tools/make_figures_ex6.py
+python3 tools/build_report.py ex6_en exercise-6 PAPER_EN
+python3 tools/build_report.py ex6_fa exercise-6 PAPER_FA
+```
 
-### Summary
+## Limits, stated plainly
 
-- **MLQ** is useful when tasks should be separated into fixed categories or priority classes.
-- **EDF** is suitable when tasks have deadlines and the scheduler should favor the earliest deadline.
-- **RM** is suitable for periodic tasks with fixed priorities derived from task periods.
-- No algorithm is universally best. To compare performance numerically, run the same workload under each algorithm and record metrics such as completion time, waiting time, response time, CPU utilization, and missed deadlines where applicable.
+- **Timings are comparative, not absolute.** They come from CPython under a GIL
+  on a shared sandbox, and two mechanisms swing by more than a factor of two
+  between runs of the same binary. Only medians are reported, always with their
+  spread.
+- **The proofs cover two participants** under sequential consistency with
+  atomic single-word loads and stores. They say nothing about relaxed memory
+  models and nothing about more than two threads.
+- **The feasibility study is a sample, not a theorem.** One generator, one
+  seed, 2 329 sets.
+- **Nothing here is a kernel.** The schedulers are models of policies, so
+  measured turnaround reflects the policy's decisions, not the cost of the
+  mechanism that would implement them.
+- The Exercise 5 demonstration clip was delivered privately to the instructor
+  and is deliberately not in this repository.
 
-## Limitations
+## Academic note
 
-- A user-space command runner cannot fully control the kernel's CPU scheduling decisions.
-- Elapsed runtime is affected by system load, I/O, and other processes; it is not the same as CPU time.
-- A meaningful Gantt chart and performance comparison should be generated from recorded execution traces rather than illustrative numbers.
-- EDF and RM comparisons require deadline/period information that a basic MLQ command runner may not collect.
-
-## Suggested experiment
-
-1. Choose a repeatable set of commands and record each command's queue, start time, finish time, and exit status.
-2. Generate a Gantt chart from those measurements.
-3. If comparing with EDF or RM, define a real-time task set with execution times, periods, and deadlines.
-4. Run all algorithms against the same task set and compare the same metrics.
-
-## Repository
-
-[Multilevel-Queue-Scheduling on GitHub](https://github.com/kaspian021/Multilevel-Queue-Scheduling)
+This is a course submission, not peer-reviewed research. The seven entries in
+`REFERENCES.md` were checked against publisher records; the four textbooks are
+listed without unverified years, editions or page numbers. No figure in the
+paper or the decks is invented: if the code does not produce it, the paper does
+not state it.

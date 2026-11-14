@@ -1,0 +1,8 @@
+# Exercise 6 — seminar decks (code/build_deck.py) and their tests
+python-pptx>=0.6.21
+Pillow>=9.0            # only used to read figure sizes when placing pictures
+pytest>=7.0
+
+# Needed only to regenerate the figures and output/deck_numbers.json, which is
+# done from the repository root with:  python3 tools/make_figures_ex6.py
+matplotlib>=3.5
