@@ -9,7 +9,28 @@ The video requirement (Exercise 5) was submitted privately to the instructor acc
 | 3 | [Exercise-3-EDF-RM-Manual-Scheduling](https://github.com/kaspian021/Multilevel-Queue-Scheduling/tree/Exercise-3-EDF-RM-Manual-Scheduling) | Three-job hand-worked EDF/RM priority schedules and reproducible calculator |
 | 4 | [Exercise-4-Dekker-Peterson-Semaphore-Monitor](https://github.com/kaspian021/Multilevel-Queue-Scheduling/tree/Exercise-4-Dekker-Peterson-Semaphore-Monitor) | Dekker, Peterson, semaphore, monitor comparison and runnable semaphore/monitor demos |
 | 5 | Submitted privately | Short video sent to instructor; intentionally not duplicated here |
-| 6 | [Exercise-6-Paper-And-Seminar](https://github.com/kaspian021/Multilevel-Queue-Scheduling/tree/Exercise-6-Paper-And-Seminar) | Bilingual paper draft, seminar slide outline, references |
+| 6 | [Exercise-6-Paper-And-Seminar](https://github.com/kaspian021/Multilevel-Queue-Scheduling/tree/Exercise-6-Paper-And-Seminar) | Bilingual paper (EN 33 / FA 31 pages, DOCX + PDF), two 26-slide PPTX seminar decks with speaker notes, 5 figures, verified bibliography |
+| 7 | [Exercise-7-Readers-Writers-Comparison](https://github.com/kaspian021/Multilevel-Queue-Scheduling/tree/Exercise-7-Readers-Writers-Comparison) | Readers-writers with semaphore, monitor, Dekker and Peterson: bilingual paper (EN 28 / FA 28 pages, DOCX + PDF), exhaustive model checker over 17 protocols, threaded benchmark harness, 9 figures, 102 tests |
 
 ## Submission status
-These branches contain organized, substantive working drafts and code/source material. They are not represented as final 40-page typeset reports, handwritten-paper scans, or a finished PowerPoint/PDF package. Before formal submission, expand and typeset long-form reports to the instructor's exact page and citation rules, export the seminar outline into slides, verify bibliography entries, and attach a scan/photo if the instructor explicitly requires handwritten work.
+
+Branches 1, 2, 3, 4 and 6 each carry, at the branch root: that exercise's own
+README, a bilingual report as DOCX **and** PDF (20–40 pages each, measured),
+runnable and tested Python code, regenerable figures and comparison tables.
+Branch 6 additionally carries two 26-slide PowerPoint decks with speaker notes
+on every slide.
+
+Every branch is **flat**: opening the branch shows that exercise's README
+directly, rather than a folder.
+
+Before formal submission:
+
+* check the reports against the instructor's exact citation style — the
+  bibliography in branch 6 separates entries verified against publisher records
+  from textbooks listed without unverified years, editions or page numbers;
+* attach a scan or photo only if the instructor explicitly requires handwritten
+  work;
+* do not fill in the "class attendance" or "student grade" columns.
+
+The Exercise-5 video was submitted privately to the instructor and is
+intentionally not in this repository.

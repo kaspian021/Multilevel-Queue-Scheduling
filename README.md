@@ -1,79 +1,89 @@
-# Multilevel Queue Scheduling
+# Exercise 7 — Readers and Writers: semaphore, monitor, Dekker, Peterson
 
-A small educational project demonstrating **Multilevel Queue (MLQ) Scheduling** by organizing programs/commands into three queues and running them according to the project's queue policy. The program also measures elapsed execution time for the commands it runs.
+The readers-writers problem asks for a lock that keeps writers exclusive of
+everybody while letting any number of readers share the section. Four classic
+mechanisms are usually offered as the answer and they are not interchangeable.
+This branch builds all four, then asks two separate questions of each:
 
-> **Scope note:** This is a user-space demonstration, not a replacement for the operating system's kernel scheduler. The Gantt chart below is an illustrative example; it is not measured benchmark data from a particular run.
+* **What is proved.** An exhaustive model checker (`code/rw_model.py`) walks
+  every reachable interleaving of a two- or three-process protocol and returns
+  a verdict on safety, deadlock freedom, starvation freedom, and — the
+  property the problem actually exists for — whether two readers can be
+  inside at once.
+* **What is measured.** A threaded harness (`code/rw_sync.py`) runs every lock
+  under load and checks the invariant on *every single entry*, not at the end.
 
-## Overview
+The two answers do not always agree, and the disagreements are the interesting
+part. Section 8 of the paper is about exactly that.
 
-Multilevel Queue Scheduling divides the ready work into separate queues. Each queue represents a category or priority level. In this project, the queues are numbered from 1 to 3:
+## Deliverables
 
-- **Queue 1:** highest-priority queue
-- **Queue 2:** medium-priority queue
-- **Queue 3:** lowest-priority queue
+| File | What it is | Pages |
+|---|---|---|
+| `REPORT_EN.md` / `docs/REPORT_EN.docx` / `docs/REPORT_EN.pdf` | the paper, English | **28** |
+| `REPORT_FA.md` / `docs/REPORT_FA.docx` / `docs/REPORT_FA.pdf` | the paper, Persian | **28** |
+| `diagrams/` | 9 figures, all regenerable | — |
+| `output/experiments.json` | every number in both papers | — |
 
-The program accepts commands/programs, associates them with a queue, executes them according to its queue-order policy, and reports elapsed runtime/status. The exact runtime depends on the commands and the machine on which the project is run.
+Page counts are the PDF page counts reported by the build, not an estimate.
+No PPTX deck on this branch: the deliverable set is the standard one.
 
-## Workflow
+## Running it
 
-![Project workflow and runtime measurement](assets/mlq-workflow.svg)
+```bash
+python3 code/rw_model.py                  # the verdicts, with witnesses
+python3 code/run_experiments.py           # every measurement -> output/
+python3 code/make_diagrams.py             # every figure -> diagrams/
+python3 -m pytest tests -q                # 102 tests
+```
 
-1. Provide the commands/programs and their queue assignments.
-2. The project groups the work into three queues.
-3. Commands are launched according to the implemented queue policy.
-4. The program measures elapsed time and reports execution results.
+Building the papers needs the shared tooling at the repository root, from the
+repository root:
 
-## Gantt Chart
+```bash
+python3 tools/build_report.py ex7_en exercise-7 REPORT_EN
+python3 tools/build_report.py ex7_fa exercise-7 REPORT_FA
+```
 
-The following chart illustrates queue-order execution with **made-up example tasks and durations**. Replace the example values with actual output from your own run before presenting them as experimental results.
+## Headline results
 
-![Illustrative Gantt chart](assets/mlq-gantt-example.svg)
+* **Every mutual exclusion solution satisfies safety and liveness and still
+  fails the one property the problem exists for.** The semaphore mutex, the
+  monitor mutex, Dekker and Peterson never let two readers in at once.
+* **Readers preference starves the writer.** Six readers and one writer, nine
+  half-second trials: the writer's share of the traffic was under one per cent
+  in most of them, and the longest unbroken read run was
+  **tens of thousands of operations**.
+* **Writers preference needs two writers to starve the reader.** With one
+  writer the reader door reopens every time and nothing starves; add a second
+  and the reader is the one that never gets in. The starvation is a property of
+  the *load*, not only of the algorithm.
+* **A Mesa monitor does not bound waiting.** Because a notified thread has to
+  re-compete for the monitor lock, the checker finds a fair cycle in which
+  *every* participant starves. Hand the woken thread a place in the entry queue
+  instead — two instructions — and only the writer can starve.
+* **Dekker and Peterson can carry the pattern, between two participants.**
+  Used as the count lock rather than as the section lock, both let two readers
+  inside together. Both are written for exactly two processes, and that is the
+  whole of their limitation.
+* **The measurements and the proofs disagree about Peterson.** It is provably
+  starvation free, and it starved the writer in most trials — because a
+  spinning thread burns its whole quantum under the GIL. The spin counts make
+  that plain.
 
-Example timeline:
+## Layout
 
-| Task | Queue | Example start | Example finish | Example duration |
-|---|---:|---:|---:|---:|
-| P1 | 1 | 0 | 2 | 2 |
-| P2 | 1 | 2 | 4 | 2 |
-| P3 | 2 | 4 | 7 | 3 |
-| P4 | 3 | 7 | 8 | 1 |
+```
+code/rw_model.py          exhaustive model checker, 17 protocols
+code/rw_sync.py           threaded locks plus the benchmark harness
+code/run_experiments.py   runs every experiment, writes output/experiments.json
+code/make_diagrams.py     regenerates all nine figures
+tests/test_exercise7.py   102 tests over the model, the locks and the artefacts
+diagrams/*.png            the figures
+output/experiments.json   the data behind every number
+docs/                     the four deliverable files
+```
 
-These numbers are only for explaining how to read a Gantt chart. They are not benchmark results from the repository.
-
-## Comparison with EDF and RM
-
-**EDF (Earliest Deadline First)** and **RM (Rate Monotonic)** are real-time scheduling algorithms designed around task deadlines and periodicity. MLQ organizes work into predefined priority queues. They solve related but different scheduling problems, so a fair quantitative comparison requires the same workload and relevant task parameters.
-
-| Property | This MLQ project | EDF | RM |
-|---|---|---|---|
-| Main decision rule | Queue assignment and queue policy | Run the ready task with the earliest absolute deadline | Fixed priority based on period; shorter period gets higher priority |
-| Priority | Based on queue/category | Dynamic; can change as deadlines approach | Fixed for a task set |
-| Needs deadlines? | Not inherently | Yes | Usually uses task periods; deadlines are often assumed equal to periods in the classical model |
-| Best fit | Demonstrating queue-based organization of commands | Dynamic-priority real-time workloads | Periodic real-time workloads with fixed priorities |
-| Main limitation | Lower queues may wait longer depending on the inter-queue policy; not a kernel scheduler | Scheduling overhead and deadline misses when workload is infeasible | Can miss deadlines for some task sets that EDF could schedule |
-| Meaningful evaluation | Queue order, elapsed runtime, and fairness under a defined workload | Deadline-miss rate, response times, utilization | Deadline-miss rate, response times, utilization |
-
-### Summary
-
-- **MLQ** is useful when tasks should be separated into fixed categories or priority classes.
-- **EDF** is suitable when tasks have deadlines and the scheduler should favor the earliest deadline.
-- **RM** is suitable for periodic tasks with fixed priorities derived from task periods.
-- No algorithm is universally best. To compare performance numerically, run the same workload under each algorithm and record metrics such as completion time, waiting time, response time, CPU utilization, and missed deadlines where applicable.
-
-## Limitations
-
-- A user-space command runner cannot fully control the kernel's CPU scheduling decisions.
-- Elapsed runtime is affected by system load, I/O, and other processes; it is not the same as CPU time.
-- A meaningful Gantt chart and performance comparison should be generated from recorded execution traces rather than illustrative numbers.
-- EDF and RM comparisons require deadline/period information that a basic MLQ command runner may not collect.
-
-## Suggested experiment
-
-1. Choose a repeatable set of commands and record each command's queue, start time, finish time, and exit status.
-2. Generate a Gantt chart from those measurements.
-3. If comparing with EDF or RM, define a real-time task set with execution times, periods, and deadlines.
-4. Run all algorithms against the same task set and compare the same metrics.
-
-## Repository
-
-[Multilevel-Queue-Scheduling on GitHub](https://github.com/kaspian021/Multilevel-Queue-Scheduling)
+Both papers are generated: every figure in them is read from
+`output/experiments.json` at build time, so a paper cannot quote a number the
+code does not produce.
