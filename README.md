@@ -1,79 +1,186 @@
-# Multilevel Queue Scheduling
+# تمرین ۲ — مقایسه کامل MLQ با EDF و RM
 
-A small educational project demonstrating **Multilevel Queue (MLQ) Scheduling** by organizing programs/commands into three queues and running them according to the project's queue policy. The program also measures elapsed execution time for the commands it runs.
+**Branch:** `Exercise-2-MLQ-EDF-RM-Comparison`
+**Exercise 2 — A complete comparison of Multilevel Queue scheduling with EDF and RM**
 
-> **Scope note:** This is a user-space demonstration, not a replacement for the operating system's kernel scheduler. The Gantt chart below is an illustrative example; it is not measured benchmark data from a particular run.
+این شاخه فقط شامل فایل‌های تمرین دوم است: گزارش مقایسه‌ای فارسی و انگلیسی،
+چارچوب شبیه‌سازی مشترک، آزمون‌های تحلیلی، تست‌های خودکار، سناریوها، نمودارها و
+خروجی‌های واقعی.
 
-## Overview
+---
 
-Multilevel Queue Scheduling divides the ready work into separate queues. Each queue represents a category or priority level. In this project, the queues are numbered from 1 to 3:
+## فهرست محتوای این شاخه
 
-- **Queue 1:** highest-priority queue
-- **Queue 2:** medium-priority queue
-- **Queue 3:** lowest-priority queue
+| مسیر | توضیح |
+|---|---|
+| `README.md` | همین فایل |
+| `COMPARISON_FA.md` | گزارش مقایسه‌ای فارسی (Markdown) |
+| `COMPARISON_EN.md` | گزارش مقایسه‌ای انگلیسی (Markdown) |
+| `docs/COMPARISON_FA.docx` / `.pdf` | نسخه Word و PDF فارسی |
+| `docs/COMPARISON_EN.docx` / `.pdf` | نسخه Word و PDF انگلیسی |
+| `code/rt_sched.py` | چارچوب مشترک شبیه‌سازی و آزمون‌های تحلیلی |
+| `code/run_experiments.py` | اجرای سناریوها، مطالعه تصادفی و تولید نمودارها |
+| `code/scenarios/*.json` | چهار سناریو |
+| `tests/test_rt_sched.py` | ۳۸ تست خودکار |
+| `diagrams/` | ۱۲ نمودار گانت و ۸ نمودار تحلیلی |
+| `output/` | خروجی متنی و JSON هر اجرا |
+| `requirements.txt` | وابستگی‌های پایتون |
 
-The program accepts commands/programs, associates them with a queue, executes them according to its queue-order policy, and reports elapsed runtime/status. The exact runtime depends on the commands and the machine on which the project is run.
+### تعداد صفحات گزارش‌ها
 
-## Workflow
+| فایل | تعداد صفحه | روش اندازه‌گیری |
+|---|---|---|
+| `docs/COMPARISON_FA.pdf` | ۳۵ | دقیق — خوانده‌شده از خود فایل PDF |
+| `docs/COMPARISON_EN.pdf` | ۳۵ | دقیق — خوانده‌شده از خود فایل PDF |
+| `docs/COMPARISON_FA.docx` | برآورد اندازه‌گیری‌شده | بیشترین پُرشدگی صفحه ۷۰٪ |
+| `docs/COMPARISON_EN.docx` | برآورد اندازه‌گیری‌شده | بیشترین پُرشدگی صفحه ۶۸٪ |
 
-![Project workflow and runtime measurement](assets/mlq-workflow.svg)
+هر دو قالب از یک مدل محتوای یکسان تولید می‌شوند؛ بنابراین صفحه‌بندی، فهرست
+مطالب، جدول‌ها و شکل‌ها در Word و PDF یکسان است. عدد PDF دقیق و عدد DOCX
+برآورد اندازه‌گیری‌شده است (اندازه‌گیری دقیق فایل Word نیازمند Microsoft Word یا
+LibreOffice است که در این محیط در دسترس نبود).
 
-1. Provide the commands/programs and their queue assignments.
-2. The project groups the work into three queues.
-3. Commands are launched according to the implemented queue policy.
-4. The program measures elapsed time and reports execution results.
+---
 
-## Gantt Chart
+## اجرا
 
-The following chart illustrates queue-order execution with **made-up example tasks and durations**. Replace the example values with actual output from your own run before presenting them as experimental results.
+```bash
+cd exercise-2
+pip install -r requirements.txt
 
-![Illustrative Gantt chart](assets/mlq-gantt-example.svg)
+# بازتولید همه نتایج، نمودارها و خروجی‌ها
+python code/run_experiments.py
 
-Example timeline:
+# اجرای تست‌ها
+python -m pytest tests/ -q
+```
 
-| Task | Queue | Example start | Example finish | Example duration |
-|---|---:|---:|---:|---:|
-| P1 | 1 | 0 | 2 | 2 |
-| P2 | 1 | 2 | 4 | 2 |
-| P3 | 2 | 4 | 7 | 3 |
-| P4 | 3 | 7 | 8 | 1 |
+## مدل وظیفه
 
-These numbers are only for explaining how to read a Gantt chart. They are not benchmark results from the repository.
+هر وظیفه با سه‌تای `(C, T, D)` تعریف می‌شود:
 
-## Comparison with EDF and RM
+* `C` زمان اجرای بدترین حالت
+* `T` دوره تناوب
+* `D` مهلت پایان نسبی (پیش‌فرض برابر `T`)
 
-**EDF (Earliest Deadline First)** and **RM (Rate Monotonic)** are real-time scheduling algorithms designed around task deadlines and periodicity. MLQ organizes work into predefined priority queues. They solve related but different scheduling problems, so a fair quantitative comparison requires the same workload and relevant task parameters.
+در فایل سناریو، فیلد `queue` سطح صف را برای اجرای MLQ تعیین می‌کند. اگر تعیین
+نشود، سطح صف بر پایه دوره تناوب تخصیص می‌یابد (دوره کوتاه‌تر یعنی صف بالاتر).
 
-| Property | This MLQ project | EDF | RM |
+## آزمون‌های تحلیلی پیاده‌سازی‌شده
+
+| آزمون | الگوریتم | دقت |
+|---|---|---|
+| شرط کافی لیو و لی‌لند | RM | فقط کافی |
+| تحلیل زمان پاسخ (جوزف و پاندیا) | RM / DM | دقیق |
+| شرط بهره‌وری `U <= 1` | EDF با مهلت ضمنی | لازم و کافی |
+| معیار تقاضای پردازنده (بارواه و همکاران) | EDF با مهلت محدود | دقیق |
+
+این آزمون‌ها مستقل از شبیه‌ساز هستند؛ شبیه‌ساز تنها نشان می‌دهد در یک افق محدود
+چه رخ داده است و اثبات قطعی زمان‌بندی‌پذیری از آزمون‌های تحلیلی به دست می‌آید.
+
+---
+
+## سناریوها و نتایج (همگی از اجرای واقعی)
+
+منبع همه اعداد: `output/experiments.json`.
+
+| سناریو | n | U | آزمون دقیق RM | آزمون دقیق EDF |
+|---|---:|---:|---|---|
+| A — مقایسه منصفانه | 4 | 0.800 | تأیید | تأیید |
+| B — فشار بالا | 2 | 0.9714 | رد (R_B = 8 > D_B = 7) | تأیید |
+| C — بار غیرمتناوب | 7 | 0.900 | رد | تأیید |
+| D — اضافه‌بار | 3 | 1.2333 | رد | رد (U > 1) |
+
+### سناریو A — مقایسه منصفانه (افق ۱۲۰ تیک)
+
+| شاخص | EDF | RM | MLQ |
+|---|---:|---:|---:|
+| نقض مهلت | 0 | 0 | 0 |
+| میانگین زمان پاسخ | 3.000 | 3.105 | 3.105 |
+| لغزش | 2.891 | 3.272 | 3.255 |
+| تعویض زمینه | 54 | 57 | 54 |
+| پیش‌گیری | 9 | 12 | 9 |
+
+### سناریو B — فشار بالا (افق ۱۰۵ تیک)
+
+| شاخص | EDF | RM | MLQ |
+|---|---:|---:|---:|
+| نقض مهلت | 0 | 3 | 3 |
+| میانگین زمان پاسخ | 3.833 | 4.000 | 4.000 |
+| لغزش | 1.424 | 2.449 | 2.449 |
+| تعویض زمینه | 36 | 48 | 48 |
+| پیش‌گیری | 3 | 15 | 15 |
+
+### سناریو C — بار غیرمتناوب (افق ۳۰ تیک)
+
+| شاخص | EDF | RM | MLQ |
+|---|---:|---:|---:|
+| نقض مهلت | 0 | 3 | 0 |
+| میانگین زمان پاسخ | 10.857 | 13.000 | 10.857 |
+| تعویض زمینه | 6 | 6 | 7 |
+
+### سناریو D — اضافه‌بار (افق ۱۲۰ تیک)
+
+| شاخص | EDF | RM | MLQ |
+|---|---:|---:|---:|
+| نقض مهلت | 31 | 10 | 10 |
+| بیشینه زمان پاسخ | 30 | 96 | 96 |
+| لغزش | 6.975 | 20.612 | 20.612 |
+
+توزیع نقض مهلت‌ها در سناریو D به تفکیک وظیفه:
+
+| وظیفه | اولویت | نقض تحت EDF | نقض تحت RM و MLQ |
 |---|---|---|---|
-| Main decision rule | Queue assignment and queue policy | Run the ready task with the earliest absolute deadline | Fixed priority based on period; shorter period gets higher priority |
-| Priority | Based on queue/category | Dynamic; can change as deadlines approach | Fixed for a task set |
-| Needs deadlines? | Not inherently | Yes | Usually uses task periods; deadlines are often assumed equal to periods in the classical model |
-| Best fit | Demonstrating queue-based organization of commands | Dynamic-priority real-time workloads | Periodic real-time workloads with fixed priorities |
-| Main limitation | Lower queues may wait longer depending on the inter-queue policy; not a kernel scheduler | Scheduling overhead and deadline misses when workload is infeasible | Can miss deadlines for some task sets that EDF could schedule |
-| Meaningful evaluation | Queue order, elapsed runtime, and fairness under a defined workload | Deadline-miss rate, response times, utilization | Deadline-miss rate, response times, utilization |
+| X | بالا | 13 از 15 | 0 از 15 |
+| Y | متوسط | 10 از 12 | 0 از 12 |
+| Z | پایین | 8 از 10 | 10 از 10 |
 
-### Summary
+### مطالعه تصادفی زمان‌بندی‌پذیری (۲۳۲۹ مجموعه، دانه ۲۰۲۵۰۱۰۱)
 
-- **MLQ** is useful when tasks should be separated into fixed categories or priority classes.
-- **EDF** is suitable when tasks have deadlines and the scheduler should favor the earliest deadline.
-- **RM** is suitable for periodic tasks with fixed priorities derived from task periods.
-- No algorithm is universally best. To compare performance numerically, run the same workload under each algorithm and record metrics such as completion time, waiting time, response time, CPU utilization, and missed deadlines where applicable.
+| بازه بهره‌وری | تعداد | زمان‌بندی‌پذیر تحت RM | زمان‌بندی‌پذیر تحت EDF |
+|---|---:|---:|---:|
+| 0.25 – 0.50 | 443 | 100.0% | 100.0% |
+| 0.50 – 0.70 | 827 | 100.0% | 100.0% |
+| 0.70 – 0.80 | 366 | 99.7% | 100.0% |
+| 0.80 – 0.90 | 344 | 82.3% | 100.0% |
+| 0.90 – 1.00 | 349 | 17.8% | 100.0% |
 
-## Limitations
+---
 
-- A user-space command runner cannot fully control the kernel's CPU scheduling decisions.
-- Elapsed runtime is affected by system load, I/O, and other processes; it is not the same as CPU time.
-- A meaningful Gantt chart and performance comparison should be generated from recorded execution traces rather than illustrative numbers.
-- EDF and RM comparisons require deadline/period information that a basic MLQ command runner may not collect.
+## تست‌ها
 
-## Suggested experiment
+```
+$ python -m pytest tests/ -q
+......................................                                   [100%]
+38 passed in 0.04s
+```
 
-1. Choose a repeatable set of commands and record each command's queue, start time, finish time, and exit status.
-2. Generate a Gantt chart from those measurements.
-3. If comparing with EDF or RM, define a real-time task set with execution times, periods, and deadlines.
-4. Run all algorithms against the same task set and compare the same metrics.
+خروجی کامل در `output/pytest_result.txt`. تست‌ها شامل: اعتبارسنجی مدل وظیفه،
+قواعد اولویت، مقادیر کران لیو و لی‌لند، تابع کران تقاضا، تطبیق آزمون تحلیلی با
+شبیه‌سازی، گرسنگی وظیفه کم‌اولویت در اضافه‌بار، چرخش RR در MLQ و قفل‌کردن اعداد
+ثبت‌شده برای همه سناریوها (Regression Lock).
 
-## Repository
+## نمودارها
 
-[Multilevel-Queue-Scheduling on GitHub](https://github.com/kaspian021/Multilevel-Queue-Scheduling)
+| فایل | موضوع |
+|---|---|
+| `diagrams/gantt_A_fair_*.png` | گانت EDF / RM / MLQ در سناریوی منصفانه |
+| `diagrams/gantt_B_stress_*.png` | گانت در سناریوی فشار بالا |
+| `diagrams/gantt_C_aperiodic_*.png` | گانت در سناریوی غیرمتناوب |
+| `diagrams/gantt_D_overload_*.png` | گانت در سناریوی اضافه‌بار |
+| `diagrams/chart_misses.png` | نقض مهلت پایان |
+| `diagrams/chart_response.png` | میانگین زمان پاسخ |
+| `diagrams/chart_jitter.png` | لغزش زمان پاسخ |
+| `diagrams/chart_overhead.png` | تعویض زمینه |
+| `diagrams/chart_utilization.png` | بهره‌وری |
+| `diagrams/chart_rm_bound.png` | کران لیو و لی‌لند در برابر کران EDF |
+| `diagrams/chart_dbf.png` | تابع کران تقاضا |
+| `diagrams/chart_feasibility_study.png` | مطالعه تصادفی زمان‌بندی‌پذیری |
+
+## محدودیت‌ها
+
+* مدل تک‌پردازنده و پیش‌گیرانه است.
+* وظایف مستقل‌اند: انسداد، اشتراک منبع و وارونگی اولویت مدل نشده است.
+* هزینه تعویض زمینه صفر فرض شده است.
+* سناریوها مصنوعی و کوچک‌اند تا امکان بررسی دستی فراهم باشد.
+* شبیه‌سازی یک افق محدود را پوشش می‌دهد؛ تضمین قطعی از آزمون‌های تحلیلی است.
