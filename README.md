@@ -1,79 +1,198 @@
-# Multilevel Queue Scheduling
+# تمرین ۱ — معرفی کامل الگوریتم Multilevel Queue Scheduling
 
-A small educational project demonstrating **Multilevel Queue (MLQ) Scheduling** by organizing programs/commands into three queues and running them according to the project's queue policy. The program also measures elapsed execution time for the commands it runs.
+**Branch:** `Exercise-1-Algorithm-Introduction`
+**Exercise 1 — A complete introduction to Multilevel Queue (MLQ) scheduling**
 
-> **Scope note:** This is a user-space demonstration, not a replacement for the operating system's kernel scheduler. The Gantt chart below is an illustrative example; it is not measured benchmark data from a particular run.
+این شاخه فقط شامل فایل‌های تمرین اول است: گزارش کامل فارسی و انگلیسی، شبیه‌ساز
+اجرایی پایتون، تست‌های خودکار، سناریوهای آزمایشی، نمودارها و خروجی‌های واقعی.
 
-## Overview
+---
 
-Multilevel Queue Scheduling divides the ready work into separate queues. Each queue represents a category or priority level. In this project, the queues are numbered from 1 to 3:
+## فهرست محتوای این شاخه
 
-- **Queue 1:** highest-priority queue
-- **Queue 2:** medium-priority queue
-- **Queue 3:** lowest-priority queue
+| مسیر | توضیح |
+|---|---|
+| `README.md` | همین فایل: راهنمای شاخه و نحوه بازتولید نتایج |
+| `REPORT_FA.md` | گزارش کامل فارسی (Markdown) |
+| `REPORT_EN.md` | گزارش کامل انگلیسی (Markdown) |
+| `docs/REPORT_FA.docx` | نسخه Word فارسی |
+| `docs/REPORT_FA.pdf` | نسخه PDF فارسی |
+| `docs/REPORT_EN.docx` | نسخه Word انگلیسی |
+| `docs/REPORT_EN.pdf` | نسخه PDF انگلیسی |
+| `code/mlq.py` | شبیه‌ساز MLQ و رابط خط فرمان |
+| `code/run_experiments.py` | اجرای همه سناریوها و بازسازی نمودارها |
+| `code/make_diagrams.py` | ترسیم ساختار، فلوچارت و نمودارهای مفهومی |
+| `code/scenarios/*.json` | ۴ سناریوی معتبر و ۳ سناریوی نامعتبر |
+| `tests/test_mlq.py` | تست‌های پایه (۱۵ تست) |
+| `tests/test_mlq_extra.py` | تست‌های افزونه‌های جدید (۴۴ تست) |
+| `diagrams/` | ۱۴ نمودار تولیدشده (گانت، فلوچارت، نمودارهای مقایسه‌ای) |
+| `output/` | خروجی متنی، CSV، JSON و نتیجه تست‌ها |
+| `requirements.txt` | وابستگی‌های پایتون |
 
-The program accepts commands/programs, associates them with a queue, executes them according to its queue-order policy, and reports elapsed runtime/status. The exact runtime depends on the commands and the machine on which the project is run.
+### تعداد صفحات گزارش‌ها
 
-## Workflow
+| فایل | تعداد صفحه | روش اندازه‌گیری |
+|---|---|---|
+| `docs/REPORT_FA.pdf` | ۳۵ | دقیق — خوانده‌شده از خود فایل PDF |
+| `docs/REPORT_EN.pdf` | ۳۵ | دقیق — خوانده‌شده از خود فایل PDF |
+| `docs/REPORT_FA.docx` | ۳۵ | برآورد اندازه‌گیری‌شده روی فایل DOCX (بیشترین پُرشدگی صفحه: ۷۴٪) |
+| `docs/REPORT_EN.docx` | ۳۵ | برآورد اندازه‌گیری‌شده روی فایل DOCX (بیشترین پُرشدگی صفحه: ۷۲٪) |
 
-![Project workflow and runtime measurement](assets/mlq-workflow.svg)
+هر دو فایل DOCX و PDF از یک مدل محتوای یکسان تولید می‌شوند؛ بنابراین شماره
+صفحات، فهرست مطالب، جدول‌ها و شکل‌ها در دو قالب دقیقاً یکسان است. بیشترین
+پُرشدگی صفحه ۷۴ درصد است، یعنی ۲۶ درصد فضای آزاد برای تفاوت احتمالی شکستن
+خطوط در Word باقی مانده است. عدد مربوط به PDF دقیق و عدد مربوط به DOCX
+برآورد اندازه‌گیری‌شده است (برای اندازه‌گیری دقیق فایل Word به Microsoft Word
+یا LibreOffice نیاز است که در این محیط در دسترس نبود).
 
-1. Provide the commands/programs and their queue assignments.
-2. The project groups the work into three queues.
-3. Commands are launched according to the implemented queue policy.
-4. The program measures elapsed time and reports execution results.
+---
 
-## Gantt Chart
+## اجرا
 
-The following chart illustrates queue-order execution with **made-up example tasks and durations**. Replace the example values with actual output from your own run before presenting them as experimental results.
+```bash
+cd exercise-1
+pip install -r requirements.txt
 
-![Illustrative Gantt chart](assets/mlq-gantt-example.svg)
+# اجرای یک سناریو
+python code/mlq.py code/scenarios/baseline.json
 
-Example timeline:
+# تغییر سیاست یک صف در لحظه اجرا
+python code/mlq.py code/scenarios/policy_mix.json --policy 2=SRTF --quiet
 
-| Task | Queue | Example start | Example finish | Example duration |
+# خروجی نمودار گانت، CSV و JSON
+python code/mlq.py code/scenarios/baseline.json --png g.png --csv r.csv --json r.json
+
+# ورود دستی پردازه‌ها
+python code/mlq.py --interactive
+
+# بازتولید همه نتایج و نمودارها
+python code/run_experiments.py
+python code/make_diagrams.py
+
+# اجرای تست‌ها
+python -m pytest tests/ -q
+```
+
+## قالب فایل سناریو
+
+```json
+{
+  "inter_policy": "fixed",
+  "inter_slice": 2,
+  "aging": 0,
+  "queues": {
+    "1": {"policy": "RR", "quantum": 2},
+    "2": {"policy": "SJF"},
+    "3": {"policy": "FCFS"}
+  },
+  "processes": [
+    {"pid": "P1", "arrival": 0, "burst": 5, "queue": 3},
+    {"pid": "P2", "arrival": 1, "burst": 4, "queue": 1}
+  ]
+}
+```
+
+* `inter_policy`: `fixed` (اولویت ثابت بین صف‌ها) یا `slice` (برش زمانی بین صف‌ها)
+* `policy` هر صف: `FCFS`، `RR`، `SJF` یا `SRTF`
+* `aging`: آستانه پیری بر حسب تیک؛ مقدار صفر یعنی غیرفعال
+
+## قابلیت‌های شبیه‌ساز
+
+* دریافت پردازه‌ها از فایل JSON، از ورودی استاندارد یا به‌صورت تعاملی
+* تعیین صف هر پردازه و اعتبارسنجی شماره صف
+* دریافت زمان اجرا، زمان ورود و اولویت
+* چهار سیاست درون‌صفی و دو سیاست بین‌صفی
+* تولید نمودار گانت (متنی و PNG)
+* محاسبه Waiting Time، Turnaround Time و Response Time
+* محاسبه میانگین شاخص‌ها به‌صورت کلان و به تفکیک هر صف
+* محاسبه بهره‌وری پردازنده، توان عملیاتی، تعویض زمینه و پیش‌گیری‌ها
+* خروجی جدول متنی، CSV و JSON
+* مدیریت کامل ورودی‌های نامعتبر با پیام خطای روشن و کد خروجی ۲
+
+---
+
+## نتایج آزمایش‌ها (همگی از اجرای واقعی گرفته شده‌اند)
+
+منبع همه اعداد: `output/experiments.json` که توسط `code/run_experiments.py`
+تولید می‌شود.
+
+| سناریو | تعداد | میانگین انتظار | میانگین چرخش | میانگین پاسخ | بهره‌وری | تعویض زمینه |
+|---|---:|---:|---:|---:|---:|---:|
+| baseline | 5 | 4.20 | 7.20 | 1.80 | 100% | 6 |
+| starvation | 11 | 1.82 | 3.73 | 1.82 | 100% | 10 |
+| timeslice | 5 | 12.80 | 17.60 | 6.00 | 100% | 8 |
+| policy_mix | 8 | 9.00 | 12.25 | 8.75 | 100% | 8 |
+
+### مقایسه سیاست‌های درون‌صفی (سناریوی policy_mix)
+
+| سیاست صف ۲ | میانگین انتظار | میانگین چرخش | میانگین پاسخ | تعویض زمینه |
 |---|---:|---:|---:|---:|
-| P1 | 1 | 0 | 2 | 2 |
-| P2 | 1 | 2 | 4 | 2 |
-| P3 | 2 | 4 | 7 | 3 |
-| P4 | 3 | 7 | 8 | 1 |
+| FCFS | 9.00 | 12.25 | 8.75 | 8 |
+| RR (q=2) | 8.50 | 11.75 | 5.25 | 13 |
+| SJF | 6.25 | 9.50 | 6.00 | 8 |
+| SRTF | 6.12 | 9.38 | 5.62 | 9 |
 
-These numbers are only for explaining how to read a Gantt chart. They are not benchmark results from the repository.
+### مقایسه سیاست‌های بین‌صفی (سناریوی timeslice)
 
-## Comparison with EDF and RM
+| سیاست بین‌صفی | میانگین انتظار | میانگین چرخش | میانگین پاسخ | تعویض زمینه |
+|---|---:|---:|---:|---:|
+| اولویت ثابت | 8.40 | 13.20 | 7.80 | 5 |
+| برش زمانی = ۲ | 14.20 | 19.00 | 3.60 | 12 |
+| برش زمانی = ۳ | 12.80 | 17.60 | 6.00 | 8 |
+| برش زمانی = ۵ | 13.20 | 18.00 | 8.60 | 6 |
 
-**EDF (Earliest Deadline First)** and **RM (Rate Monotonic)** are real-time scheduling algorithms designed around task deadlines and periodicity. MLQ organizes work into predefined priority queues. They solve related but different scheduling problems, so a fair quantitative comparison requires the same workload and relevant task parameters.
+### اثر پیری بر گرسنگی (سناریوی starvation)
 
-| Property | This MLQ project | EDF | RM |
-|---|---|---|---|
-| Main decision rule | Queue assignment and queue policy | Run the ready task with the earliest absolute deadline | Fixed priority based on period; shorter period gets higher priority |
-| Priority | Based on queue/category | Dynamic; can change as deadlines approach | Fixed for a task set |
-| Needs deadlines? | Not inherently | Yes | Usually uses task periods; deadlines are often assumed equal to periods in the classical model |
-| Best fit | Demonstrating queue-based organization of commands | Dynamic-priority real-time workloads | Periodic real-time workloads with fixed priorities |
-| Main limitation | Lower queues may wait longer depending on the inter-queue policy; not a kernel scheduler | Scheduling overhead and deadline misses when workload is infeasible | Can miss deadlines for some task sets that EDF could schedule |
-| Meaningful evaluation | Queue order, elapsed runtime, and fairness under a defined workload | Deadline-miss rate, response times, utilization | Deadline-miss rate, response times, utilization |
+| آستانه پیری | انتظار L1 | چرخش L1 | میانگین انتظار | تعداد ارتقا |
+|---:|---:|---:|---:|---:|
+| ۰ (غیرفعال) | 20 | 21 | 1.82 | 0 |
+| ۲ | 6 | 7 | 1.18 | 2 |
+| ۴ | 10 | 11 | 1.36 | 2 |
+| ۶ | 14 | 15 | 1.55 | 2 |
+| ۸ | 18 | 19 | 1.73 | 2 |
+| ۱۲ | 20 | 21 | 1.82 | 1 |
 
-### Summary
+---
 
-- **MLQ** is useful when tasks should be separated into fixed categories or priority classes.
-- **EDF** is suitable when tasks have deadlines and the scheduler should favor the earliest deadline.
-- **RM** is suitable for periodic tasks with fixed priorities derived from task periods.
-- No algorithm is universally best. To compare performance numerically, run the same workload under each algorithm and record metrics such as completion time, waiting time, response time, CPU utilization, and missed deadlines where applicable.
+## تست‌ها
 
-## Limitations
+```
+$ python -m pytest tests/ -q
+...........................................................              [100%]
+59 passed in 0.62s
+```
 
-- A user-space command runner cannot fully control the kernel's CPU scheduling decisions.
-- Elapsed runtime is affected by system load, I/O, and other processes; it is not the same as CPU time.
-- A meaningful Gantt chart and performance comparison should be generated from recorded execution traces rather than illustrative numbers.
-- EDF and RM comparisons require deadline/period information that a basic MLQ command runner may not collect.
+خروجی کامل در `output/pytest_result.txt` ذخیره شده است. تست‌ها شامل موارد زیر
+هستند: درستی نمودار گانت سناریوی مرجع، اتحادهای شاخص‌ها، رفتار چهار سیاست
+درون‌صفی، رفتار دو سیاست بین‌صفی، رشد خطی گرسنگی، اثر پیری، انطباق تعداد تعویض
+زمینه با نمودار گانت، خروجی CSV/JSON/PNG، بازنویسی سیاست از خط فرمان، ورودی
+تعاملی و مجموعه کامل سناریوهای نامعتبر.
 
-## Suggested experiment
+## نمودارهای تولیدشده
 
-1. Choose a repeatable set of commands and record each command's queue, start time, finish time, and exit status.
-2. Generate a Gantt chart from those measurements.
-3. If comparing with EDF or RM, define a real-time task set with execution times, periods, and deadlines.
-4. Run all algorithms against the same task set and compare the same metrics.
+| فایل | موضوع |
+|---|---|
+| `diagrams/fig_mlq_structure.png` | ساختار سه‌سطحی صف‌ها و نگهبان بین‌صفی |
+| `diagrams/fig_flowchart.png` | فلوچارت کامل یک تیک زمان‌بند |
+| `diagrams/fig_metrics_timeline.png` | تعریف تصویری Burst، Waiting، TAT و Response |
+| `diagrams/fig_queue_waiting.png` | رشد زمان انتظار با کاهش سطح صف |
+| `diagrams/gantt_baseline.png` | نمودار گانت سناریوی مرجع |
+| `diagrams/gantt_starvation.png` | نمودار گانت سناریوی گرسنگی |
+| `diagrams/gantt_timeslice.png` | نمودار گانت سناریوی برش زمانی |
+| `diagrams/gantt_policy_mix.png` | نمودار گانت سناریوی مقایسه سیاست‌ها |
+| `diagrams/chart_queue_policy.png` | مقایسه چهار سیاست درون‌صفی |
+| `diagrams/chart_aging.png` | جاروب آستانه پیری |
+| `diagrams/chart_interqueue.png` | مقایسه اولویت ثابت و برش زمانی |
+| `diagrams/chart_scenarios.png` | شاخص‌های چهار سناریو |
+| `diagrams/chart_overhead.png` | سربار زمان‌بندی و بهره‌وری |
+| `diagrams/chart_starvation.png` | زمان انتظار به تفکیک صف |
 
-## Repository
+## محدودیت‌های این مدل
 
-[Multilevel-Queue-Scheduling on GitHub](https://github.com/kaspian021/Multilevel-Queue-Scheduling)
+* زمان گسسته و بر حسب تیک است.
+* طول Burst از پیش معلوم فرض شده است.
+* هزینه تعویض زمینه صفر در نظر گرفته شده است.
+* یک پردازنده واحد مدل شده است.
+* سناریوها مصنوعی و کوچک‌اند تا امکان محاسبه دستی فراهم باشد.
+
+این یک مدل آموزشی و قابل‌سنجش است و جایگزین زمان‌بند واقعی هسته نیست.
