@@ -1,0 +1,983 @@
+{
+  "errors": {
+    "invalid_burst.json": "A: burst must be > 0",
+    "invalid_missing_field.json": "process #1: missing field 'burst'",
+    "invalid_queue.json": "A: queue 7 not in [1]"
+  },
+  "experiments": {
+    "aging": {
+      "avg_wait": [
+        1.8181818181818181,
+        1.1818181818181819,
+        1.3636363636363635,
+        1.5454545454545454,
+        1.7272727272727273,
+        1.8181818181818181
+      ],
+      "low_tat": [
+        21,
+        7,
+        11,
+        15,
+        19,
+        21
+      ],
+      "low_wait": [
+        20,
+        6,
+        10,
+        14,
+        18,
+        20
+      ],
+      "promotions": [
+        0,
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      "thresholds": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        12
+      ]
+    },
+    "interqueue": {
+      "fixed/2": {
+        "busy": 24,
+        "context_switches": 5,
+        "dispatches": 6,
+        "idle": 0,
+        "n": 5,
+        "preemptions": 1,
+        "promotions": 0,
+        "response": 7.8,
+        "switches_total": 5,
+        "throughput": 0.20833333333333334,
+        "total_time": 24,
+        "turnaround": 13.2,
+        "utilization": 1.0,
+        "waiting": 8.4
+      },
+      "slice/2": {
+        "busy": 24,
+        "context_switches": 12,
+        "dispatches": 13,
+        "idle": 0,
+        "n": 5,
+        "preemptions": 8,
+        "promotions": 0,
+        "response": 3.6,
+        "switches_total": 12,
+        "throughput": 0.20833333333333334,
+        "total_time": 24,
+        "turnaround": 19.0,
+        "utilization": 1.0,
+        "waiting": 14.2
+      },
+      "slice/3": {
+        "busy": 24,
+        "context_switches": 8,
+        "dispatches": 9,
+        "idle": 0,
+        "n": 5,
+        "preemptions": 4,
+        "promotions": 0,
+        "response": 6.0,
+        "switches_total": 8,
+        "throughput": 0.20833333333333334,
+        "total_time": 24,
+        "turnaround": 17.6,
+        "utilization": 1.0,
+        "waiting": 12.8
+      },
+      "slice/5": {
+        "busy": 24,
+        "context_switches": 6,
+        "dispatches": 7,
+        "idle": 0,
+        "n": 5,
+        "preemptions": 2,
+        "promotions": 0,
+        "response": 8.6,
+        "switches_total": 6,
+        "throughput": 0.20833333333333334,
+        "total_time": 24,
+        "turnaround": 18.0,
+        "utilization": 1.0,
+        "waiting": 13.2
+      }
+    },
+    "overhead": {
+      "dispatches": [
+        7,
+        11,
+        9,
+        9
+      ],
+      "labels": [
+        "baseline",
+        "starvation",
+        "policy_mix",
+        "timeslice"
+      ],
+      "switches": [
+        6,
+        10,
+        8,
+        8
+      ],
+      "utilization": [
+        100.0,
+        100.0,
+        100.0,
+        100.0
+      ]
+    },
+    "queue_policy": {
+      "FCFS": {
+        "busy": 26,
+        "context_switches": 8,
+        "dispatches": 9,
+        "idle": 0,
+        "n": 8,
+        "preemptions": 2,
+        "promotions": 0,
+        "response": 8.75,
+        "switches_total": 8,
+        "throughput": 0.3076923076923077,
+        "total_time": 26,
+        "turnaround": 12.25,
+        "utilization": 1.0,
+        "waiting": 9.0
+      },
+      "RR": {
+        "busy": 26,
+        "context_switches": 13,
+        "dispatches": 14,
+        "idle": 0,
+        "n": 8,
+        "preemptions": 7,
+        "promotions": 0,
+        "response": 5.25,
+        "switches_total": 13,
+        "throughput": 0.3076923076923077,
+        "total_time": 26,
+        "turnaround": 11.75,
+        "utilization": 1.0,
+        "waiting": 8.5
+      },
+      "SJF": {
+        "busy": 26,
+        "context_switches": 8,
+        "dispatches": 9,
+        "idle": 0,
+        "n": 8,
+        "preemptions": 2,
+        "promotions": 0,
+        "response": 6.0,
+        "switches_total": 8,
+        "throughput": 0.3076923076923077,
+        "total_time": 26,
+        "turnaround": 9.5,
+        "utilization": 1.0,
+        "waiting": 6.25
+      },
+      "SRTF": {
+        "busy": 26,
+        "context_switches": 9,
+        "dispatches": 10,
+        "idle": 0,
+        "n": 8,
+        "preemptions": 3,
+        "promotions": 0,
+        "response": 5.625,
+        "switches_total": 9,
+        "throughput": 0.3076923076923077,
+        "total_time": 26,
+        "turnaround": 9.375,
+        "utilization": 1.0,
+        "waiting": 6.125
+      }
+    },
+    "scenarios": {
+      "baseline": {
+        "busy": 15,
+        "context_switches": 6,
+        "dispatches": 7,
+        "idle": 0,
+        "n": 5,
+        "preemptions": 2,
+        "promotions": 0,
+        "response": 1.8,
+        "switches_total": 6,
+        "throughput": 0.3333333333333333,
+        "total_time": 15,
+        "turnaround": 7.2,
+        "utilization": 1.0,
+        "waiting": 4.2
+      },
+      "policy_mix": {
+        "busy": 26,
+        "context_switches": 8,
+        "dispatches": 9,
+        "idle": 0,
+        "n": 8,
+        "preemptions": 2,
+        "promotions": 0,
+        "response": 8.75,
+        "switches_total": 8,
+        "throughput": 0.3076923076923077,
+        "total_time": 26,
+        "turnaround": 12.25,
+        "utilization": 1.0,
+        "waiting": 9.0
+      },
+      "starvation": {
+        "busy": 21,
+        "context_switches": 10,
+        "dispatches": 11,
+        "idle": 0,
+        "n": 11,
+        "preemptions": 0,
+        "promotions": 0,
+        "response": 1.8181818181818181,
+        "switches_total": 10,
+        "throughput": 0.5238095238095238,
+        "total_time": 21,
+        "turnaround": 3.727272727272727,
+        "utilization": 1.0,
+        "waiting": 1.8181818181818181
+      },
+      "timeslice": {
+        "busy": 24,
+        "context_switches": 8,
+        "dispatches": 9,
+        "idle": 0,
+        "n": 5,
+        "preemptions": 4,
+        "promotions": 0,
+        "response": 6.0,
+        "switches_total": 8,
+        "throughput": 0.20833333333333334,
+        "total_time": 24,
+        "turnaround": 17.6,
+        "utilization": 1.0,
+        "waiting": 12.8
+      }
+    },
+    "starvation_bars": {
+      "0": {
+        "1": {
+          "avg_response": 0.0,
+          "avg_turnaround": 2.0,
+          "avg_waiting": 0.0,
+          "count": 10,
+          "max_turnaround": 2
+        },
+        "3": {
+          "avg_response": 20.0,
+          "avg_turnaround": 21.0,
+          "avg_waiting": 20.0,
+          "count": 1,
+          "max_turnaround": 21
+        }
+      },
+      "4": {
+        "1": {
+          "avg_response": 0.5,
+          "avg_turnaround": 2.5,
+          "avg_waiting": 0.5,
+          "count": 10,
+          "max_turnaround": 3
+        },
+        "3": {
+          "avg_response": 10.0,
+          "avg_turnaround": 11.0,
+          "avg_waiting": 10.0,
+          "count": 1,
+          "max_turnaround": 11
+        }
+      }
+    }
+  },
+  "scenarios": {
+    "baseline.json": {
+      "gantt": [
+        [
+          0,
+          1,
+          "P1"
+        ],
+        [
+          1,
+          3,
+          "P2"
+        ],
+        [
+          3,
+          5,
+          "P4"
+        ],
+        [
+          5,
+          7,
+          "P2"
+        ],
+        [
+          7,
+          8,
+          "P5"
+        ],
+        [
+          8,
+          11,
+          "P3"
+        ],
+        [
+          11,
+          15,
+          "P1"
+        ]
+      ],
+      "per_queue": {
+        "1": {
+          "avg_response": 0.0,
+          "avg_turnaround": 4.0,
+          "avg_waiting": 1.0,
+          "count": 2,
+          "max_turnaround": 6
+        },
+        "2": {
+          "avg_response": 4.5,
+          "avg_turnaround": 6.5,
+          "avg_waiting": 4.5,
+          "count": 2,
+          "max_turnaround": 9
+        },
+        "3": {
+          "avg_response": 0.0,
+          "avg_turnaround": 15.0,
+          "avg_waiting": 10.0,
+          "count": 1,
+          "max_turnaround": 15
+        }
+      },
+      "rows": [
+        {
+          "arrival": 0,
+          "burst": 5,
+          "final_queue": 3,
+          "finish": 15,
+          "pid": "P1",
+          "queue": 3,
+          "response": 0,
+          "turnaround": 15,
+          "waiting": 10
+        },
+        {
+          "arrival": 1,
+          "burst": 4,
+          "final_queue": 1,
+          "finish": 7,
+          "pid": "P2",
+          "queue": 1,
+          "response": 0,
+          "turnaround": 6,
+          "waiting": 2
+        },
+        {
+          "arrival": 2,
+          "burst": 3,
+          "final_queue": 2,
+          "finish": 11,
+          "pid": "P3",
+          "queue": 2,
+          "response": 6,
+          "turnaround": 9,
+          "waiting": 6
+        },
+        {
+          "arrival": 3,
+          "burst": 2,
+          "final_queue": 1,
+          "finish": 5,
+          "pid": "P4",
+          "queue": 1,
+          "response": 0,
+          "turnaround": 2,
+          "waiting": 0
+        },
+        {
+          "arrival": 4,
+          "burst": 1,
+          "final_queue": 2,
+          "finish": 8,
+          "pid": "P5",
+          "queue": 2,
+          "response": 3,
+          "turnaround": 4,
+          "waiting": 3
+        }
+      ],
+      "summary": {
+        "busy": 15,
+        "context_switches": 6,
+        "dispatches": 7,
+        "idle": 0,
+        "n": 5,
+        "preemptions": 2,
+        "promotions": 0,
+        "response": 1.8,
+        "switches_total": 6,
+        "throughput": 0.3333333333333333,
+        "total_time": 15,
+        "turnaround": 7.2,
+        "utilization": 1.0,
+        "waiting": 4.2
+      }
+    },
+    "policy_mix.json": {
+      "gantt": [
+        [
+          0,
+          3,
+          "F1"
+        ],
+        [
+          3,
+          9,
+          "S1"
+        ],
+        [
+          9,
+          11,
+          "F2"
+        ],
+        [
+          11,
+          12,
+          "S1"
+        ],
+        [
+          12,
+          13,
+          "S2"
+        ],
+        [
+          13,
+          17,
+          "S3"
+        ],
+        [
+          17,
+          19,
+          "S4"
+        ],
+        [
+          19,
+          22,
+          "S5"
+        ],
+        [
+          22,
+          26,
+          "T1"
+        ]
+      ],
+      "per_queue": {
+        "1": {
+          "avg_response": 0.0,
+          "avg_turnaround": 2.5,
+          "avg_waiting": 0.0,
+          "count": 2,
+          "max_turnaround": 3
+        },
+        "2": {
+          "avg_response": 9.6,
+          "avg_turnaround": 13.4,
+          "avg_waiting": 10.0,
+          "count": 5,
+          "max_turnaround": 16
+        },
+        "3": {
+          "avg_response": 22.0,
+          "avg_turnaround": 26.0,
+          "avg_waiting": 22.0,
+          "count": 1,
+          "max_turnaround": 26
+        }
+      },
+      "rows": [
+        {
+          "arrival": 0,
+          "burst": 3,
+          "final_queue": 1,
+          "finish": 3,
+          "pid": "F1",
+          "queue": 1,
+          "response": 0,
+          "turnaround": 3,
+          "waiting": 0
+        },
+        {
+          "arrival": 9,
+          "burst": 2,
+          "final_queue": 1,
+          "finish": 11,
+          "pid": "F2",
+          "queue": 1,
+          "response": 0,
+          "turnaround": 2,
+          "waiting": 0
+        },
+        {
+          "arrival": 0,
+          "burst": 7,
+          "final_queue": 2,
+          "finish": 12,
+          "pid": "S1",
+          "queue": 2,
+          "response": 3,
+          "turnaround": 12,
+          "waiting": 5
+        },
+        {
+          "arrival": 2,
+          "burst": 1,
+          "final_queue": 2,
+          "finish": 13,
+          "pid": "S2",
+          "queue": 2,
+          "response": 10,
+          "turnaround": 11,
+          "waiting": 10
+        },
+        {
+          "arrival": 3,
+          "burst": 4,
+          "final_queue": 2,
+          "finish": 17,
+          "pid": "S3",
+          "queue": 2,
+          "response": 10,
+          "turnaround": 14,
+          "waiting": 10
+        },
+        {
+          "arrival": 5,
+          "burst": 2,
+          "final_queue": 2,
+          "finish": 19,
+          "pid": "S4",
+          "queue": 2,
+          "response": 12,
+          "turnaround": 14,
+          "waiting": 12
+        },
+        {
+          "arrival": 6,
+          "burst": 3,
+          "final_queue": 2,
+          "finish": 22,
+          "pid": "S5",
+          "queue": 2,
+          "response": 13,
+          "turnaround": 16,
+          "waiting": 13
+        },
+        {
+          "arrival": 0,
+          "burst": 4,
+          "final_queue": 3,
+          "finish": 26,
+          "pid": "T1",
+          "queue": 3,
+          "response": 22,
+          "turnaround": 26,
+          "waiting": 22
+        }
+      ],
+      "summary": {
+        "busy": 26,
+        "context_switches": 8,
+        "dispatches": 9,
+        "idle": 0,
+        "n": 8,
+        "preemptions": 2,
+        "promotions": 0,
+        "response": 8.75,
+        "switches_total": 8,
+        "throughput": 0.3076923076923077,
+        "total_time": 26,
+        "turnaround": 12.25,
+        "utilization": 1.0,
+        "waiting": 9.0
+      }
+    },
+    "starvation.json": {
+      "gantt": [
+        [
+          0,
+          2,
+          "H1"
+        ],
+        [
+          2,
+          4,
+          "H2"
+        ],
+        [
+          4,
+          6,
+          "H3"
+        ],
+        [
+          6,
+          8,
+          "H4"
+        ],
+        [
+          8,
+          10,
+          "H5"
+        ],
+        [
+          10,
+          12,
+          "H6"
+        ],
+        [
+          12,
+          14,
+          "H7"
+        ],
+        [
+          14,
+          16,
+          "H8"
+        ],
+        [
+          16,
+          18,
+          "H9"
+        ],
+        [
+          18,
+          20,
+          "H10"
+        ],
+        [
+          20,
+          21,
+          "L1"
+        ]
+      ],
+      "per_queue": {
+        "1": {
+          "avg_response": 0.0,
+          "avg_turnaround": 2.0,
+          "avg_waiting": 0.0,
+          "count": 10,
+          "max_turnaround": 2
+        },
+        "3": {
+          "avg_response": 20.0,
+          "avg_turnaround": 21.0,
+          "avg_waiting": 20.0,
+          "count": 1,
+          "max_turnaround": 21
+        }
+      },
+      "rows": [
+        {
+          "arrival": 0,
+          "burst": 2,
+          "final_queue": 1,
+          "finish": 2,
+          "pid": "H1",
+          "queue": 1,
+          "response": 0,
+          "turnaround": 2,
+          "waiting": 0
+        },
+        {
+          "arrival": 18,
+          "burst": 2,
+          "final_queue": 1,
+          "finish": 20,
+          "pid": "H10",
+          "queue": 1,
+          "response": 0,
+          "turnaround": 2,
+          "waiting": 0
+        },
+        {
+          "arrival": 2,
+          "burst": 2,
+          "final_queue": 1,
+          "finish": 4,
+          "pid": "H2",
+          "queue": 1,
+          "response": 0,
+          "turnaround": 2,
+          "waiting": 0
+        },
+        {
+          "arrival": 4,
+          "burst": 2,
+          "final_queue": 1,
+          "finish": 6,
+          "pid": "H3",
+          "queue": 1,
+          "response": 0,
+          "turnaround": 2,
+          "waiting": 0
+        },
+        {
+          "arrival": 6,
+          "burst": 2,
+          "final_queue": 1,
+          "finish": 8,
+          "pid": "H4",
+          "queue": 1,
+          "response": 0,
+          "turnaround": 2,
+          "waiting": 0
+        },
+        {
+          "arrival": 8,
+          "burst": 2,
+          "final_queue": 1,
+          "finish": 10,
+          "pid": "H5",
+          "queue": 1,
+          "response": 0,
+          "turnaround": 2,
+          "waiting": 0
+        },
+        {
+          "arrival": 10,
+          "burst": 2,
+          "final_queue": 1,
+          "finish": 12,
+          "pid": "H6",
+          "queue": 1,
+          "response": 0,
+          "turnaround": 2,
+          "waiting": 0
+        },
+        {
+          "arrival": 12,
+          "burst": 2,
+          "final_queue": 1,
+          "finish": 14,
+          "pid": "H7",
+          "queue": 1,
+          "response": 0,
+          "turnaround": 2,
+          "waiting": 0
+        },
+        {
+          "arrival": 14,
+          "burst": 2,
+          "final_queue": 1,
+          "finish": 16,
+          "pid": "H8",
+          "queue": 1,
+          "response": 0,
+          "turnaround": 2,
+          "waiting": 0
+        },
+        {
+          "arrival": 16,
+          "burst": 2,
+          "final_queue": 1,
+          "finish": 18,
+          "pid": "H9",
+          "queue": 1,
+          "response": 0,
+          "turnaround": 2,
+          "waiting": 0
+        },
+        {
+          "arrival": 0,
+          "burst": 1,
+          "final_queue": 3,
+          "finish": 21,
+          "pid": "L1",
+          "queue": 3,
+          "response": 20,
+          "turnaround": 21,
+          "waiting": 20
+        }
+      ],
+      "summary": {
+        "busy": 21,
+        "context_switches": 10,
+        "dispatches": 11,
+        "idle": 0,
+        "n": 11,
+        "preemptions": 0,
+        "promotions": 0,
+        "response": 1.8181818181818181,
+        "switches_total": 10,
+        "throughput": 0.5238095238095238,
+        "total_time": 21,
+        "turnaround": 3.727272727272727,
+        "utilization": 1.0,
+        "waiting": 1.8181818181818181
+      }
+    },
+    "timeslice.json": {
+      "gantt": [
+        [
+          0,
+          3,
+          "A1"
+        ],
+        [
+          3,
+          6,
+          "B1"
+        ],
+        [
+          6,
+          9,
+          "C1"
+        ],
+        [
+          9,
+          12,
+          "A1"
+        ],
+        [
+          12,
+          15,
+          "B2"
+        ],
+        [
+          15,
+          17,
+          "C1"
+        ],
+        [
+          17,
+          20,
+          "A2"
+        ],
+        [
+          20,
+          23,
+          "B1"
+        ],
+        [
+          23,
+          24,
+          "B2"
+        ]
+      ],
+      "per_queue": {
+        "1": {
+          "avg_response": 5.0,
+          "avg_turnaround": 12.5,
+          "avg_waiting": 8.0,
+          "count": 2,
+          "max_turnaround": 13
+        },
+        "2": {
+          "avg_response": 7.0,
+          "avg_turnaround": 23.0,
+          "avg_waiting": 18.0,
+          "count": 2,
+          "max_turnaround": 23
+        },
+        "3": {
+          "avg_response": 6.0,
+          "avg_turnaround": 17.0,
+          "avg_waiting": 12.0,
+          "count": 1,
+          "max_turnaround": 17
+        }
+      },
+      "rows": [
+        {
+          "arrival": 0,
+          "burst": 6,
+          "final_queue": 1,
+          "finish": 12,
+          "pid": "A1",
+          "queue": 1,
+          "response": 0,
+          "turnaround": 12,
+          "waiting": 6
+        },
+        {
+          "arrival": 7,
+          "burst": 3,
+          "final_queue": 1,
+          "finish": 20,
+          "pid": "A2",
+          "queue": 1,
+          "response": 10,
+          "turnaround": 13,
+          "waiting": 10
+        },
+        {
+          "arrival": 0,
+          "burst": 6,
+          "final_queue": 2,
+          "finish": 23,
+          "pid": "B1",
+          "queue": 2,
+          "response": 3,
+          "turnaround": 23,
+          "waiting": 17
+        },
+        {
+          "arrival": 1,
+          "burst": 4,
+          "final_queue": 2,
+          "finish": 24,
+          "pid": "B2",
+          "queue": 2,
+          "response": 11,
+          "turnaround": 23,
+          "waiting": 19
+        },
+        {
+          "arrival": 0,
+          "burst": 5,
+          "final_queue": 3,
+          "finish": 17,
+          "pid": "C1",
+          "queue": 3,
+          "response": 6,
+          "turnaround": 17,
+          "waiting": 12
+        }
+      ],
+      "summary": {
+        "busy": 24,
+        "context_switches": 8,
+        "dispatches": 9,
+        "idle": 0,
+        "n": 5,
+        "preemptions": 4,
+        "promotions": 0,
+        "response": 6.0,
+        "switches_total": 8,
+        "throughput": 0.20833333333333334,
+        "total_time": 24,
+        "turnaround": 17.6,
+        "utilization": 1.0,
+        "waiting": 12.8
+      }
+    }
+  }
+}

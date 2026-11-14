@@ -1,0 +1,13 @@
+{
+  "queues": {"1": {"policy": "RR", "quantum": 2}, "2": {"policy": "FCFS"}, "3": {"policy": "FCFS"}},
+  "processes": [
+    {"pid": "S1", "arrival": 0, "burst": 7, "queue": 2},
+    {"pid": "S2", "arrival": 2, "burst": 1, "queue": 2},
+    {"pid": "S3", "arrival": 3, "burst": 4, "queue": 2},
+    {"pid": "S4", "arrival": 5, "burst": 2, "queue": 2},
+    {"pid": "S5", "arrival": 6, "burst": 3, "queue": 2},
+    {"pid": "F1", "arrival": 0, "burst": 3, "queue": 1},
+    {"pid": "F2", "arrival": 9, "burst": 2, "queue": 1},
+    {"pid": "T1", "arrival": 0, "burst": 4, "queue": 3}
+  ]
+}

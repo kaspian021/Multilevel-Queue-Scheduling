@@ -1,0 +1,4 @@
+{
+  "queues": {"1": {"policy": "FCFS"}},
+  "processes": [{"pid": "A", "arrival": 0, "burst": 0, "queue": 1}]
+}
