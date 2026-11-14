@@ -1,4 +1,5 @@
-import unittest
+import os, sys, unittest
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "code"))
 from sync_demo import semaphore_demo, monitor_demo
 
 class SynchronizationDemoTests(unittest.TestCase):
