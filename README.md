@@ -1,7 +1,7 @@
 # Exercise 3 — EDF and RM scheduling with three inputs, solved by hand
 
 **Branch:** `Exercise-3-EDF-RM-Manual-Scheduling`
-**Scope of this README:** only the files in this `exercise-3/` folder.
+**Scope of this README:** this branch contains Exercise 3 only. Every file listed below sits at the **root of the branch**, so GitHub renders this README on the branch home page.
 
 ---
 
@@ -98,48 +98,50 @@ deadline (12) is nearer than that of `T1_3` (16).
 ## 4. Files in this branch
 
 ```
-exercise-3/
-├── README.md                        this file
-├── requirements.txt                 pytest, matplotlib
-├── .gitignore
-├── MANUAL_SOLUTION_FA.md            Persian report (Markdown source)
-├── MANUAL_SOLUTION_EN.md            English report (Markdown source)
-├── docs/
-│   ├── MANUAL_SOLUTION_FA.docx      Persian report, 24 pages
-│   ├── MANUAL_SOLUTION_FA.pdf       Persian report, 24 pages
-│   ├── MANUAL_SOLUTION_EN.docx      English report, 24 pages
-│   └── MANUAL_SOLUTION_EN.pdf       English report, 24 pages
-├── code/
-│   ├── edf_rm.py                    simulator, schedulability tests, CLI
-│   ├── run_experiments.py           writes every artefact under output/
-│   ├── make_figures.py              regenerates every PNG under diagrams/
-│   ├── manual_solution.py           the earlier one-shot illustration
-│   └── build_manual_pdf.py          HTML → headless Chrome Persian worksheet
-├── diagrams/
-│   ├── gantt_edf.png                EDF Gantt over one hyperperiod
-│   ├── gantt_rm.png                 RM Gantt over one hyperperiod
-│   ├── chart_rta.png                R vs. D for the three tasks
-│   ├── chart_response.png           min / avg / max response per task
-│   ├── chart_utilization.png        23 busy vs. 1 idle unit
-│   └── fig_release_pattern.png      releases and deadlines in [0,24)
-├── output/
-│   ├── experiments.json             every number, machine-readable
-│   ├── experiments_summary.txt      text summary
-│   ├── summary_EDF.txt / summary_RM.txt
-│   ├── step_table_EDF.txt / step_table_RM.txt
-│   └── pytest_result.txt
-└── tests/
-    ├── test_edf_rm.py               27 tests
-    └── test_manual_solution.py      2 tests
+README.md                        this file
+requirements.txt                 pytest, matplotlib
+.gitignore
+MANUAL_SOLUTION_FA.md            Persian report (Markdown source)
+MANUAL_SOLUTION_EN.md            English report (Markdown source)
+docs/
+├── MANUAL_SOLUTION_FA.docx      Persian report, 24 pages
+├── MANUAL_SOLUTION_FA.pdf       Persian report, 24 pages
+├── MANUAL_SOLUTION_EN.docx      English report, 24 pages
+└── MANUAL_SOLUTION_EN.pdf       English report, 24 pages
+code/
+├── edf_rm.py                    simulator, schedulability tests, CLI
+├── run_experiments.py           writes every artefact under output/
+├── make_figures.py              regenerates every PNG under diagrams/
+├── manual_solution.py           the earlier one-shot illustration
+└── build_manual_pdf.py          HTML → headless Chrome Persian worksheet
+diagrams/
+├── gantt_edf.png                EDF Gantt over one hyperperiod
+├── gantt_rm.png                 RM Gantt over one hyperperiod
+├── chart_rta.png                R vs. D for the three tasks
+├── chart_response.png           min / avg / max response per task
+├── chart_utilization.png        23 busy vs. 1 idle unit
+└── fig_release_pattern.png      releases and deadlines in [0,24)
+output/
+├── experiments.json             every number, machine-readable
+├── experiments_summary.txt      text summary
+├── summary_EDF.txt / summary_RM.txt
+├── step_table_EDF.txt / step_table_RM.txt
+└── pytest_result.txt
+tests/
+├── test_edf_rm.py               27 tests
+└── test_manual_solution.py      2 tests
 ```
+
+(The repository root also carries `PROJECT_PROGRESS.md`,
+`EXERCISE_BRANCH_INDEX.md`, `Multilevel_Queue_Scheduling.py` and `assets/`,
+which are inherited from `master` and are not part of this exercise.)
 
 ---
 
 ## 5. Running it
 
 ```bash
-cd exercise-3
-
+# from the branch root (this folder IS the branch root)
 python3 code/run_experiments.py          # every number, table and JSON
 python3 code/make_figures.py             # regenerates all six PNGs
 python3 -m pytest tests -q               # 29 passed
@@ -161,13 +163,17 @@ solution printed in the report.
 
 ## 6. Reproducing the reports
 
-From the repository root:
+The reports are generated from content modules that live on the session branch
+of the repository (`tools/content/ex3_fa.py` and `tools/content/ex3_en.py`):
 
 ```bash
 python3 tools/build_report.py ex3_fa exercise-3 MANUAL_SOLUTION_FA
 python3 tools/build_report.py ex3_en exercise-3 MANUAL_SOLUTION_EN
 python3 tools/check_outputs.py exercise-3        # re-measures page counts
 ```
+
+The Markdown sources, DOCX and PDF published here are the output of those two
+commands, so what you see on this branch is exactly what the generator emits.
 
 The content modules live in `tools/content/ex3_fa.py` and `tools/content/ex3_en.py`
 and import their numbers straight from `edf_rm.py`, so the report text, the
