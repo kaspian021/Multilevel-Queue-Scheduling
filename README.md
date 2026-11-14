@@ -1,5 +1,9 @@
 # Exercise 3 — EDF and RM scheduling with three inputs, solved by hand
 
+![EDF and RM hyperperiod visual](docs/figures/hyperperiod-24.svg)
+
+> برای دنبال‌کردن محاسبات و حل دستی، [راهنمای تصویری docs](docs/README.md) را باز کنید.
+
 **Branch:** `Exercise-3-EDF-RM-Manual-Scheduling`
 **Scope of this README:** this branch contains Exercise 3 only. Every file listed below sits at the **root of the branch**, so GitHub renders this README on the branch home page.
 
@@ -208,3 +212,27 @@ step tables and the program can never disagree.
   Algorithms and Applications*.
 * Silberschatz, A., Galvin, P. B., & Gagne, G. — *Operating System Concepts*,
   chapter on Real-Time CPU Scheduling.
+
+---
+
+## Visual worksheet / راهنمای تصویری حل
+
+برای دیدن قاعده انتخاب و مقایسه دو خط زمان، [راهنمای تصویری پوشه docs](docs/README.md) را باز کنید.
+
+![EDF and RM 24-tick overview](docs/figures/hyperperiod-24.svg)
+
+### Trace figures from the task set
+
+![Release pattern](diagrams/fig_release_pattern.png)
+
+![EDF Gantt chart](diagrams/gantt_edf.png)
+
+![RM Gantt chart](diagrams/gantt_rm.png)
+
+### Analytic checks
+
+![Response-time analysis](diagrams/chart_rta.png)
+
+![CPU utilization](diagrams/chart_utilization.png)
+
+برای حل دستی، ابتدا C/T/D و زمان‌های آزادسازی را از جدول بردارید؛ سپس با قاعده EDF یا RM خانه‌های جدول را پر کنید و در پایان آن را با فایل‌های خروجی گام‌به‌گام تطبیق دهید.
