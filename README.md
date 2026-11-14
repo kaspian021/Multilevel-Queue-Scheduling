@@ -1,5 +1,9 @@
 # تمرین ۲ — مقایسه کامل MLQ با EDF و RM
 
+![Scheduling comparison overview](docs/figures/priority-rules.svg)
+
+> برای دیدن تفاوت قواعد اولویت و روش تحلیل، [راهنمای تصویری docs](docs/README.md) را ببینید.
+
 **Branch:** `Exercise-2-MLQ-EDF-RM-Comparison`
 **Exercise 2 — A complete comparison of Multilevel Queue scheduling with EDF and RM**
 
@@ -187,3 +191,29 @@ $ python -m pytest tests/ -q
 * هزینه تعویض زمینه صفر فرض شده است.
 * سناریوها مصنوعی و کوچک‌اند تا امکان بررسی دستی فراهم باشد.
 * شبیه‌سازی یک افق محدود را پوشش می‌دهد؛ تضمین قطعی از آزمون‌های تحلیلی است.
+
+---
+
+## Visual guide / راهنمای تصویری
+
+برای مطالعه شکل‌ها، تعریف فرضیات و مسیر بازتولید نمودارها، [راهنمای تصویری پوشه docs](docs/README.md) را باز کنید.
+
+![Three scheduling priority rules](docs/figures/priority-rules.svg)
+
+### Scenario A — three scheduler timelines
+
+![EDF timeline](diagrams/gantt_A_fair_EDF.png)
+
+![RM timeline](diagrams/gantt_A_fair_RM.png)
+
+![MLQ timeline](diagrams/gantt_A_fair_MLQ.png)
+
+### Analytical views
+
+![RM sufficient utilization bound](diagrams/chart_rm_bound.png)
+
+![EDF demand-bound analysis](diagrams/chart_dbf.png)
+
+![Random feasibility study](diagrams/chart_feasibility_study.png)
+
+این شکل‌ها باید همراه فرضیات گزارش خوانده شوند: MLQ یک زمان‌بند مبتنی بر صف است؛ EDF و RM در این شاخه در چارچوب وظایف بلادرنگ دوره‌ای تحلیل می‌شوند.
