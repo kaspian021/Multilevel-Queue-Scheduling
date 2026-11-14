@@ -1,5 +1,9 @@
 # تمرین ۱ — معرفی کامل الگوریتم Multilevel Queue Scheduling
 
+![MLQ architecture overview](docs/figures/mlq-architecture.svg)
+
+> راهنمای سریع: ابتدا معماری صف‌ها را ببینید؛ سپس [راهنمای تصویری و خواندن گزارش‌ها](docs/README.md) را دنبال کنید.
+
 **Branch:** `Exercise-1-Algorithm-Introduction`
 **Exercise 1 — A complete introduction to Multilevel Queue (MLQ) scheduling**
 
@@ -199,3 +203,27 @@ $ python -m pytest tests/ -q
 * سناریوها مصنوعی و کوچک‌اند تا امکان محاسبه دستی فراهم باشد.
 
 این یک مدل آموزشی و قابل‌سنجش است و جایگزین زمان‌بند واقعی هسته نیست.
+
+---
+
+## راهنمای تصویری و مسیر مطالعه
+
+برای دیدن ساختار صف‌ها، چرخه تصمیم‌گیری و نمودارهای خروجی، [راهنمای تصویری پوشه docs](docs/README.md) را باز کنید.
+
+![معماری الگوریتم MLQ](docs/figures/mlq-architecture.svg)
+
+### سه تصویر مهم از اجرای واقعی
+
+**فلوچارت زمان‌بند** — مسیر تصمیم‌گیری در هر تیک:
+
+![فلوچارت MLQ](diagrams/fig_flowchart.png)
+
+**نمودار گانت سناریوی پایه** — ترتیب اجرای پردازه‌ها در نمونه مرجع:
+
+![گانت سناریوی پایه](diagrams/gantt_baseline.png)
+
+**مقایسه سیاست‌های درون‌صفی** — اثر انتخاب FCFS، RR، SJF و SRTF در سناریوی مقایسه:
+
+![مقایسه سیاست‌ها](diagrams/chart_queue_policy.png)
+
+برای مطالعه تحلیلی اثر Aging نیز [نمودار Aging](diagrams/chart_aging.png) را ببینید. همه نمودارهای این شاخه در پوشه diagrams و فایل‌های بازتولید آن‌ها در پوشه code قرار دارند.
