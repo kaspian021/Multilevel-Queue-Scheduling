@@ -1,0 +1,9 @@
+{
+  "name": "B — high utilisation stress test",
+  "horizon": 105,
+  "queue_assignment": "explicit, shorter period -> higher queue",
+  "tasks": [
+    {"name": "A", "C": 2, "T": 5, "D": 5, "queue": 1},
+    {"name": "B", "C": 4, "T": 7, "D": 7, "queue": 2}
+  ]
+}

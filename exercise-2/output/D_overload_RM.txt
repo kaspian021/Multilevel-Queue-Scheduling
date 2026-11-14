@@ -1,0 +1,17 @@
+scenario: scenario_D_overload.json
+algorithm: RM
+
+|  X#0   |  Y#0   |  X#1   |  Y#1   |  X#2   |  Y#2   |  X#3   | Z#0 | Y#3 |  X#4   | Y#3 | Z#0 |  X#5   |  Y#4   |  X#6   |  Y#5   |  X#7   |  Y#6   |  X#8   | Z#1 | Y#7 |  X#9   | Y#7 | Z#1 |  X#10  |  Y#8   |  X#11  |  Y#9   |  X#12  |  Y#10  |  X#13  | Z#2 | Y#11 |  X#14  | Y#11 | Z#2 |
+0-4:X#0  4-8:Y#0  8-12:X#1  12-16:Y#1  16-20:X#2  20-24:Y#2  24-28:X#3  28-30:Z#0  30-32:Y#3  32-36:X#4  36-38:Y#3  38-40:Z#0  40-44:X#5  44-48:Y#4  48-52:X#6  52-56:Y#5  56-60:X#7  60-64:Y#6  64-68:X#8  68-70:Z#1  70-72:Y#7  72-76:X#9  76-78:Y#7  78-80:Z#1  80-84:X#10  84-88:Y#8  88-92:X#11  92-96:Y#9  96-100:X#12  100-104:Y#10  104-108:X#13  108-110:Z#2  110-112:Y#11  112-116:X#14  116-118:Y#11  118-120:Z#2
+
+algorithm: RM
+  horizon=120  jobs=37  finished=30  deadline misses=10
+  missed jobs: Z#0, Z#1, Z#2, Z#3, Z#4, Z#5, Z#6, Z#7, Z#8, Z#9
+  CPU utilization=100.00%  (offered load 123.33%)  idle=0
+  avg response=11.400  max response=96  jitter(stdev)=20.612
+  context switches=35  preemptions=6
+  per task:
+    task    C   T   D  Q  jobs  miss    avgR  maxR  jitter
+    X       4   8   8  1    15     0    4.00     4    0.00
+    Y       4  10  10  2    12     0    6.50     8    1.73
+    Z       4  12  12  3    10    10   68.00    96   28.00

@@ -1,0 +1,11 @@
+{
+  "name": "A — fair periodic comparison",
+  "horizon": 120,
+  "queue_assignment": "explicit, by criticality class",
+  "tasks": [
+    {"name": "T1", "C": 1, "T": 5,  "D": 5,  "queue": 1, "criticality": "high"},
+    {"name": "T2", "C": 2, "T": 8,  "D": 8,  "queue": 1, "criticality": "high"},
+    {"name": "T3", "C": 2, "T": 10, "D": 10, "queue": 2, "criticality": "medium"},
+    {"name": "T4", "C": 3, "T": 20, "D": 20, "queue": 3, "criticality": "low"}
+  ]
+}

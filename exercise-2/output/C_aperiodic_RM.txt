@@ -1,0 +1,21 @@
+scenario: scenario_C_aperiodic.json
+algorithm: RM
+
+|   BAT1#0   | SYS1#0 | INT1#0 | INT2#0 |  BAT2#0  | INT3#0 | BAT3#0 | IDLE |
+0-6:BAT1#0  6-9:SYS1#0  9-13:INT1#0  13-16:INT2#0  16-21:BAT2#0  21-23:INT3#0  23-27:BAT3#0  27-30:IDLE
+
+algorithm: RM
+  horizon=30  jobs=7  finished=7  deadline misses=3
+  missed jobs: SYS1#0, INT2#0, INT3#0
+  CPU utilization=90.00%  (offered load 90.00%)  idle=3
+  avg response=13.000  max response=18  jitter(stdev)=4.320
+  context switches=6  preemptions=0
+  per task:
+    task    C   T   D  Q  jobs  miss    avgR  maxR  jitter
+    SYS1    3  30   6  1     1     1    9.00     9    0.00
+    INT1    4  30  12  1     1     0   12.00    12    0.00
+    BAT1    6  30  30  3     1     0    6.00     6    0.00
+    INT2    3  30  13  2     1     1   14.00    14    0.00
+    BAT2    5  30  30  3     1     0   18.00    18    0.00
+    INT3    2  30  14  1     1     1   15.00    15    0.00
+    BAT3    4  30  30  3     1     0   17.00    17    0.00

@@ -1,0 +1,3 @@
+# Runtime dependencies for the exercise-2 comparison harness
+pytest>=7.0
+matplotlib>=3.5

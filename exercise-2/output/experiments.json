@@ -1,0 +1,1283 @@
+{
+  "analytic": {
+    "A_fair": {
+      "edf": {
+        "bound_used": 0,
+        "checked_points": 0,
+        "feasible": true,
+        "method": "U <= 1 (exact for implicit deadlines)",
+        "utilization": 0.8
+      },
+      "liu_layland_bound": 0.7568,
+      "n": 4,
+      "notes": {
+        "edf_exact": "exact for EDF with constrained deadlines (processor-demand criterion)",
+        "edf_simple": "U <= 1 is necessary and sufficient for EDF only when D_i = T_i for every task",
+        "liu_layland": "sufficient only: U <= bound proves RM feasibility, U > bound proves nothing",
+        "rm_exact": "exact for RM under the stated assumptions (response-time analysis)"
+      },
+      "rm": {
+        "bound": 0.7568284600108841,
+        "feasible": true,
+        "response_times": {
+          "T1": {
+            "C": 1,
+            "D": 5,
+            "R": 1,
+            "T": 5,
+            "ok": true
+          },
+          "T2": {
+            "C": 2,
+            "D": 8,
+            "R": 3,
+            "T": 8,
+            "ok": true
+          },
+          "T3": {
+            "C": 2,
+            "D": 10,
+            "R": 5,
+            "T": 10,
+            "ok": true
+          },
+          "T4": {
+            "C": 3,
+            "D": 20,
+            "R": 14,
+            "T": 20,
+            "ok": true
+          }
+        },
+        "utilization": 0.8
+      },
+      "utilization": 0.8
+    },
+    "B_stress": {
+      "edf": {
+        "bound_used": 0,
+        "checked_points": 0,
+        "feasible": true,
+        "method": "U <= 1 (exact for implicit deadlines)",
+        "utilization": 0.9714
+      },
+      "liu_layland_bound": 0.8284,
+      "n": 2,
+      "notes": {
+        "edf_exact": "exact for EDF with constrained deadlines (processor-demand criterion)",
+        "edf_simple": "U <= 1 is necessary and sufficient for EDF only when D_i = T_i for every task",
+        "liu_layland": "sufficient only: U <= bound proves RM feasibility, U > bound proves nothing",
+        "rm_exact": "exact for RM under the stated assumptions (response-time analysis)"
+      },
+      "rm": {
+        "bound": 0.8284271247461903,
+        "feasible": false,
+        "response_times": {
+          "A": {
+            "C": 2,
+            "D": 5,
+            "R": 2,
+            "T": 5,
+            "ok": true
+          },
+          "B": {
+            "C": 4,
+            "D": 7,
+            "R": 8,
+            "T": 7,
+            "ok": false
+          }
+        },
+        "utilization": 0.9714
+      },
+      "utilization": 0.9714
+    },
+    "C_aperiodic": {
+      "edf": {
+        "bound_used": 676,
+        "checked_points": 114,
+        "feasible": true,
+        "method": "processor demand criterion",
+        "tightest_point": [
+          14,
+          12
+        ],
+        "utilization": 0.9
+      },
+      "liu_layland_bound": 0.7286,
+      "n": 7,
+      "notes": {
+        "edf_exact": "exact for EDF with constrained deadlines (processor-demand criterion)",
+        "edf_simple": "U <= 1 is necessary and sufficient for EDF only when D_i = T_i for every task",
+        "liu_layland": "sufficient only: U <= bound proves RM feasibility, U > bound proves nothing",
+        "rm_exact": "exact for RM under the stated assumptions (response-time analysis)"
+      },
+      "rm": {
+        "bound": 0.7286265957166858,
+        "feasible": false,
+        "response_times": {
+          "BAT1": {
+            "C": 6,
+            "D": 30,
+            "R": 6,
+            "T": 30,
+            "ok": true
+          },
+          "BAT2": {
+            "C": 5,
+            "D": 30,
+            "R": 11,
+            "T": 30,
+            "ok": true
+          },
+          "BAT3": {
+            "C": 4,
+            "D": 30,
+            "R": 15,
+            "T": 30,
+            "ok": true
+          },
+          "INT1": {
+            "C": 4,
+            "D": 12,
+            "R": 19,
+            "T": 30,
+            "ok": false
+          },
+          "INT2": {
+            "C": 3,
+            "D": 13,
+            "R": 22,
+            "T": 30,
+            "ok": false
+          },
+          "INT3": {
+            "C": 2,
+            "D": 14,
+            "R": 24,
+            "T": 30,
+            "ok": false
+          },
+          "SYS1": {
+            "C": 3,
+            "D": 6,
+            "R": 27,
+            "T": 30,
+            "ok": false
+          }
+        },
+        "utilization": 0.9
+      },
+      "utilization": 0.9
+    },
+    "D_overload": {
+      "edf": {
+        "bound_used": 0,
+        "checked_points": 0,
+        "feasible": false,
+        "method": "utilisation bound",
+        "reason": "utilization > 1",
+        "utilization": 1.2333
+      },
+      "liu_layland_bound": 0.7798,
+      "n": 3,
+      "notes": {
+        "edf_exact": "exact for EDF with constrained deadlines (processor-demand criterion)",
+        "edf_simple": "U <= 1 is necessary and sufficient for EDF only when D_i = T_i for every task",
+        "liu_layland": "sufficient only: U <= bound proves RM feasibility, U > bound proves nothing",
+        "rm_exact": "exact for RM under the stated assumptions (response-time analysis)"
+      },
+      "rm": {
+        "bound": 0.7797631496846196,
+        "feasible": false,
+        "response_times": {
+          "X": {
+            "C": 4,
+            "D": 8,
+            "R": 4,
+            "T": 8,
+            "ok": true
+          },
+          "Y": {
+            "C": 4,
+            "D": 10,
+            "R": 8,
+            "T": 10,
+            "ok": true
+          },
+          "Z": {
+            "C": 4,
+            "D": 12,
+            "R": 20,
+            "T": 12,
+            "ok": false
+          }
+        },
+        "utilization": 1.2333
+      },
+      "utilization": 1.2333
+    }
+  },
+  "feasibility_study": {
+    "buckets": {
+      "0.00-0.25": {
+        "edf": 0,
+        "n": 0,
+        "rm": 0
+      },
+      "0.25-0.50": {
+        "edf": 443,
+        "n": 443,
+        "rm": 443
+      },
+      "0.50-0.70": {
+        "edf": 827,
+        "n": 827,
+        "rm": 827
+      },
+      "0.70-0.80": {
+        "edf": 366,
+        "n": 366,
+        "rm": 365
+      },
+      "0.80-0.90": {
+        "edf": 344,
+        "n": 344,
+        "rm": 283
+      },
+      "0.90-1.00": {
+        "edf": 349,
+        "n": 349,
+        "rm": 62
+      }
+    },
+    "seed": 20250101,
+    "sets": 2329
+  },
+  "measured": {
+    "A_fair|EDF": {
+      "algorithm": "EDF",
+      "avg_response": 3.0,
+      "context_switches": 54,
+      "deadline_misses": 0,
+      "demand_utilization": 0.8,
+      "finished": 57,
+      "horizon": 120,
+      "idle": 24,
+      "jitter": 2.891,
+      "jobs": 57,
+      "max_response": 12,
+      "missed_jobs": [],
+      "per_task": {
+        "T1": {
+          "C": 1,
+          "D": 5,
+          "T": 5,
+          "avg_response": 1.0,
+          "finished": 24,
+          "jitter": 0.0,
+          "jobs": 24,
+          "max_response": 1,
+          "misses": 0,
+          "queue": 1
+        },
+        "T2": {
+          "C": 2,
+          "D": 8,
+          "T": 8,
+          "avg_response": 2.6,
+          "finished": 15,
+          "jitter": 0.507,
+          "jobs": 15,
+          "max_response": 3,
+          "misses": 0,
+          "queue": 1
+        },
+        "T3": {
+          "C": 2,
+          "D": 10,
+          "T": 10,
+          "avg_response": 3.75,
+          "finished": 12,
+          "jitter": 0.866,
+          "jobs": 12,
+          "max_response": 5,
+          "misses": 0,
+          "queue": 2
+        },
+        "T4": {
+          "C": 3,
+          "D": 20,
+          "T": 20,
+          "avg_response": 10.5,
+          "finished": 6,
+          "jitter": 1.643,
+          "jobs": 6,
+          "max_response": 12,
+          "misses": 0,
+          "queue": 3
+        }
+      },
+      "preemptions": 9,
+      "unfinished": 0,
+      "utilization": 0.8
+    },
+    "A_fair|MLQ": {
+      "algorithm": "MLQ",
+      "avg_response": 3.105,
+      "context_switches": 54,
+      "deadline_misses": 0,
+      "demand_utilization": 0.8,
+      "finished": 57,
+      "horizon": 120,
+      "idle": 24,
+      "jitter": 3.255,
+      "jobs": 57,
+      "max_response": 14,
+      "missed_jobs": [],
+      "per_task": {
+        "T1": {
+          "C": 1,
+          "D": 5,
+          "T": 5,
+          "avg_response": 1.125,
+          "finished": 24,
+          "jitter": 0.338,
+          "jobs": 24,
+          "max_response": 2,
+          "misses": 0,
+          "queue": 1
+        },
+        "T2": {
+          "C": 2,
+          "D": 8,
+          "T": 8,
+          "avg_response": 2.2,
+          "finished": 15,
+          "jitter": 0.414,
+          "jobs": 15,
+          "max_response": 3,
+          "misses": 0,
+          "queue": 1
+        },
+        "T3": {
+          "C": 2,
+          "D": 10,
+          "T": 10,
+          "avg_response": 4.0,
+          "finished": 12,
+          "jitter": 1.044,
+          "jobs": 12,
+          "max_response": 5,
+          "misses": 0,
+          "queue": 2
+        },
+        "T4": {
+          "C": 3,
+          "D": 20,
+          "T": 20,
+          "avg_response": 11.5,
+          "finished": 6,
+          "jitter": 2.739,
+          "jobs": 6,
+          "max_response": 14,
+          "misses": 0,
+          "queue": 3
+        }
+      },
+      "preemptions": 9,
+      "unfinished": 0,
+      "utilization": 0.8
+    },
+    "A_fair|RM": {
+      "algorithm": "RM",
+      "avg_response": 3.105,
+      "context_switches": 57,
+      "deadline_misses": 0,
+      "demand_utilization": 0.8,
+      "finished": 57,
+      "horizon": 120,
+      "idle": 24,
+      "jitter": 3.272,
+      "jobs": 57,
+      "max_response": 14,
+      "missed_jobs": [],
+      "per_task": {
+        "T1": {
+          "C": 1,
+          "D": 5,
+          "T": 5,
+          "avg_response": 1.0,
+          "finished": 24,
+          "jitter": 0.0,
+          "jobs": 24,
+          "max_response": 1,
+          "misses": 0,
+          "queue": 1
+        },
+        "T2": {
+          "C": 2,
+          "D": 8,
+          "T": 8,
+          "avg_response": 2.4,
+          "finished": 15,
+          "jitter": 0.507,
+          "jobs": 15,
+          "max_response": 3,
+          "misses": 0,
+          "queue": 1
+        },
+        "T3": {
+          "C": 2,
+          "D": 10,
+          "T": 10,
+          "avg_response": 4.0,
+          "finished": 12,
+          "jitter": 1.044,
+          "jobs": 12,
+          "max_response": 5,
+          "misses": 0,
+          "queue": 2
+        },
+        "T4": {
+          "C": 3,
+          "D": 20,
+          "T": 20,
+          "avg_response": 11.5,
+          "finished": 6,
+          "jitter": 2.739,
+          "jobs": 6,
+          "max_response": 14,
+          "misses": 0,
+          "queue": 3
+        }
+      },
+      "preemptions": 12,
+      "unfinished": 0,
+      "utilization": 0.8
+    },
+    "B_stress|EDF": {
+      "algorithm": "EDF",
+      "avg_response": 3.833,
+      "context_switches": 36,
+      "deadline_misses": 0,
+      "demand_utilization": 0.9714,
+      "finished": 36,
+      "horizon": 105,
+      "idle": 3,
+      "jitter": 1.424,
+      "jobs": 36,
+      "max_response": 6,
+      "missed_jobs": [],
+      "per_task": {
+        "A": {
+          "C": 2,
+          "D": 5,
+          "T": 5,
+          "avg_response": 2.857,
+          "finished": 21,
+          "jitter": 0.854,
+          "jobs": 21,
+          "max_response": 4,
+          "misses": 0,
+          "queue": 1
+        },
+        "B": {
+          "C": 4,
+          "D": 7,
+          "T": 7,
+          "avg_response": 5.2,
+          "finished": 15,
+          "jitter": 0.775,
+          "jobs": 15,
+          "max_response": 6,
+          "misses": 0,
+          "queue": 2
+        }
+      },
+      "preemptions": 3,
+      "unfinished": 0,
+      "utilization": 0.9714
+    },
+    "B_stress|MLQ": {
+      "algorithm": "MLQ",
+      "avg_response": 4.0,
+      "context_switches": 48,
+      "deadline_misses": 3,
+      "demand_utilization": 0.9714,
+      "finished": 36,
+      "horizon": 105,
+      "idle": 3,
+      "jitter": 2.449,
+      "jobs": 36,
+      "max_response": 8,
+      "missed_jobs": [
+        "B#0",
+        "B#5",
+        "B#10"
+      ],
+      "per_task": {
+        "A": {
+          "C": 2,
+          "D": 5,
+          "T": 5,
+          "avg_response": 2.0,
+          "finished": 21,
+          "jitter": 0.0,
+          "jobs": 21,
+          "max_response": 2,
+          "misses": 0,
+          "queue": 1
+        },
+        "B": {
+          "C": 4,
+          "D": 7,
+          "T": 7,
+          "avg_response": 6.8,
+          "finished": 15,
+          "jitter": 0.775,
+          "jobs": 15,
+          "max_response": 8,
+          "misses": 3,
+          "queue": 2
+        }
+      },
+      "preemptions": 15,
+      "unfinished": 0,
+      "utilization": 0.9714
+    },
+    "B_stress|RM": {
+      "algorithm": "RM",
+      "avg_response": 4.0,
+      "context_switches": 48,
+      "deadline_misses": 3,
+      "demand_utilization": 0.9714,
+      "finished": 36,
+      "horizon": 105,
+      "idle": 3,
+      "jitter": 2.449,
+      "jobs": 36,
+      "max_response": 8,
+      "missed_jobs": [
+        "B#0",
+        "B#5",
+        "B#10"
+      ],
+      "per_task": {
+        "A": {
+          "C": 2,
+          "D": 5,
+          "T": 5,
+          "avg_response": 2.0,
+          "finished": 21,
+          "jitter": 0.0,
+          "jobs": 21,
+          "max_response": 2,
+          "misses": 0,
+          "queue": 1
+        },
+        "B": {
+          "C": 4,
+          "D": 7,
+          "T": 7,
+          "avg_response": 6.8,
+          "finished": 15,
+          "jitter": 0.775,
+          "jobs": 15,
+          "max_response": 8,
+          "misses": 3,
+          "queue": 2
+        }
+      },
+      "preemptions": 15,
+      "unfinished": 0,
+      "utilization": 0.9714
+    },
+    "C_aperiodic|EDF": {
+      "algorithm": "EDF",
+      "avg_response": 10.857,
+      "context_switches": 6,
+      "deadline_misses": 0,
+      "demand_utilization": 0.9,
+      "finished": 7,
+      "horizon": 30,
+      "idle": 3,
+      "jitter": 7.221,
+      "jobs": 7,
+      "max_response": 20,
+      "missed_jobs": [],
+      "per_task": {
+        "BAT1": {
+          "C": 6,
+          "D": 30,
+          "T": 30,
+          "avg_response": 18.0,
+          "finished": 1,
+          "jitter": 0.0,
+          "jobs": 1,
+          "max_response": 18,
+          "misses": 0,
+          "queue": 3
+        },
+        "BAT2": {
+          "C": 5,
+          "D": 30,
+          "T": 30,
+          "avg_response": 20.0,
+          "finished": 1,
+          "jitter": 0.0,
+          "jobs": 1,
+          "max_response": 20,
+          "misses": 0,
+          "queue": 3
+        },
+        "BAT3": {
+          "C": 4,
+          "D": 30,
+          "T": 30,
+          "avg_response": 17.0,
+          "finished": 1,
+          "jitter": 0.0,
+          "jobs": 1,
+          "max_response": 17,
+          "misses": 0,
+          "queue": 3
+        },
+        "INT1": {
+          "C": 4,
+          "D": 12,
+          "T": 30,
+          "avg_response": 6.0,
+          "finished": 1,
+          "jitter": 0.0,
+          "jobs": 1,
+          "max_response": 6,
+          "misses": 0,
+          "queue": 1
+        },
+        "INT2": {
+          "C": 3,
+          "D": 13,
+          "T": 30,
+          "avg_response": 8.0,
+          "finished": 1,
+          "jitter": 0.0,
+          "jobs": 1,
+          "max_response": 8,
+          "misses": 0,
+          "queue": 2
+        },
+        "INT3": {
+          "C": 2,
+          "D": 14,
+          "T": 30,
+          "avg_response": 4.0,
+          "finished": 1,
+          "jitter": 0.0,
+          "jobs": 1,
+          "max_response": 4,
+          "misses": 0,
+          "queue": 1
+        },
+        "SYS1": {
+          "C": 3,
+          "D": 6,
+          "T": 30,
+          "avg_response": 3.0,
+          "finished": 1,
+          "jitter": 0.0,
+          "jobs": 1,
+          "max_response": 3,
+          "misses": 0,
+          "queue": 1
+        }
+      },
+      "preemptions": 0,
+      "unfinished": 0,
+      "utilization": 0.9
+    },
+    "C_aperiodic|MLQ": {
+      "algorithm": "MLQ",
+      "avg_response": 10.857,
+      "context_switches": 7,
+      "deadline_misses": 0,
+      "demand_utilization": 0.9,
+      "finished": 7,
+      "horizon": 30,
+      "idle": 3,
+      "jitter": 7.493,
+      "jobs": 7,
+      "max_response": 20,
+      "missed_jobs": [],
+      "per_task": {
+        "BAT1": {
+          "C": 6,
+          "D": 30,
+          "T": 30,
+          "avg_response": 18.0,
+          "finished": 1,
+          "jitter": 0.0,
+          "jobs": 1,
+          "max_response": 18,
+          "misses": 0,
+          "queue": 3
+        },
+        "BAT2": {
+          "C": 5,
+          "D": 30,
+          "T": 30,
+          "avg_response": 20.0,
+          "finished": 1,
+          "jitter": 0.0,
+          "jobs": 1,
+          "max_response": 20,
+          "misses": 0,
+          "queue": 3
+        },
+        "BAT3": {
+          "C": 4,
+          "D": 30,
+          "T": 30,
+          "avg_response": 17.0,
+          "finished": 1,
+          "jitter": 0.0,
+          "jobs": 1,
+          "max_response": 17,
+          "misses": 0,
+          "queue": 3
+        },
+        "INT1": {
+          "C": 4,
+          "D": 12,
+          "T": 30,
+          "avg_response": 6.0,
+          "finished": 1,
+          "jitter": 0.0,
+          "jobs": 1,
+          "max_response": 6,
+          "misses": 0,
+          "queue": 1
+        },
+        "INT2": {
+          "C": 3,
+          "D": 13,
+          "T": 30,
+          "avg_response": 10.0,
+          "finished": 1,
+          "jitter": 0.0,
+          "jobs": 1,
+          "max_response": 10,
+          "misses": 0,
+          "queue": 2
+        },
+        "INT3": {
+          "C": 2,
+          "D": 14,
+          "T": 30,
+          "avg_response": 2.0,
+          "finished": 1,
+          "jitter": 0.0,
+          "jobs": 1,
+          "max_response": 2,
+          "misses": 0,
+          "queue": 1
+        },
+        "SYS1": {
+          "C": 3,
+          "D": 6,
+          "T": 30,
+          "avg_response": 3.0,
+          "finished": 1,
+          "jitter": 0.0,
+          "jobs": 1,
+          "max_response": 3,
+          "misses": 0,
+          "queue": 1
+        }
+      },
+      "preemptions": 1,
+      "unfinished": 0,
+      "utilization": 0.9
+    },
+    "C_aperiodic|RM": {
+      "algorithm": "RM",
+      "avg_response": 13.0,
+      "context_switches": 6,
+      "deadline_misses": 3,
+      "demand_utilization": 0.9,
+      "finished": 7,
+      "horizon": 30,
+      "idle": 3,
+      "jitter": 4.32,
+      "jobs": 7,
+      "max_response": 18,
+      "missed_jobs": [
+        "SYS1#0",
+        "INT2#0",
+        "INT3#0"
+      ],
+      "per_task": {
+        "BAT1": {
+          "C": 6,
+          "D": 30,
+          "T": 30,
+          "avg_response": 6.0,
+          "finished": 1,
+          "jitter": 0.0,
+          "jobs": 1,
+          "max_response": 6,
+          "misses": 0,
+          "queue": 3
+        },
+        "BAT2": {
+          "C": 5,
+          "D": 30,
+          "T": 30,
+          "avg_response": 18.0,
+          "finished": 1,
+          "jitter": 0.0,
+          "jobs": 1,
+          "max_response": 18,
+          "misses": 0,
+          "queue": 3
+        },
+        "BAT3": {
+          "C": 4,
+          "D": 30,
+          "T": 30,
+          "avg_response": 17.0,
+          "finished": 1,
+          "jitter": 0.0,
+          "jobs": 1,
+          "max_response": 17,
+          "misses": 0,
+          "queue": 3
+        },
+        "INT1": {
+          "C": 4,
+          "D": 12,
+          "T": 30,
+          "avg_response": 12.0,
+          "finished": 1,
+          "jitter": 0.0,
+          "jobs": 1,
+          "max_response": 12,
+          "misses": 0,
+          "queue": 1
+        },
+        "INT2": {
+          "C": 3,
+          "D": 13,
+          "T": 30,
+          "avg_response": 14.0,
+          "finished": 1,
+          "jitter": 0.0,
+          "jobs": 1,
+          "max_response": 14,
+          "misses": 1,
+          "queue": 2
+        },
+        "INT3": {
+          "C": 2,
+          "D": 14,
+          "T": 30,
+          "avg_response": 15.0,
+          "finished": 1,
+          "jitter": 0.0,
+          "jobs": 1,
+          "max_response": 15,
+          "misses": 1,
+          "queue": 1
+        },
+        "SYS1": {
+          "C": 3,
+          "D": 6,
+          "T": 30,
+          "avg_response": 9.0,
+          "finished": 1,
+          "jitter": 0.0,
+          "jobs": 1,
+          "max_response": 9,
+          "misses": 1,
+          "queue": 1
+        }
+      },
+      "preemptions": 0,
+      "unfinished": 0,
+      "utilization": 0.9
+    },
+    "D_overload|EDF": {
+      "algorithm": "EDF",
+      "avg_response": 18.2,
+      "context_switches": 29,
+      "deadline_misses": 31,
+      "demand_utilization": 1.2333,
+      "finished": 30,
+      "horizon": 120,
+      "idle": 0,
+      "jitter": 6.975,
+      "jobs": 37,
+      "max_response": 30,
+      "missed_jobs": [
+        "X#2",
+        "Y#2",
+        "X#3",
+        "Z#2",
+        "Y#3",
+        "X#4",
+        "Z#3",
+        "X#5",
+        "Y#4",
+        "X#6",
+        "Z#4",
+        "Y#5",
+        "X#7",
+        "Y#6",
+        "Z#5",
+        "X#8",
+        "Y#7",
+        "X#9",
+        "Z#6",
+        "X#10",
+        "Y#8",
+        "Z#7",
+        "X#11",
+        "Y#9",
+        "X#12",
+        "Z#8",
+        "Y#10",
+        "X#13",
+        "Z#9",
+        "Y#11",
+        "X#14"
+      ],
+      "per_task": {
+        "X": {
+          "C": 4,
+          "D": 8,
+          "T": 8,
+          "avg_response": 17.0,
+          "finished": 12,
+          "jitter": 7.261,
+          "jobs": 15,
+          "max_response": 28,
+          "misses": 13,
+          "queue": 1
+        },
+        "Y": {
+          "C": 4,
+          "D": 10,
+          "T": 10,
+          "avg_response": 18.6,
+          "finished": 10,
+          "jitter": 7.427,
+          "jobs": 12,
+          "max_response": 30,
+          "misses": 10,
+          "queue": 2
+        },
+        "Z": {
+          "C": 4,
+          "D": 12,
+          "T": 12,
+          "avg_response": 19.5,
+          "finished": 8,
+          "jitter": 6.568,
+          "jobs": 10,
+          "max_response": 28,
+          "misses": 8,
+          "queue": 3
+        }
+      },
+      "preemptions": 0,
+      "unfinished": 7,
+      "utilization": 1.0
+    },
+    "D_overload|MLQ": {
+      "algorithm": "MLQ",
+      "avg_response": 11.4,
+      "context_switches": 35,
+      "deadline_misses": 10,
+      "demand_utilization": 1.2333,
+      "finished": 30,
+      "horizon": 120,
+      "idle": 0,
+      "jitter": 20.612,
+      "jobs": 37,
+      "max_response": 96,
+      "missed_jobs": [
+        "Z#0",
+        "Z#1",
+        "Z#2",
+        "Z#3",
+        "Z#4",
+        "Z#5",
+        "Z#6",
+        "Z#7",
+        "Z#8",
+        "Z#9"
+      ],
+      "per_task": {
+        "X": {
+          "C": 4,
+          "D": 8,
+          "T": 8,
+          "avg_response": 4.0,
+          "finished": 15,
+          "jitter": 0.0,
+          "jobs": 15,
+          "max_response": 4,
+          "misses": 0,
+          "queue": 1
+        },
+        "Y": {
+          "C": 4,
+          "D": 10,
+          "T": 10,
+          "avg_response": 6.5,
+          "finished": 12,
+          "jitter": 1.732,
+          "jobs": 12,
+          "max_response": 8,
+          "misses": 0,
+          "queue": 2
+        },
+        "Z": {
+          "C": 4,
+          "D": 12,
+          "T": 12,
+          "avg_response": 68.0,
+          "finished": 3,
+          "jitter": 28.0,
+          "jobs": 10,
+          "max_response": 96,
+          "misses": 10,
+          "queue": 3
+        }
+      },
+      "preemptions": 6,
+      "unfinished": 7,
+      "utilization": 1.0
+    },
+    "D_overload|RM": {
+      "algorithm": "RM",
+      "avg_response": 11.4,
+      "context_switches": 35,
+      "deadline_misses": 10,
+      "demand_utilization": 1.2333,
+      "finished": 30,
+      "horizon": 120,
+      "idle": 0,
+      "jitter": 20.612,
+      "jobs": 37,
+      "max_response": 96,
+      "missed_jobs": [
+        "Z#0",
+        "Z#1",
+        "Z#2",
+        "Z#3",
+        "Z#4",
+        "Z#5",
+        "Z#6",
+        "Z#7",
+        "Z#8",
+        "Z#9"
+      ],
+      "per_task": {
+        "X": {
+          "C": 4,
+          "D": 8,
+          "T": 8,
+          "avg_response": 4.0,
+          "finished": 15,
+          "jitter": 0.0,
+          "jobs": 15,
+          "max_response": 4,
+          "misses": 0,
+          "queue": 1
+        },
+        "Y": {
+          "C": 4,
+          "D": 10,
+          "T": 10,
+          "avg_response": 6.5,
+          "finished": 12,
+          "jitter": 1.732,
+          "jobs": 12,
+          "max_response": 8,
+          "misses": 0,
+          "queue": 2
+        },
+        "Z": {
+          "C": 4,
+          "D": 12,
+          "T": 12,
+          "avg_response": 68.0,
+          "finished": 3,
+          "jitter": 28.0,
+          "jobs": 10,
+          "max_response": 96,
+          "misses": 10,
+          "queue": 3
+        }
+      },
+      "preemptions": 6,
+      "unfinished": 7,
+      "utilization": 1.0
+    }
+  },
+  "scenarios": {
+    "A_fair": {
+      "horizon": 120,
+      "hyperperiod": 40,
+      "tasks": [
+        {
+          "C": 1,
+          "D": 5,
+          "T": 5,
+          "name": "T1",
+          "offset": 0,
+          "queue": 1
+        },
+        {
+          "C": 2,
+          "D": 8,
+          "T": 8,
+          "name": "T2",
+          "offset": 0,
+          "queue": 1
+        },
+        {
+          "C": 2,
+          "D": 10,
+          "T": 10,
+          "name": "T3",
+          "offset": 0,
+          "queue": 2
+        },
+        {
+          "C": 3,
+          "D": 20,
+          "T": 20,
+          "name": "T4",
+          "offset": 0,
+          "queue": 3
+        }
+      ]
+    },
+    "B_stress": {
+      "horizon": 105,
+      "hyperperiod": 35,
+      "tasks": [
+        {
+          "C": 2,
+          "D": 5,
+          "T": 5,
+          "name": "A",
+          "offset": 0,
+          "queue": 1
+        },
+        {
+          "C": 4,
+          "D": 7,
+          "T": 7,
+          "name": "B",
+          "offset": 0,
+          "queue": 2
+        }
+      ]
+    },
+    "C_aperiodic": {
+      "horizon": 30,
+      "hyperperiod": 30,
+      "tasks": [
+        {
+          "C": 3,
+          "D": 6,
+          "T": 30,
+          "name": "SYS1",
+          "offset": 0,
+          "queue": 1
+        },
+        {
+          "C": 4,
+          "D": 12,
+          "T": 30,
+          "name": "INT1",
+          "offset": 1,
+          "queue": 1
+        },
+        {
+          "C": 6,
+          "D": 30,
+          "T": 30,
+          "name": "BAT1",
+          "offset": 0,
+          "queue": 3
+        },
+        {
+          "C": 3,
+          "D": 13,
+          "T": 30,
+          "name": "INT2",
+          "offset": 2,
+          "queue": 2
+        },
+        {
+          "C": 5,
+          "D": 30,
+          "T": 30,
+          "name": "BAT2",
+          "offset": 3,
+          "queue": 3
+        },
+        {
+          "C": 2,
+          "D": 14,
+          "T": 30,
+          "name": "INT3",
+          "offset": 8,
+          "queue": 1
+        },
+        {
+          "C": 4,
+          "D": 30,
+          "T": 30,
+          "name": "BAT3",
+          "offset": 10,
+          "queue": 3
+        }
+      ]
+    },
+    "D_overload": {
+      "horizon": 120,
+      "hyperperiod": 120,
+      "tasks": [
+        {
+          "C": 4,
+          "D": 8,
+          "T": 8,
+          "name": "X",
+          "offset": 0,
+          "queue": 1
+        },
+        {
+          "C": 4,
+          "D": 10,
+          "T": 10,
+          "name": "Y",
+          "offset": 0,
+          "queue": 2
+        },
+        {
+          "C": 4,
+          "D": 12,
+          "T": 12,
+          "name": "Z",
+          "offset": 0,
+          "queue": 3
+        }
+      ]
+    }
+  }
+}
