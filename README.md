@@ -1,5 +1,9 @@
 # Exercise 6 — Research Paper and Seminar
 
+![Research synthesis overview](docs/figures/research-synthesis.svg)
+
+> برای فهم مسیر شواهد و راهنمای استفاده از مقاله و اسلایدها، [راهنمای تصویری docs](docs/README.md) را ببینید.
+
 Bilingual research paper and two ready-to-present seminar decks on multilevel
 queue scheduling, the real-time algorithms EDF and RM, and mutual exclusion.
 The paper is a synthesis of Exercises 1 to 4: every number in it is read from
@@ -99,8 +103,7 @@ python3 tools/build_report.py ex6_fa exercise-6 PAPER_FA
 - **Nothing here is a kernel.** The schedulers are models of policies, so
   measured turnaround reflects the policy's decisions, not the cost of the
   mechanism that would implement them.
-- The Exercise 5 demonstration clip was delivered privately to the instructor
-  and is deliberately not in this repository.
+- The Exercise 5 demonstration clip was delivered privately to the instructor; its duration is 5 seconds (as confirmed by the student). It is deliberately not in this repository, and its contents have not been inspected here.
 
 ## Academic note
 
@@ -109,3 +112,25 @@ This is a course submission, not peer-reviewed research. The seven entries in
 listed without unverified years, editions or page numbers. No figure in the
 paper or the decks is invented: if the code does not produce it, the paper does
 not state it.
+
+---
+
+## Visual guide / راهنمای تصویری
+
+برای دیدن نقشه ارتباط تمرین‌ها با مقاله و نسبت هر ادعا با مدرک آن، [راهنمای تصویری docs](docs/README.md) را باز کنید.
+
+![Research synthesis](docs/figures/research-synthesis.svg)
+
+### Selected figures used in the research narrative
+
+![Aging study](diagrams/fig_aging.png)
+
+![Synchronization property matrix](diagrams/fig_property_matrix.png)
+
+![Overload schedule](diagrams/fig_overload_gantt.png)
+
+![Utilisation feasibility cliff](diagrams/fig_utilisation_cliff.png)
+
+![Contention benchmark](diagrams/fig_contention.png)
+
+**ویدئوی تمرین پنجم:** طبق اعلام دانشجو، کلیپ ۵ ثانیه‌ای به‌صورت خصوصی برای استاد ارسال شده است؛ فایل آن عمداً در مخزن عمومی قرار نگرفته و محتوای آن در این شاخه قابل ارزیابی نیست.
