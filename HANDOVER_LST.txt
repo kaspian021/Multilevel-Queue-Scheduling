@@ -10,10 +10,12 @@
       https://github.com/kaspian021/Multilevel-Queue-Scheduling.git /tmp/src
 
 در /tmp/src/lst/ کلِ پروژه است: هفت تمرین، هسته‌ی شبیه‌ساز، تست‌ها و ابزارِ
-ساختِ گزارش. آن را به فضای کاریِ خودت بیاور:
+ساختِ گزارش. آن را به فضای کاریِ خودت بیاور (هر جا که ریشه‌ی فضای کاری‌ات
+هست؛ این نشست ممکن است آدرسِ دیگری داشته باشد، مهم این است که پوشه‌ی lst/
+در کنارِ پوشه‌ی ریپویی که بعداً می‌سازی بنشیند):
 
-    cp -r /tmp/src/lst /home/user/LST
-    cd /home/user/LST
+    cp -r /tmp/src/lst ./lst
+    cd lst
 
 و این دو فایل را هم از /tmp/src بخوان، چون می‌گویند تا حالا چه شده:
 
@@ -33,7 +35,7 @@
 
 بعد —قبل از هر تغییری— مطمئن شو آنچه تحویل گرفتی سالم است:
 
-    cd /home/user/LST && python3 -m pytest tests -q
+    python3 -m pytest tests -q          # از درونِ پوشه‌ی lst
 
 باید ۶۹ تست سبز بدهد. اگر نداد، اول آن را درست کن و بگو چرا فرق داشت.
 
@@ -100,6 +102,7 @@
 پوش (به ترتیب: اول کلِ درخت روی main، بعد هر تمرین روی برنچِ خودش):
 
     bash tools/push_lst.sh main . "LST: seven exercises, project root"
+    # و برای هر تمرین:
     bash tools/push_lst.sh Exercise-1-LST-Introduction exercise-1 "Exercise 1: ..."
 
 اسمِ برنچ‌ها در EXERCISE_BRANCH_INDEX.md است؛ اسکریپت اگر برنچ وجود نداشته
