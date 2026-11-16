@@ -1,0 +1,4 @@
+# Runtime dependencies for the exercise-1 simulator
+# (pytest + matplotlib are enough to run the simulator and its tests)
+pytest>=7.0
+matplotlib>=3.5

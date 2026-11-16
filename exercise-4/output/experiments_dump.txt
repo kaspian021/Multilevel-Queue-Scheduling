@@ -1,0 +1,237 @@
+Exercise 4 — experiment results (code/run_experiments.py)
+
+=== dekker  [software]
+    Dekker's algorithm: two flags plus a turn variable.
+    states=324  transitions=648  enter_actions=38
+    mutual exclusion : HOLDS
+    deadlock free    : YES
+    starvation free  : P0=YES, P1=YES
+
+=== peterson  [software]
+    Peterson's algorithm: two flags plus a turn variable, simpler loop.
+    states=199  transitions=398  enter_actions=24
+    mutual exclusion : HOLDS
+    deadlock free    : YES
+    starvation free  : P0=YES, P1=YES
+
+=== lock_variable  [broken]
+    Broken: test-then-set on a single lock variable.
+    states=60  transitions=120  enter_actions=16
+    mutual exclusion : VIOLATED
+      witness:
+           pc=(0,0) shared=(0, 0) loc=((0,), (0,))
+        P0: pc=(1,0) shared=(0, 0) loc=((0,), (0,))
+        P0: pc=(2,0) shared=(0, 0) loc=((0,), (0,))
+        P1: pc=(2,1) shared=(0, 0) loc=((0,), (0,))
+        P0: pc=(3,1) shared=(1, 0) loc=((0,), (0,))
+        P0: pc=(4,1) shared=(1, 0) loc=((0,), (0,)) ENTER
+        P1: pc=(4,2) shared=(1, 0) loc=((0,), (0,))
+        P1: pc=(4,3) shared=(1, 1) loc=((0,), (0,))
+        P1: pc=(4,4) shared=(1, 1) loc=((0,), (0,)) ENTER
+    deadlock free    : YES
+    starvation free  : P0=NO, P1=NO
+      P0 witness:
+           pc=(1,2) shared=(0, 0) loc=((1,), (0,))
+        P0: pc=(0,2) shared=(0, 0) loc=((1,), (0,))
+        P1: pc=(0,3) shared=(0, 1) loc=((1,), (0,))
+        P0: pc=(1,3) shared=(0, 1) loc=((1,), (0,))
+        P1: pc=(1,4) shared=(0, 1) loc=((1,), (0,)) ENTER
+        P0: pc=(0,4) shared=(0, 1) loc=((1,), (0,))
+        P1: pc=(0,5) shared=(0, 0) loc=((1,), (0,))
+        P1: pc=(0,0) shared=(0, 0) loc=((1,), (0,))
+        P1: pc=(0,1) shared=(0, 0) loc=((1,), (0,))
+        P1: pc=(0,2) shared=(0, 0) loc=((1,), (0,))
+        P1: pc=(0,3) shared=(0, 1) loc=((1,), (0,))
+        P0: pc=(1,3) shared=(0, 1) loc=((1,), (0,))
+        P1: pc=(1,4) shared=(0, 1) loc=((1,), (0,)) ENTER
+        (cycle: P0 stays in its entry section while P1 enters at least twice)
+      P1 witness:
+           pc=(2,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(3,0) shared=(1, 0) loc=((0,), (1,))
+        P0: pc=(4,0) shared=(1, 0) loc=((0,), (1,)) ENTER
+        P0: pc=(5,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(0,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(1,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(2,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(3,0) shared=(1, 0) loc=((0,), (1,))
+        P0: pc=(4,0) shared=(1, 0) loc=((0,), (1,)) ENTER
+        P0: pc=(5,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(0,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(1,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(2,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(3,0) shared=(1, 0) loc=((0,), (1,))
+        P0: pc=(4,0) shared=(1, 0) loc=((0,), (1,)) ENTER
+        P0: pc=(5,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(0,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(1,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(2,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(3,0) shared=(1, 0) loc=((0,), (1,))
+        P0: pc=(4,0) shared=(1, 0) loc=((0,), (1,)) ENTER
+        P0: pc=(5,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(0,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(1,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(2,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(3,0) shared=(1, 0) loc=((0,), (1,))
+        P0: pc=(4,0) shared=(1, 0) loc=((0,), (1,)) ENTER
+        P0: pc=(5,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(0,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(1,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(2,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(3,0) shared=(1, 0) loc=((0,), (1,))
+        P0: pc=(4,0) shared=(1, 0) loc=((0,), (1,)) ENTER
+        P0: pc=(5,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(0,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(1,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(2,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(3,0) shared=(1, 0) loc=((0,), (1,))
+        P0: pc=(4,0) shared=(1, 0) loc=((0,), (1,)) ENTER
+        P0: pc=(5,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(0,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(1,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(2,0) shared=(0, 0) loc=((0,), (1,))
+        P0: pc=(3,0) shared=(1, 0) loc=((0,), (1,))
+        P0: pc=(4,0) shared=(1, 0) loc=((0,), (1,)) ENTER
+        P1: pc=(4,1) shared=(1, 0) loc=((0,), (1,))
+        (cycle: P1 stays in its entry section while P0 enters at least twice)
+
+=== flag_spin  [broken]
+    Broken: announces interest then spins; can deadlock.
+    states=55  transitions=110  enter_actions=10
+    mutual exclusion : HOLDS
+    deadlock free    : NO
+      witness:
+           pc=(0,0) shared=(0, 0) loc=((0,), (0,))
+        P0: pc=(1,0) shared=(1, 0) loc=((0,), (0,))
+        P1: pc=(1,1) shared=(1, 1) loc=((0,), (0,))
+    starvation free  : P0=YES, P1=YES
+
+=== tas  [hardware]
+    Test-and-set spinlock: correct exclusion, no bounded waiting.
+    states=51  transitions=102  enter_actions=10
+    mutual exclusion : HOLDS
+    deadlock free    : YES
+    starvation free  : P0=NO, P1=NO
+      P0 witness:
+           pc=(1,0) shared=(0,) loc=((1,), (0,))
+        P0: pc=(0,0) shared=(0,) loc=((1,), (0,))
+        P1: pc=(0,1) shared=(1,) loc=((1,), (0,))
+        P0: pc=(1,1) shared=(1,) loc=((1,), (0,))
+        P1: pc=(1,2) shared=(1,) loc=((1,), (0,))
+        P0: pc=(0,2) shared=(1,) loc=((1,), (0,))
+        P1: pc=(0,3) shared=(1,) loc=((1,), (0,)) ENTER
+        P0: pc=(1,3) shared=(1,) loc=((1,), (0,))
+        P1: pc=(1,4) shared=(0,) loc=((1,), (0,))
+        P0: pc=(0,4) shared=(0,) loc=((1,), (0,))
+        P1: pc=(0,5) shared=(0,) loc=((1,), (0,))
+        P1: pc=(0,0) shared=(0,) loc=((1,), (0,))
+        P1: pc=(0,1) shared=(1,) loc=((1,), (0,))
+        P0: pc=(1,1) shared=(1,) loc=((1,), (0,))
+        P1: pc=(1,2) shared=(1,) loc=((1,), (0,))
+        P0: pc=(0,2) shared=(1,) loc=((1,), (0,))
+        P1: pc=(0,3) shared=(1,) loc=((1,), (0,)) ENTER
+        (cycle: P0 stays in its entry section while P1 enters at least twice)
+      P1 witness:
+           pc=(1,0) shared=(1,) loc=((0,), (1,))
+        P0: pc=(2,0) shared=(1,) loc=((0,), (1,))
+        P0: pc=(3,0) shared=(1,) loc=((0,), (1,)) ENTER
+        P0: pc=(4,0) shared=(0,) loc=((0,), (1,))
+        P0: pc=(5,0) shared=(0,) loc=((0,), (1,))
+        P0: pc=(0,0) shared=(0,) loc=((0,), (1,))
+        P0: pc=(1,0) shared=(1,) loc=((0,), (1,))
+        P0: pc=(2,0) shared=(1,) loc=((0,), (1,))
+        P0: pc=(3,0) shared=(1,) loc=((0,), (1,)) ENTER
+        P0: pc=(4,0) shared=(0,) loc=((0,), (1,))
+        P0: pc=(5,0) shared=(0,) loc=((0,), (1,))
+        P0: pc=(0,0) shared=(0,) loc=((0,), (1,))
+        P0: pc=(1,0) shared=(1,) loc=((0,), (1,))
+        P0: pc=(2,0) shared=(1,) loc=((0,), (1,))
+        P0: pc=(3,0) shared=(1,) loc=((0,), (1,)) ENTER
+        P0: pc=(4,0) shared=(0,) loc=((0,), (1,))
+        P0: pc=(5,0) shared=(0,) loc=((0,), (1,))
+        P0: pc=(0,0) shared=(0,) loc=((0,), (1,))
+        P0: pc=(1,0) shared=(1,) loc=((0,), (1,))
+        P0: pc=(2,0) shared=(1,) loc=((0,), (1,))
+        P0: pc=(3,0) shared=(1,) loc=((0,), (1,)) ENTER
+        P0: pc=(4,0) shared=(0,) loc=((0,), (1,))
+        P0: pc=(5,0) shared=(0,) loc=((0,), (1,))
+        P0: pc=(0,0) shared=(0,) loc=((0,), (1,))
+        P0: pc=(1,0) shared=(1,) loc=((0,), (1,))
+        P0: pc=(2,0) shared=(1,) loc=((0,), (1,))
+        P0: pc=(3,0) shared=(1,) loc=((0,), (1,)) ENTER
+        P0: pc=(4,0) shared=(0,) loc=((0,), (1,))
+        P0: pc=(5,0) shared=(0,) loc=((0,), (1,))
+        P0: pc=(0,0) shared=(0,) loc=((0,), (1,))
+        P0: pc=(1,0) shared=(1,) loc=((0,), (1,))
+        P0: pc=(2,0) shared=(1,) loc=((0,), (1,))
+        P0: pc=(3,0) shared=(1,) loc=((0,), (1,)) ENTER
+        P0: pc=(4,0) shared=(0,) loc=((0,), (1,))
+        P0: pc=(5,0) shared=(0,) loc=((0,), (1,))
+        P0: pc=(0,0) shared=(0,) loc=((0,), (1,))
+        P0: pc=(1,0) shared=(1,) loc=((0,), (1,))
+        P0: pc=(2,0) shared=(1,) loc=((0,), (1,))
+        P0: pc=(3,0) shared=(1,) loc=((0,), (1,)) ENTER
+        P0: pc=(4,0) shared=(0,) loc=((0,), (1,))
+        P0: pc=(5,0) shared=(0,) loc=((0,), (1,))
+        P0: pc=(0,0) shared=(0,) loc=((0,), (1,))
+        P0: pc=(1,0) shared=(1,) loc=((0,), (1,))
+        P0: pc=(2,0) shared=(1,) loc=((0,), (1,))
+        P0: pc=(3,0) shared=(1,) loc=((0,), (1,)) ENTER
+        P1: pc=(3,1) shared=(1,) loc=((0,), (1,))
+        (cycle: P1 stays in its entry section while P0 enters at least twice)
+
+=== semaphore_binary  [primitive]
+    Binary semaphore with a FIFO wait queue (correct usage).
+    states=22  transitions=38  enter_actions=6
+    mutual exclusion : HOLDS
+    deadlock free    : YES
+    starvation free  : P0=YES, P1=YES
+
+=== semaphore_wrong_order  [broken]
+    Broken: two semaphores acquired in opposite orders; deadlocks.
+    states=48  transitions=66  enter_actions=6
+    mutual exclusion : HOLDS
+    deadlock free    : NO
+      witness:
+           pc=(0,0) shared=(1, 1, 0, 0) loc=((), ())
+        P0: pc=(1,0) shared=(0, 1, 0, 0) loc=((), ())
+        P1: pc=(1,1) shared=(0, 0, 0, 0) loc=((), ())
+    starvation free  : P0=YES, P1=YES
+
+=== monitor_mesa  [monitor]
+    Mesa monitor over a bounded buffer of capacity one.
+    states=54  transitions=82  enter_actions=6
+    mutual exclusion : HOLDS
+    deadlock free    : YES
+    starvation free  : P0=YES, P1=YES
+
+=== mutual-exclusion mechanisms (2 threads x 5000 sections, median of 7)
+  {"class": "DekkerLock", "correct": true, "counter": 10000, "elapsed_s_max": 0.0407, "elapsed_s_median": 0.01, "elapsed_s_min": 0.0097, "entries": {"0": 5000, "1": 5000}, "expected_counter": 10000, "fairness_pstdev": 0.0, "iterations": 5000, "max_concurrent": 1, "mutual_exclusion_observed": true, "name": "dekker", "reps": 7, "spins_max": 224604, "spins_median": 0, "threads": 2, "throughput_max": 1029634.4, "throughput_median": 995695.9, "throughput_min": 245408.3}
+  {"class": "PetersonLock", "correct": true, "counter": 10000, "elapsed_s_max": 0.0098, "elapsed_s_median": 0.0095, "elapsed_s_min": 0.0093, "entries": {"0": 5000, "1": 5000}, "expected_counter": 10000, "fairness_pstdev": 0.0, "iterations": 5000, "max_concurrent": 1, "mutual_exclusion_observed": true, "name": "peterson", "reps": 7, "spins_max": 0, "spins_median": 0, "threads": 2, "throughput_max": 1069821.9, "throughput_median": 1048659.8, "throughput_min": 1018671.2}
+  {"class": "TasLock", "correct": true, "counter": 10000, "elapsed_s_max": 0.0245, "elapsed_s_median": 0.0235, "elapsed_s_min": 0.0134, "entries": {"0": 5000, "1": 5000}, "expected_counter": 10000, "fairness_pstdev": 0.0, "iterations": 5000, "max_concurrent": 1, "mutual_exclusion_observed": true, "name": "tas", "reps": 7, "spins_max": 47837, "spins_median": 37613, "threads": 2, "throughput_max": 745473.7, "throughput_median": 425099.0, "throughput_min": 408594.4}
+  {"class": "SemaphoreLock", "correct": true, "counter": 10000, "elapsed_s_max": 0.0209, "elapsed_s_median": 0.02, "elapsed_s_min": 0.019, "entries": {"0": 5000, "1": 5000}, "expected_counter": 10000, "fairness_pstdev": 0.0, "iterations": 5000, "max_concurrent": 1, "mutual_exclusion_observed": true, "name": "semaphore", "reps": 7, "spins_max": null, "spins_median": null, "threads": 2, "throughput_max": 527004.5, "throughput_median": 501065.6, "throughput_min": 477696.7}
+  {"class": "MonitorLock", "correct": true, "counter": 10000, "elapsed_s_max": 0.0189, "elapsed_s_median": 0.0181, "elapsed_s_min": 0.0179, "entries": {"0": 5000, "1": 5000}, "expected_counter": 10000, "fairness_pstdev": 0.0, "iterations": 5000, "max_concurrent": 1, "mutual_exclusion_observed": true, "name": "monitor", "reps": 7, "spins_max": null, "spins_median": null, "threads": 2, "throughput_max": 557830.4, "throughput_median": 551455.3, "throughput_min": 528263.3}
+
+=== contention sweep (5000 sections per thread, median of 5)
+  {"class": "TasLock", "correct": true, "counter": 10000, "elapsed_s_max": 0.0235, "elapsed_s_median": 0.018, "elapsed_s_min": 0.0129, "entries": {"0": 5000, "1": 5000}, "expected_counter": 10000, "fairness_pstdev": 0.0, "iterations": 5000, "max_concurrent": 1, "mutual_exclusion_observed": true, "name": "tas_2t", "reps": 5, "spins_max": 48527, "spins_median": 24163, "threads": 2, "throughput_max": 773822.6, "throughput_median": 554396.7, "throughput_min": 424993.4}
+  {"class": "SemaphoreLock", "correct": true, "counter": 10000, "elapsed_s_max": 0.0192, "elapsed_s_median": 0.019, "elapsed_s_min": 0.0184, "entries": {"0": 5000, "1": 5000}, "expected_counter": 10000, "fairness_pstdev": 0.0, "iterations": 5000, "max_concurrent": 1, "mutual_exclusion_observed": true, "name": "semaphore_2t", "reps": 5, "spins_max": null, "spins_median": null, "threads": 2, "throughput_max": 542162.5, "throughput_median": 524971.5, "throughput_min": 519649.9}
+  {"class": "MonitorLock", "correct": true, "counter": 10000, "elapsed_s_max": 0.0186, "elapsed_s_median": 0.0185, "elapsed_s_min": 0.0177, "entries": {"0": 5000, "1": 5000}, "expected_counter": 10000, "fairness_pstdev": 0.0, "iterations": 5000, "max_concurrent": 1, "mutual_exclusion_observed": true, "name": "monitor_2t", "reps": 5, "spins_max": null, "spins_median": null, "threads": 2, "throughput_max": 565874.4, "throughput_median": 540953.2, "throughput_min": 538334.2}
+  {"class": "TasLock", "correct": true, "counter": 20000, "elapsed_s_max": 0.0473, "elapsed_s_median": 0.032, "elapsed_s_min": 0.0271, "entries": {"0": 5000, "1": 5000, "2": 5000, "3": 5000}, "expected_counter": 20000, "fairness_pstdev": 0.0, "iterations": 5000, "max_concurrent": 1, "mutual_exclusion_observed": true, "name": "tas_4t", "reps": 5, "spins_max": 94032, "spins_median": 24714, "threads": 4, "throughput_max": 738903.6, "throughput_median": 624466.2, "throughput_min": 422988.2}
+  {"class": "SemaphoreLock", "correct": true, "counter": 20000, "elapsed_s_max": 0.0518, "elapsed_s_median": 0.0406, "elapsed_s_min": 0.0396, "entries": {"0": 5000, "1": 5000, "2": 5000, "3": 5000}, "expected_counter": 20000, "fairness_pstdev": 0.0, "iterations": 5000, "max_concurrent": 1, "mutual_exclusion_observed": true, "name": "semaphore_4t", "reps": 5, "spins_max": null, "spins_median": null, "threads": 4, "throughput_max": 504512.3, "throughput_median": 492372.0, "throughput_min": 386255.9}
+  {"class": "MonitorLock", "correct": true, "counter": 20000, "elapsed_s_max": 0.0386, "elapsed_s_median": 0.0376, "elapsed_s_min": 0.0371, "entries": {"0": 5000, "1": 5000, "2": 5000, "3": 5000}, "expected_counter": 20000, "fairness_pstdev": 0.0, "iterations": 5000, "max_concurrent": 1, "mutual_exclusion_observed": true, "name": "monitor_4t", "reps": 5, "spins_max": null, "spins_median": null, "threads": 4, "throughput_max": 539326.1, "throughput_median": 532147.9, "throughput_min": 517718.1}
+  {"class": "TasLock", "correct": true, "counter": 40000, "elapsed_s_max": 0.1469, "elapsed_s_median": 0.0839, "elapsed_s_min": 0.063, "entries": {"0": 5000, "1": 5000, "2": 5000, "3": 5000, "4": 5000, "5": 5000, "6": 5000, "7": 5000}, "expected_counter": 40000, "fairness_pstdev": 0.0, "iterations": 5000, "max_concurrent": 1, "mutual_exclusion_observed": true, "name": "tas_8t", "reps": 5, "spins_max": 421164, "spins_median": 141814, "threads": 8, "throughput_max": 634540.5, "throughput_median": 476978.0, "throughput_min": 272228.0}
+  {"class": "SemaphoreLock", "correct": true, "counter": 40000, "elapsed_s_max": 0.0841, "elapsed_s_median": 0.0809, "elapsed_s_min": 0.08, "entries": {"0": 5000, "1": 5000, "2": 5000, "3": 5000, "4": 5000, "5": 5000, "6": 5000, "7": 5000}, "expected_counter": 40000, "fairness_pstdev": 0.0, "iterations": 5000, "max_concurrent": 1, "mutual_exclusion_observed": true, "name": "semaphore_8t", "reps": 5, "spins_max": null, "spins_median": null, "threads": 8, "throughput_max": 499925.5, "throughput_median": 494447.4, "throughput_min": 475501.9}
+  {"class": "MonitorLock", "correct": true, "counter": 40000, "elapsed_s_max": 0.0887, "elapsed_s_median": 0.0783, "elapsed_s_min": 0.0739, "entries": {"0": 5000, "1": 5000, "2": 5000, "3": 5000, "4": 5000, "5": 5000, "6": 5000, "7": 5000}, "expected_counter": 40000, "fairness_pstdev": 0.0, "iterations": 5000, "max_concurrent": 1, "mutual_exclusion_observed": true, "name": "monitor_8t", "reps": 5, "spins_max": null, "spins_median": null, "threads": 8, "throughput_max": 540965.0, "throughput_median": 510747.2, "throughput_min": 451046.4}
+
+=== monitor: bounded buffer producer/consumer
+  capacity=1: {"balanced": true, "capacity": 1, "capacity_respected": true, "consumed": 1600, "consumers": 2, "elapsed_s": 0.0685, "expected_items": 1600, "items_per_producer": 800, "max_observed_in_buffer": 1, "produced": 1600, "producers": 2, "re_waits_after_signal": 1383, "throughput_items_per_s": 23343.2}
+  capacity=4: {"balanced": true, "capacity": 4, "capacity_respected": true, "consumed": 1600, "consumers": 2, "elapsed_s": 0.0372, "expected_items": 1600, "items_per_producer": 800, "max_observed_in_buffer": 4, "produced": 1600, "producers": 2, "re_waits_after_signal": 494, "throughput_items_per_s": 43032.0}
+  capacity=16: {"balanced": true, "capacity": 16, "capacity_respected": true, "consumed": 1600, "consumers": 2, "elapsed_s": 0.0144, "expected_items": 1600, "items_per_producer": 800, "max_observed_in_buffer": 16, "produced": 1600, "producers": 2, "re_waits_after_signal": 146, "throughput_items_per_s": 110728.4}
+
+=== readers/writers (6 readers, 1 writer, 5 x 0.6 s)
+  ReadersPreferenceRW: {"duration_s": 0.6, "read_share_max": 1.0, "read_share_mean": 1.0, "read_share_min": 1.0, "readers": 6, "reads_max": 38898, "reads_min": 37138, "reads_total": 189832, "reps": 5, "trials": [{"read_share": 1.0, "reader_starved": false, "reads": 38129, "write_share": 0.0, "writer_starved": false, "writes": 1}, {"read_share": 1.0, "reader_starved": false, "reads": 38125, "write_share": 0.0, "writer_starved": false, "writes": 1}, {"read_share": 1.0, "reader_starved": false, "reads": 38898, "write_share": 0.0, "writer_starved": false, "writes": 1}, {"read_share": 1.0, "reader_starved": false, "reads": 37138, "write_share": 0.0, "writer_starved": false, "writes": 1}, {"read_share": 1.0, "reader_starved": false, "reads": 37542, "write_share": 0.0, "writer_starved": false, "writes": 1}], "trials_with_reader_starved": 0, "trials_with_writer_starved": 0, "variant": "ReadersPreferenceRW", "writers": 1, "writes_max": 1, "writes_min": 1, "writes_total": 5}
+  WritersPreferenceRW: {"duration_s": 0.6, "read_share_max": 0.3361, "read_share_mean": 0.2918, "read_share_min": 0.2531, "readers": 6, "reads_max": 106579, "reads_min": 84062, "reads_total": 479104, "reps": 5, "trials": [{"read_share": 0.3019, "reader_starved": false, "reads": 106579, "write_share": 0.6981, "writer_starved": false, "writes": 246506}, {"read_share": 0.298, "reader_starved": false, "reads": 102138, "write_share": 0.702, "writer_starved": false, "writes": 240646}, {"read_share": 0.2697, "reader_starved": false, "reads": 85146, "write_share": 0.7303, "writer_starved": false, "writes": 230518}, {"read_share": 0.2531, "reader_starved": false, "reads": 84062, "write_share": 0.7469, "writer_starved": false, "writes": 248074}, {"read_share": 0.3361, "reader_starved": false, "reads": 101179, "write_share": 0.6639, "writer_starved": false, "writes": 199888}], "trials_with_reader_starved": 0, "trials_with_writer_starved": 0, "variant": "WritersPreferenceRW", "writers": 1, "writes_max": 248074, "writes_min": 199888, "writes_total": 1165632}
+  FairRW: {"duration_s": 0.6, "read_share_max": 0.9172, "read_share_mean": 0.8984, "read_share_min": 0.8844, "readers": 6, "reads_max": 21898, "reads_min": 15497, "reads_total": 91051, "reps": 5, "trials": [{"read_share": 0.9172, "reader_starved": false, "reads": 21898, "write_share": 0.0828, "writer_starved": false, "writes": 1978}, {"read_share": 0.8848, "reader_starved": false, "reads": 15497, "write_share": 0.1152, "writer_starved": false, "writes": 2017}, {"read_share": 0.9041, "reader_starved": false, "reads": 18487, "write_share": 0.0959, "writer_starved": false, "writes": 1962}, {"read_share": 0.9017, "reader_starved": false, "reads": 19259, "write_share": 0.0983, "writer_starved": false, "writes": 2100}, {"read_share": 0.8844, "reader_starved": false, "reads": 15910, "write_share": 0.1156, "writer_starved": false, "writes": 2079}], "trials_with_reader_starved": 0, "trials_with_writer_starved": 0, "variant": "FairRW", "writers": 1, "writes_max": 2100, "writes_min": 1962, "writes_total": 10136}
+
+=== circular wait (two locks, two threads)
+  {"consistent_order": {"both_completed": true, "deadlocked": false, "state": {"t0": "completed", "t1": "completed"}}, "consistent_order_finishes": true, "note": "with opposite orders both threads hold one lock and wait for the other (circular wait); with a consistent order the same program always finishes", "wrong_order": {"both_completed": false, "deadlocked": true, "state": {"t0": "holds A, blocked on B", "t1": "holds B, blocked on A"}}, "wrong_order_deadlocks": true}
+

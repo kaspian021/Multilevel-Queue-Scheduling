@@ -1,0 +1,16 @@
+{
+  "queues": {"1": {"policy": "FCFS"}, "2": {"policy": "FCFS"}, "3": {"policy": "FCFS"}},
+  "processes": [
+    {"pid": "L1", "arrival": 0, "burst": 1, "queue": 3},
+    {"pid": "H1", "arrival": 0, "burst": 2, "queue": 1},
+    {"pid": "H2", "arrival": 2, "burst": 2, "queue": 1},
+    {"pid": "H3", "arrival": 4, "burst": 2, "queue": 1},
+    {"pid": "H4", "arrival": 6, "burst": 2, "queue": 1},
+    {"pid": "H5", "arrival": 8, "burst": 2, "queue": 1},
+    {"pid": "H6", "arrival": 10, "burst": 2, "queue": 1},
+    {"pid": "H7", "arrival": 12, "burst": 2, "queue": 1},
+    {"pid": "H8", "arrival": 14, "burst": 2, "queue": 1},
+    {"pid": "H9", "arrival": 16, "burst": 2, "queue": 1},
+    {"pid": "H10", "arrival": 18, "burst": 2, "queue": 1}
+  ]
+}

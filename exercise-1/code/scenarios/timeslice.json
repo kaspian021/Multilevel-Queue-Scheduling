@@ -1,0 +1,12 @@
+{
+  "inter_policy": "slice",
+  "inter_slice": 3,
+  "queues": {"1": {"policy": "FCFS"}, "2": {"policy": "FCFS"}, "3": {"policy": "FCFS"}},
+  "processes": [
+    {"pid": "A1", "arrival": 0, "burst": 6, "queue": 1},
+    {"pid": "B1", "arrival": 0, "burst": 6, "queue": 2},
+    {"pid": "B2", "arrival": 1, "burst": 4, "queue": 2},
+    {"pid": "C1", "arrival": 0, "burst": 5, "queue": 3},
+    {"pid": "A2", "arrival": 7, "burst": 3, "queue": 1}
+  ]
+}

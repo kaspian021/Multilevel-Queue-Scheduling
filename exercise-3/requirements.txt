@@ -1,0 +1,3 @@
+# Runtime dependencies for the exercise-3 EDF/RM simulator
+pytest>=7.0
+matplotlib>=3.5

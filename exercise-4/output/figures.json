@@ -1,0 +1,10 @@
+[
+  "chart_contention.png",
+  "chart_readers_writers.png",
+  "chart_spins.png",
+  "chart_throughput.png",
+  "fig_deadlock.png",
+  "fig_monitor_timeline.png",
+  "fig_property_matrix.png",
+  "fig_state_spaces.png"
+]

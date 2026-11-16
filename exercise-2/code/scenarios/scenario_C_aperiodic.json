@@ -1,0 +1,15 @@
+{
+  "name": "C — aperiodic general-purpose workload (outside the real-time model)",
+  "horizon": 30,
+  "queue_assignment": "explicit, by workload class",
+  "note": "one-shot work: T equals the horizon so exactly one job per task exists; the deadlines are synthetic and are supplied only so that EDF can run at all",
+  "tasks": [
+    {"name": "SYS1", "C": 3, "T": 30, "D": 6,  "offset": 0,  "queue": 1},
+    {"name": "INT1", "C": 4, "T": 30, "D": 12, "offset": 1,  "queue": 1},
+    {"name": "BAT1", "C": 6, "T": 30, "D": 30, "offset": 0,  "queue": 3},
+    {"name": "INT2", "C": 3, "T": 30, "D": 13, "offset": 2,  "queue": 2},
+    {"name": "BAT2", "C": 5, "T": 30, "D": 30, "offset": 3,  "queue": 3},
+    {"name": "INT3", "C": 2, "T": 30, "D": 14, "offset": 8,  "queue": 1},
+    {"name": "BAT3", "C": 4, "T": 30, "D": 30, "offset": 10, "queue": 3}
+  ]
+}

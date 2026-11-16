@@ -1,0 +1,27 @@
+scenario: timeslice.json
+
+|  A1  |  B1  |  C1  |  A1  |  B2  | C1 |  A2  |  B1  | B2 |
+0-3:A1  3-6:B1  6-9:C1  9-12:A1  12-15:B2  15-17:C1  17-20:A2  20-23:B1  23-24:B2
+
+PID     Q  Arr Burst  Fin  Wait  TAT  Resp
+------------------------------------------
+A1      1    0     6   12     6   12     0
+A2      1    7     3   20    10   13    10
+B1      2    0     6   23    17   23     3
+B2      2    1     4   24    19   23    11
+C1      3    0     5   17    12   17     6
+------------------------------------------
+avg waiting   = 12.80
+avg turnaround= 17.60
+avg response  = 6.00
+total time    = 24   busy = 24   idle = 0
+CPU utilization = 100.00%
+throughput    = 0.2083 proc/tick
+context switches (proc->proc) = 8   dispatches = 9   total switches = 8
+preemptions = 4   aging promotions = 0
+
+  Q   n     avgW   avgTAT     avgR   maxTAT
+  1   2     8.00    12.50     5.00       13
+  2   2    18.00    23.00     7.00       23
+  3   1    12.00    17.00     6.00       17
+

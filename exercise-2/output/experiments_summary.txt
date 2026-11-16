@@ -1,0 +1,37 @@
+Exercise 2 — experiment summary (code/run_experiments.py)
+
+[A_fair]  U=0.8000  n=4  Liu&Layland bound=0.7568
+   RM  exact test (response-time analysis): FEASIBLE
+   EDF exact test (processor demand):        FEASIBLE  
+   EDF measured: misses=  0  util= 80.00%  avgR=  3.000  jitter=  2.891  ctx= 54  preemptions=  9
+   RM  measured: misses=  0  util= 80.00%  avgR=  3.105  jitter=  3.272  ctx= 57  preemptions= 12
+   MLQ measured: misses=  0  util= 80.00%  avgR=  3.105  jitter=  3.255  ctx= 54  preemptions=  9
+
+[B_stress]  U=0.9714  n=2  Liu&Layland bound=0.8284
+   RM  exact test (response-time analysis): NOT feasible
+   EDF exact test (processor demand):        FEASIBLE  
+   EDF measured: misses=  0  util= 97.14%  avgR=  3.833  jitter=  1.424  ctx= 36  preemptions=  3
+   RM  measured: misses=  3  util= 97.14%  avgR=  4.000  jitter=  2.449  ctx= 48  preemptions= 15
+   MLQ measured: misses=  3  util= 97.14%  avgR=  4.000  jitter=  2.449  ctx= 48  preemptions= 15
+
+[C_aperiodic]  U=0.9000  n=7  Liu&Layland bound=0.7286
+   RM  exact test (response-time analysis): NOT feasible
+   EDF exact test (processor demand):        FEASIBLE  
+   EDF measured: misses=  0  util= 90.00%  avgR= 10.857  jitter=  7.221  ctx=  6  preemptions=  0
+   RM  measured: misses=  3  util= 90.00%  avgR= 13.000  jitter=  4.320  ctx=  6  preemptions=  0
+   MLQ measured: misses=  0  util= 90.00%  avgR= 10.857  jitter=  7.493  ctx=  7  preemptions=  1
+
+[D_overload]  U=1.2333  n=3  Liu&Layland bound=0.7798
+   RM  exact test (response-time analysis): NOT feasible
+   EDF exact test (processor demand):        NOT feasible  utilization > 1
+   EDF measured: misses= 31  util=100.00%  avgR= 18.200  jitter=  6.975  ctx= 29  preemptions=  0
+   RM  measured: misses= 10  util=100.00%  avgR= 11.400  jitter= 20.612  ctx= 35  preemptions=  6
+   MLQ measured: misses= 10  util=100.00%  avgR= 11.400  jitter= 20.612  ctx= 35  preemptions=  6
+
+Random feasibility study: 2329 task sets (seed 20250101)
+   U in 0.25-0.50: n= 443  RM feasible=100.0%  EDF feasible=100.0%
+   U in 0.50-0.70: n= 827  RM feasible=100.0%  EDF feasible=100.0%
+   U in 0.70-0.80: n= 366  RM feasible= 99.7%  EDF feasible=100.0%
+   U in 0.80-0.90: n= 344  RM feasible= 82.3%  EDF feasible=100.0%
+   U in 0.90-1.00: n= 349  RM feasible= 17.8%  EDF feasible=100.0%
+

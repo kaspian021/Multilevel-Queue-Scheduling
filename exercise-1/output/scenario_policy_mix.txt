@@ -1,0 +1,30 @@
+scenario: policy_mix.json
+
+|  F1  |     S1     | F2 | S1 | S2 |   S3   | S4 |  S5  |   T1   |
+0-3:F1  3-9:S1  9-11:F2  11-12:S1  12-13:S2  13-17:S3  17-19:S4  19-22:S5  22-26:T1
+
+PID     Q  Arr Burst  Fin  Wait  TAT  Resp
+------------------------------------------
+F1      1    0     3    3     0    3     0
+F2      1    9     2   11     0    2     0
+S1      2    0     7   12     5   12     3
+S2      2    2     1   13    10   11    10
+S3      2    3     4   17    10   14    10
+S4      2    5     2   19    12   14    12
+S5      2    6     3   22    13   16    13
+T1      3    0     4   26    22   26    22
+------------------------------------------
+avg waiting   = 9.00
+avg turnaround= 12.25
+avg response  = 8.75
+total time    = 26   busy = 26   idle = 0
+CPU utilization = 100.00%
+throughput    = 0.3077 proc/tick
+context switches (proc->proc) = 8   dispatches = 9   total switches = 8
+preemptions = 2   aging promotions = 0
+
+  Q   n     avgW   avgTAT     avgR   maxTAT
+  1   2     0.00     2.50     0.00        3
+  2   5    10.00    13.40     9.60       16
+  3   1    22.00    26.00    22.00       26
+
