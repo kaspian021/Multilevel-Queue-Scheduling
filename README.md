@@ -91,4 +91,6 @@ Each exercise is maintained on its own branch. The branch READMEs contain the de
 - [Exercise 6 — Research paper and seminar](https://github.com/kaspian021/Multilevel-Queue-Scheduling/tree/Exercise-6-Paper-And-Seminar)
 - [Exercise 7 — Readers-writers comparison](https://github.com/kaspian021/Multilevel-Queue-Scheduling/tree/Exercise-7-Readers-Writers-Comparison)
 
+- [Exercise 8 — Dining philosophers: deadlock and starvation](https://github.com/kaspian021/Multilevel-Queue-Scheduling/tree/Exercise-8-Dining-Philosophers-Deadlock-Starvation)
+
 [Persian instructor-rubric audit and final PDF page counts](RUBRIC_AUDIT_FA.md)
