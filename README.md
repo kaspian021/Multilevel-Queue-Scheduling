@@ -225,7 +225,7 @@ $ python -m pytest tests/ -q
 | معیار | وضعیت فعلی این شاخه |
 |---|---|
 | شکل و نمودار | موجود؛ نمودارهای گانت برای MLQ، EDF و RM و نمودارهای utilization/response |
-| فلوچارت | موجود؛ `docs/figures/feasibility-workflow.svg` |
+| فلوچارت | موجود؛ فلوچارت مسیر مقایسه در README و `docs/figures/feasibility-workflow.svg` |
 | جدول مقایسه | موجود؛ مقایسهٔ معیارها و نتایج در README و گزارش |
 | کد اجرایی | موجود؛ `code/rt_sched.py` و اجرای آزمایش‌ها |
 | مستند فارسی و انگلیسی | موجود؛ Word و PDF هر دو زبان |
