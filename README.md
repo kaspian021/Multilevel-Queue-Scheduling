@@ -77,3 +77,18 @@ These numbers are only for explaining how to read a Gantt chart. They are not be
 ## Repository
 
 [Multilevel-Queue-Scheduling on GitHub](https://github.com/kaspian021/Multilevel-Queue-Scheduling)
+
+
+## Exercise branches and instructor-rubric audit
+
+Each exercise is maintained on its own branch. The branch READMEs contain the deliverables, report links, diagrams, and a status summary against the instructor's checklist.
+
+- [Exercise 1 — MLQ algorithm introduction](https://github.com/kaspian021/Multilevel-Queue-Scheduling/tree/Exercise-1-Algorithm-Introduction)
+- [Exercise 2 — MLQ vs EDF/RM comparison](https://github.com/kaspian021/Multilevel-Queue-Scheduling/tree/Exercise-2-MLQ-EDF-RM-Comparison)
+- [Exercise 3 — Manual EDF/RM scheduling](https://github.com/kaspian021/Multilevel-Queue-Scheduling/tree/Exercise-3-EDF-RM-Manual-Scheduling)
+- [Exercise 4 — Dekker, Peterson, semaphores, and monitors](https://github.com/kaspian021/Multilevel-Queue-Scheduling/tree/Exercise-4-Dekker-Peterson-Semaphore-Monitor)
+- [Exercise 5 — MLQ synchronization demo and clip](https://github.com/kaspian021/Multilevel-Queue-Scheduling/tree/Exercise-5-MLQ-Synchronization)
+- [Exercise 6 — Research paper and seminar](https://github.com/kaspian021/Multilevel-Queue-Scheduling/tree/Exercise-6-Paper-And-Seminar)
+- [Exercise 7 — Readers-writers comparison](https://github.com/kaspian021/Multilevel-Queue-Scheduling/tree/Exercise-7-Readers-Writers-Comparison)
+
+[Persian instructor-rubric audit and final PDF page counts](RUBRIC_AUDIT_FA.md)
