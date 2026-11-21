@@ -1,0 +1,20 @@
+{
+  "algorithm": "naive_left_then_right",
+  "states": 573,
+  "transitions": 1475,
+  "deadlock_state_count": 1,
+  "first_deadlock": [
+    1,
+    1,
+    1,
+    1,
+    1
+  ]
+}
+{
+  "algorithm": "n_minus_1_plus_global_order",
+  "states": 2006,
+  "transitions": 6424,
+  "deadlock_state_count": 0,
+  "first_deadlock": null
+}

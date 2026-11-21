@@ -1,0 +1,14 @@
+{
+  "philosophers": 5,
+  "meals_per_philosopher": 2,
+  "events": 60,
+  "meals_completed": 10,
+  "per_philosopher": [
+    2,
+    2,
+    2,
+    2,
+    2
+  ],
+  "all_completed": true
+}

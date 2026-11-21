@@ -1,0 +1,20 @@
+{
+  "naive": {
+    "states": 573,
+    "transitions": 1475,
+    "deadlocks": [
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ]
+  },
+  "proposed": {
+    "states": 2006,
+    "transitions": 6424,
+    "deadlocks": []
+  }
+}
