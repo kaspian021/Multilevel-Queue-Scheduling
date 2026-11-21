@@ -146,6 +146,8 @@ Q1 first runs P1 for two units, then P2 for two. P1 receives another two units, 
 
 ## Generated Gantt chart
 
+![Gantt chart generated from the simulator trace](generated/gantt.png)
+
 The following Gantt chart is generated from the program's schedule trace rather than from hypothetical hand-entered timings. Each rectangle represents an execution slice, and its label identifies the process. Segment boundaries reveal dispatch points and the return of unfinished processes to the queue. The horizontal axis is simulated time, not wall-clock seconds. Read the chart together with the workload, quantum, and inter-queue policy. When the input changes, the Gantt chart should be regenerated from the new trace.
 
 <!-- page 26 -->
@@ -175,6 +177,8 @@ Response time is measured from arrival until the first start of execution. In th
 <!-- page 30 -->
 
 ## Process-metric table
+
+![Waiting and turnaround comparison by process](generated/metrics.png)
 
 | Process | Queue | Burst | Completion | Waiting | Turnaround | First response |
 |---|---:|---:|---:|---:|---:|---:|
@@ -225,6 +229,8 @@ A queue outside 1–3 or a non-positive burst causes Process to raise ValueError
 <!-- page 37 -->
 
 ## SVG Gantt generation
+
+![CPU service share by queue](generated/queue_share.png)
 
 The render_gantt function creates a standalone SVG and maps each Slice to a rectangle on the time axis. Rectangle width is proportional to the slice duration, and its fill distinguishes the queue. Process identifiers appear inside each block, while start and finish labels appear along the axis. SVG is useful in a README because it scales without pixelation. In a report, the caption should identify the colors and state that this is a simulated trace, not an observation of a real kernel scheduler.
 
