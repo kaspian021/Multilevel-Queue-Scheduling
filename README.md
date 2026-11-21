@@ -20,7 +20,7 @@ part. Section 8 of the paper is about exactly that.
 
 | File | What it is | Pages |
 |---|---|---|
-| `REPORT_EN.md` / `docs/REPORT_EN.docx` / `docs/REPORT_EN.pdf` | the paper, English | **28** |
+| `REPORT_EN.md` / `docs/REPORT_EN.docx` / `docs/REPORT_EN.pdf` | the paper, English | **48** |
 | `REPORT_FA.md` / `docs/REPORT_FA.docx` / `docs/REPORT_FA.pdf` | the paper, Persian | **28** |
 | `diagrams/` | 9 figures, all regenerable | — |
 | `output/experiments.json` | every number in both papers | — |
@@ -109,3 +109,13 @@ code does not produce.
 ![توان عملیاتی در آزمایش‌ها](diagrams/fig_throughput.png)
 
 تفسیر starvation باید بار کاری و تعداد reader/writerها را همراه نتیجه گزارش کند. نتیجهٔ یک بار کاری خاص، به‌تنهایی حکم کلی دربارهٔ منصفانه بودن همهٔ پیاده‌سازی‌ها نیست.
+
+
+## نسخهٔ گسترش‌یافته و صفحه‌شماری نهایی
+
+| گزارش | تعداد صفحهٔ PDF نهایی |
+|---|---:|
+| فارسی | **48 صفحه** |
+| English | **50 pages** |
+
+این تعدادها از PDFهای تولیدشده در GitHub Actions با شمارش صفحات PDF تأیید شده‌اند. فایل‌های نهایی در پوشهٔ `docs/` قرار دارند. منابع Markdown و ضمیمهٔ فنی نیز در همان پوشه نگهداری می‌شوند.
