@@ -1,0 +1,65 @@
+name: Exercise 8 - Dining Philosophers
+on:
+  push:
+    branches:
+      - Exercise-8-Dining-Philosophers-Deadlock-Starvation
+    paths:
+      - 'REPORT_FA.md'
+      - 'README.md'
+      - 'EXERCISE_BRANCH_INDEX.md'
+      - 'requirements.txt'
+      - 'code/**'
+      - 'tests/**'
+      - '.github/workflows/exercise8.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  verify-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install system fonts and PDF tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libreoffice fonts-noto-core fonts-dejavu-core poppler-utils
+      - name: Install Python requirements
+        run: python -m pip install -r requirements.txt
+      - name: Run tests
+        run: |
+          mkdir -p output docs
+          set -o pipefail
+          python -m pytest -q tests | tee output/test_results.txt
+      - name: Run finite-state model checker
+        run: python code/model_check.py | tee output/model_check_run.txt
+      - name: Generate diagrams and threaded execution trace
+        run: python code/make_diagrams.py
+      - name: Build Persian report DOCX
+        run: python code/build_report.py
+      - name: Convert DOCX to PDF
+        run: |
+          libreoffice --headless --convert-to pdf --outdir docs docs/REPORT_FA.docx
+          pages="$(pdfinfo docs/REPORT_FA.pdf | awk '/^Pages:/ {print $2}')"
+          echo "PDF pages: $pages"
+          test "$pages" = "38"
+      - name: Commit generated report and evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/REPORT_FA.docx docs/REPORT_FA.pdf diagrams output
+          if git diff --cached --quiet; then
+            echo "No generated changes to commit."
+          else
+            git commit -m "Build Exercise 8 report, diagrams and verification outputs"
+            git push origin "HEAD:${{ github.ref_name }}"
+          fi
