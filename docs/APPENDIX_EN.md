@@ -39,3 +39,22 @@ A context-switch count is not the same as context-switch cost. The count records
 ## Appendix 7 — Reproducibility and validity
 
 A reproducible result records the code revision, scenario file, queue parameters, Python version, and command line. The JSON scenario is part of the experimental data, not incidental input. Changing a quantum or aging threshold can change both the Gantt order and the aggregate metrics. Raw outputs should accompany figures so readers can recompute each number. This educational simulator is not a substitute for measurement of a real kernel scheduler.
+
+
+# شکل‌های تکمیلی
+
+<!-- page 43 -->
+
+## MLQ scheduler decision flowchart
+
+![MLQ scheduler decision flowchart](../diagrams/fig_flowchart.png)
+
+This figure is generated from the outputs in this branch. Read its axes and scale together with the input scenario; the image alone does not replace the raw data and experiment settings.
+
+<!-- page 44 -->
+
+## Aging and waiting-time trend
+
+![Aging and waiting-time trend](../diagrams/chart_aging.png)
+
+This figure is generated from the outputs in this branch. Read its axes and scale together with the input scenario; the image alone does not replace the raw data and experiment settings.
