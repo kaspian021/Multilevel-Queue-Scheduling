@@ -33,3 +33,22 @@ In the readers-writers problem, multiple readers may enter together, but a write
 ## Appendix 6 — Mechanism choice and scope
 
 For two participants under the classical atomic model, Dekker and Peterson are important teaching solutions; application software generally uses library mutexes, semaphores, or monitors. Do not choose a mechanism using throughput alone. Report the explored state-space size, participant count, operating system, memory model, and workload. Exhaustive checking of a bounded model is not a correctness claim for every thread count and architecture.
+
+
+# شکل‌های تکمیلی
+
+<!-- page 45 -->
+
+## Synchronization property matrix
+
+![Synchronization property matrix](../diagrams/fig_property_matrix.png)
+
+This figure is generated from the outputs in this branch. Read its axes and scale together with the input scenario; the image alone does not replace the raw data and experiment settings.
+
+<!-- page 46 -->
+
+## Monitor timeline
+
+![Monitor timeline](../diagrams/fig_monitor_timeline.png)
+
+This figure is generated from the outputs in this branch. Read its axes and scale together with the input scenario; the image alone does not replace the raw data and experiment settings.
