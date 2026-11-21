@@ -14,8 +14,8 @@ is typed by hand.
 
 | File | What it is | Measured pages |
 |---|---|---|
-| `PAPER_EN.md` / `docs/PAPER_EN.docx` / `docs/PAPER_EN.pdf` | the paper, English | **33** |
-| `PAPER_FA.md` / `docs/PAPER_FA.docx` / `docs/PAPER_FA.pdf` | the paper, Persian | **31** |
+| `PAPER_EN.md` / `docs/PAPER_EN.docx` / `docs/PAPER_EN.pdf` | the paper, English | **47** |
+| `PAPER_FA.md` / `docs/PAPER_FA.docx` / `docs/PAPER_FA.pdf` | the paper, Persian | **45** |
 | `docs/SEMINAR_EN.pptx` | seminar deck, English | 26 slides |
 | `docs/SEMINAR_FA.pptx` | seminar deck, Persian | 26 slides |
 
@@ -156,3 +156,13 @@ not state it.
 ![رقابت و همگام‌سازی](diagrams/fig_contention.png)
 
 منابعی که در مقاله به‌عنوان «تأییدشده» معرفی شده‌اند از منابعی که metadata آن‌ها هنوز تثبیت نشده جدا نگه داشته شوند؛ برای کتاب‌های درسیِ بدون ویرایش/صفحهٔ دقیق، شماره صفحه حدس زده نشود.
+
+
+## نسخهٔ گسترش‌یافته و صفحه‌شماری نهایی
+
+| گزارش | تعداد صفحهٔ PDF نهایی |
+|---|---:|
+| فارسی | **45 صفحه** |
+| English | **47 pages** |
+
+این تعدادها از PDFهای تولیدشده در GitHub Actions با شمارش صفحات PDF تأیید شده‌اند. فایل‌های نهایی در پوشهٔ `docs/` قرار دارند. منابع Markdown و ضمیمهٔ فنی نیز در همان پوشه نگهداری می‌شوند.
