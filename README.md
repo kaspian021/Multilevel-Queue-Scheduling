@@ -21,7 +21,7 @@ part. Section 8 of the paper is about exactly that.
 | File | What it is | Pages |
 |---|---|---|
 | `REPORT_EN.md` / `docs/REPORT_EN.docx` / `docs/REPORT_EN.pdf` | the paper, English | **48** |
-| `REPORT_FA.md` / `docs/REPORT_FA.docx` / `docs/REPORT_FA.pdf` | the paper, Persian | **28** |
+| `REPORT_FA.md` / `docs/REPORT_FA.docx` / `docs/REPORT_FA.pdf` | the paper, Persian | **48** |
 | `diagrams/` | 9 figures, all regenerable | — |
 | `output/experiments.json` | every number in both papers | — |
 
@@ -100,7 +100,7 @@ code does not produce.
 | جدول مقایسه | موجود؛ نتایج checker و مقایسهٔ سیاست‌ها در گزارش |
 | کد اجرایی | موجود؛ `code/rw_model.py` و `code/rw_sync.py` |
 | مستند فارسی و انگلیسی | موجود؛ Word و PDF هر دو زبان |
-| بیش از ۴۰ صفحه | **فعلاً احراز نمی‌شود: PDFها ۲۸ صفحه‌اند** |
+| بیش از ۴۰ صفحه | تأیید شد؛ PDF فارسی ۴۸ و انگلیسی ۵۰ صفحه است |
 
 **شکل‌های مناسب برای ارائه**
 
