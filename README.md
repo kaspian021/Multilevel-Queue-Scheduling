@@ -119,3 +119,19 @@ code does not produce.
 | English | **50 pages** |
 
 این تعدادها از PDFهای تولیدشده در GitHub Actions با شمارش صفحات PDF تأیید شده‌اند. فایل‌های نهایی در پوشهٔ `docs/` قرار دارند. منابع Markdown و ضمیمهٔ فنی نیز در همان پوشه نگهداری می‌شوند.
+
+ 
+## فلوچارت تحلیل مسئلهٔ خوانندگان و نویسندگان
+
+```mermaid
+flowchart TD
+    A[تعریف invariant: نویسنده انحصاری، چند خواننده مجاز] --> B[انتخاب reader-preference یا writer-preference]
+    B --> C[ساخت مدل وضعیت و گذارها]
+    C --> D[پیمایش interleavingهای قابل دسترس]
+    D --> E[بررسی safety، progress و starvation]
+    E --> F[بررسی read concurrency و bounded waiting]
+    F --> G[اجرای آزمون نخ‌محور با workload مشخص]
+    G --> H[ثبت throughput و latency دنباله‌ای]
+    H --> I[تطبیق شواهد مدل با اندازه‌گیری]
+    I --> J[گزارش نتیجه با ذکر تعداد نخ و فرض‌های اجرا]
+```
