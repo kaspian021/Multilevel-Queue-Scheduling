@@ -28,6 +28,8 @@ jobs:
           sudo apt-get install -y libreoffice-writer fonts-noto-core fonts-noto-extra
           python -m pip install --upgrade pip
           python -m pip install python-docx pypdf matplotlib
+      - name: Run Exercise 5 unit tests
+        run: python -m unittest discover -s exercise-5 -p 'test_*.py' -v
       - name: Build bilingual reports and generated charts
         run: python tools/build_exercise5_reports.py
       - name: Commit Word/PDF reports and charts
