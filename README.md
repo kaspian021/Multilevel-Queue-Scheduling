@@ -87,3 +87,25 @@ docs/                     the four deliverable files
 Both papers are generated: every figure in them is read from
 `output/experiments.json` at build time, so a paper cannot quote a number the
 code does not produce.
+
+ 
+---
+
+## ممیزی معیارهای جدول استاد
+
+| معیار | وضعیت فعلی این شاخه |
+|---|---|
+| شکل و نمودار | موجود؛ ۹ تصویر دربارهٔ الگوی رقابت، starvation، throughput و verdictها |
+| فلوچارت | منطق پروتکل‌ها در مدل بررسی شده و تصاویر حالت/الگو موجودند |
+| جدول مقایسه | موجود؛ نتایج checker و مقایسهٔ سیاست‌ها در گزارش |
+| کد اجرایی | موجود؛ `code/rw_model.py` و `code/rw_sync.py` |
+| مستند فارسی و انگلیسی | موجود؛ Word و PDF هر دو زبان |
+| بیش از ۴۰ صفحه | **فعلاً احراز نمی‌شود: PDFها ۲۸ صفحه‌اند** |
+
+**شکل‌های مناسب برای ارائه**
+
+![نتایج بررسی ویژگی‌های پروتکل‌ها](diagrams/fig_verdicts.png)
+
+![توان عملیاتی در آزمایش‌ها](diagrams/fig_throughput.png)
+
+تفسیر starvation باید بار کاری و تعداد reader/writerها را همراه نتیجه گزارش کند. نتیجهٔ یک بار کاری خاص، به‌تنهایی حکم کلی دربارهٔ منصفانه بودن همهٔ پیاده‌سازی‌ها نیست.
