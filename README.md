@@ -144,9 +144,9 @@ COMPARISON_FA.md              Persian report (Markdown source)
 COMPARISON_EN.md              English report (Markdown source)
 docs/
 ├── COMPARISON_FA.docx        Persian report, 45 pages
-├── COMPARISON_FA.pdf         Persian report, 37 pages
+├── COMPARISON_FA.pdf         Persian report, 45 pages
 ├── COMPARISON_EN.docx        English report, 46 pages
-└── COMPARISON_EN.pdf         English report, 38 pages
+└── COMPARISON_EN.pdf         English report, 46 pages
 code/
 ├── sync_model.py             the model checker: 8 algorithms, verdicts, witnesses
 ├── sync_algorithms.py        runnable Dekker, Peterson, TAS, semaphore, monitor,
@@ -278,7 +278,7 @@ The content modules live in `tools/content/ex4_fa.py` and
 | جدول مقایسه | موجود؛ ماتریس ویژگی‌ها و نتایج |
 | کد اجرایی | موجود؛ پیاده‌سازی الگوریتم‌ها، مدل و تست‌ها |
 | مستند فارسی و انگلیسی | موجود؛ Word و PDF هر دو زبان |
-| بیش از ۴۰ صفحه | **فعلاً احراز نمی‌شود: فارسی ۳۷ و انگلیسی ۳۸ صفحه‌اند** |
+| بیش از ۴۰ صفحه | تأیید شد؛ PDF فارسی ۴۵ و انگلیسی ۴۶ صفحه است |
 
 **شکل‌های مهم برای ارائه**
 
