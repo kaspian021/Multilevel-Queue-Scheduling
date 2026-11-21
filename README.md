@@ -117,3 +117,15 @@ See [Exercise 5 documentation](exercise-5/README.md) for run commands, assumptio
 این کلیپ ردّ قطعی سناریوی تعریف‌شده در کد را برای سه حالت Semaphore، Monitor و Combined نشان می‌دهد. چون زمان‌بند تک‌نخی و قطعی است، یکسان بودن ردّها مورد انتظار است؛ این ویدئو **بنچمارک کارایی قفل‌ها یا آزمایش هم‌روندی چندنخی نیست**.
 
 ![نمودار مقایسهٔ سه حالت همگام‌سازی](exercise-5/assets/mlq_sync_comparison.svg)
+
+
+## گزارش فنی دوزبانه
+
+| نسخه | Word | PDF | صفحه |
+|---|---|---|---:|
+| فارسی | [REPORT_FA.docx](docs/REPORT_FA.docx) | [REPORT_FA.pdf](docs/REPORT_FA.pdf) | **۴۷** |
+| English | [REPORT_EN.docx](docs/REPORT_EN.docx) | [REPORT_EN.pdf](docs/REPORT_EN.pdf) | **47** |
+
+گزارش‌ها از منبع Markdown ساخته می‌شوند و تعداد صفحات PDF در GitHub Actions شمرده می‌شود. سه نمودار گزارش از trace واقعی شبیه‌ساز تولید شده‌اند: [گانت](docs/generated/gantt.png)، [شاخص‌های پردازه](docs/generated/metrics.png)، و [سهم CPU صف‌ها](docs/generated/queue_share.png).
+
+برای بازسازی محلی، وابستگی‌های `python-docx`, `matplotlib`, `pypdf` و LibreOffice لازم است؛ سپس `python tools/build_exercise5_reports.py` را اجرا کنید.
