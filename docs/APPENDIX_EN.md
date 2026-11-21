@@ -105,3 +105,22 @@ A half-second run may reveal a fast contention pattern but is insufficient to in
 ## Appendix 18 — Oral-presentation checklist
 
 In a presentation, state the reader-writer invariant first; show why a simple lock removes concurrent reading; compare reader and writer preference using two traces; and close by distinguishing model checking from threaded experiments. A starvation chart should state competitor count and test duration. Define safety, progress, starvation, and concurrency before showing the verdict table.
+
+
+# شکل‌های تکمیلی
+
+<!-- page 47 -->
+
+## Protocol model-checking verdicts
+
+![Protocol model-checking verdicts](../diagrams/fig_verdicts.png)
+
+This chart is built from this branch's output data; interpret it together with reader/writer counts and the duration of each trial.
+
+<!-- page 48 -->
+
+## Measured throughput
+
+![Measured throughput](../diagrams/fig_throughput.png)
+
+This chart is built from this branch's output data; interpret it together with reader/writer counts and the duration of each trial.
