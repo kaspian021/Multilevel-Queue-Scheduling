@@ -29,3 +29,21 @@
 - [تمرین ۵](https://github.com/kaspian021/Multilevel-Queue-Scheduling/tree/Exercise-5-MLQ-Synchronization)
 - [تمرین ۶](https://github.com/kaspian021/Multilevel-Queue-Scheduling/tree/Exercise-6-Paper-And-Seminar)
 - [تمرین ۷](https://github.com/kaspian021/Multilevel-Queue-Scheduling/tree/Exercise-7-Readers-Writers-Comparison)
+
+
+## وضعیت نهایی پس از تکمیل (۲۱ نوامبر ۲۰۲۶)
+
+فرایند GitHub Actions نسخهٔ Word و PDF گزارش‌های دوزبانه را بازسازی کرده و تعداد صفحات PDF نهایی را با شمارش مستقیم تأیید کرده است:
+
+| شاخه | فارسی | انگلیسی | وضعیت |
+|---|---:|---:|---|
+| تمرین ۱ | ۴۴ | ۴۴ | بیش از ۴۰ صفحه |
+| تمرین ۲ | ۴۴ | ۴۴ | بیش از ۴۰ صفحه |
+| تمرین ۳ | ۴۴ | ۴۴ | بیش از ۴۰ صفحه |
+| تمرین ۴ | ۴۵ | ۴۶ | بیش از ۴۰ صفحه |
+| تمرین ۶ | ۴۵ | ۴۷ | بیش از ۴۰ صفحه |
+| تمرین ۷ | ۴۸ | ۵۰ | بیش از ۴۰ صفحه |
+
+کلیپ تمرین ۵ اکنون در مسیر `exercise-5/assets/exercise5_mlq_sync_demo.mp4` در شاخهٔ مربوط موجود است و به README همان شاخه پیوند داده شده. ویدئو نمایش بصری trace قطعی شبیه‌ساز است، نه آزمون سرعت قفل‌های هم‌روند.
+
+**توضیح صفحه‌شماری:** تعدادهای بالا از PDF تولیدشده توسط workflow و خروجی ابزار شمارش صفحات PDF خوانده شده‌اند. این اعداد نتیجهٔ build فعلی‌اند و به معنی بازبینی دستی تک‌تک خطوط یا تصحیح و تأیید استاد نیستند.
