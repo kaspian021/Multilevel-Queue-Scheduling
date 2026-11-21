@@ -10,6 +10,8 @@ The video requirement (Exercise 5) was submitted privately to the instructor acc
 | 4 | [Exercise-4-Dekker-Peterson-Semaphore-Monitor](https://github.com/kaspian021/Multilevel-Queue-Scheduling/tree/Exercise-4-Dekker-Peterson-Semaphore-Monitor) | Dekker, Peterson, semaphore, monitor comparison and runnable semaphore/monitor demos |
 | 5 | Submitted privately | Short video sent to instructor; intentionally not duplicated here |
 | 6 | [Exercise-6-Paper-And-Seminar](https://github.com/kaspian021/Multilevel-Queue-Scheduling/tree/Exercise-6-Paper-And-Seminar) | Bilingual paper draft, seminar slide outline, references |
+| 7 | [Exercise-7-Readers-Writers-Comparison](https://github.com/kaspian021/Multilevel-Queue-Scheduling/tree/Exercise-7-Readers-Writers-Comparison) | Readers-writers, starvation and fairness comparison |
+| 8 | [Exercise-8-Dining-Philosophers-Deadlock-Starvation](https://github.com/kaspian021/Multilevel-Queue-Scheduling/tree/Exercise-8-Dining-Philosophers-Deadlock-Starvation) | Dining philosophers: deadlock, starvation, FIFO fairness, global resource order, finite-state model checking, Python simulation |
 
 ## Submission status
 These branches contain organized, substantive working drafts and code/source material. They are not represented as final 40-page typeset reports, handwritten-paper scans, or a finished PowerPoint/PDF package. Before formal submission, expand and typeset long-form reports to the instructor's exact page and citation rules, export the seminar outline into slides, verify bibliography entries, and attach a scan/photo if the instructor explicitly requires handwritten work.
