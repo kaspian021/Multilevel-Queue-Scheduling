@@ -41,10 +41,9 @@ def set_font(run, name=FONT, size=8.7, bold=False, italic=False, rtl=True):
 
 
 def clean(text):
-    text = re.sub(r"!\\[([^]]*)\\]\\([^)]+\\)", r"\\1", text)
-    text = re.sub(r"\\[([^]]+)\\]\\(([^)]+)\\)", r"\\1 (\\2)", text)
-    text = text.replace("**", "").replace("`", "").replace("~~", "")
-    return text.strip()
+    text = re.sub(r"!\[([^]]*)\]\([^)]+\)", r"\1", text)
+    text = re.sub(r"\[([^]]+)\]\(([^)]+)\)", r"\1 (\2)", text)
+    return text.replace("**", "").replace("`", "").replace("~~", "").strip()
 
 
 def shade(cell, fill="EAF0F6"):
@@ -100,16 +99,15 @@ def add_para(doc, text, kind="body"):
 
 
 def add_image(doc, line):
-    m = re.search(r"\\]\\(([^)]+)\\)", line)
+    m = re.search(r"\]\(([^)]+)\)", line)
     if not m: return
     path = (ROOT / m.group(1)).resolve()
     if not path.exists():
         add_para(doc, f"[تصویر تولیدنشده: {m.group(1)}]", "note"); return
     p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p.paragraph_format.space_after = Pt(1); p.paragraph_format.space_before = Pt(1)
-    try: p.add_run().add_picture(str(path), width=Cm(12.8))
-    except Exception: add_para(doc, f"[تصویر: {m.group(1)}]", "note")
-    alt = re.match(r"!\\[([^]]*)\\]", line)
+    p.add_run().add_picture(str(path), width=Cm(12.8))
+    alt = re.match(r"!\[([^]]*)\]", line)
     if alt and alt.group(1): add_para(doc, alt.group(1), "caption")
 
 
@@ -126,7 +124,7 @@ def parse_page(doc, lines, index):
         if line.startswith("```"):
             code=[]; i += 1
             while i < len(lines) and lines[i].strip() != "```": code.append(lines[i].rstrip()); i += 1
-            add_code(doc, "\\n".join(code)); i += 1; continue
+            add_code(doc, "\n".join(code)); i += 1; continue
         if line.startswith("!["):
             add_image(doc, line); i += 1; continue
         if line.startswith("|"):
@@ -142,7 +140,7 @@ def parse_page(doc, lines, index):
             add_para(doc, line[4:], "subhead"); i += 1; continue
         if line.startswith("# "):
             add_para(doc, line[2:], "subhead"); i += 1; continue
-        if re.match(r"^\\*.+\\*$", line):
+        if re.match(r"^\*.+\*$", line):
             add_para(doc, line.strip("*"), "caption"); i += 1; continue
         para=[line]; i += 1
         while i < len(lines):
@@ -155,7 +153,7 @@ def parse_page(doc, lines, index):
 def main():
     text = SOURCE.read_text(encoding="utf-8")
     lines = text.splitlines()
-    starts = [i for i, line in enumerate(lines) if re.match(r"^## صفحه \\d+:", line)]
+    starts = [i for i, line in enumerate(lines) if re.match(r"^## صفحه \d+:", line)]
     if len(starts) != 38:
         raise SystemExit(f"Expected 38 page sections, found {len(starts)}")
     sections=[]
