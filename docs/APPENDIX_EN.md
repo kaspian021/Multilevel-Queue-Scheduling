@@ -112,3 +112,22 @@ A clear manual solution begins with the C/T/D table and utilization; computes th
 ## Appendix 18 — Reproduction and independent checking
 
 The branch code is useful for independently checking the hand-worked table and Gantt trace. Record the command, Python version, input file, and commit revision to reproduce a result. If the manual solution differs from the program, first check preemption assumptions, releases, absolute deadlines, and tie-breaking. Code can detect arithmetic mistakes, but the report should retain the reasoning behind each dispatch decision.
+
+
+# شکل‌های تکمیلی
+
+<!-- page 43 -->
+
+## EDF scheduling trace
+
+![EDF scheduling trace](../diagrams/gantt_edf.png)
+
+This figure is generated from the outputs in this branch. Read its axes and scale together with the input scenario; the image alone does not replace the raw data and experiment settings.
+
+<!-- page 44 -->
+
+## RM scheduling trace
+
+![RM scheduling trace](../diagrams/gantt_rm.png)
+
+This figure is generated from the outputs in this branch. Read its axes and scale together with the input scenario; the image alone does not replace the raw data and experiment settings.
