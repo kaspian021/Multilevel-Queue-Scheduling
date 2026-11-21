@@ -39,3 +39,22 @@ Classical MLQ does not itself provide deadline guarantees; it is mainly intended
 ## Appendix 7 — Results and validity threats
 
 Low-load and stressed scenarios should be reported separately because an overall mean can hide deadline misses. The number of random task sets, seed, C/T distributions, tie-breaking rules, and preemption model must be recorded. A 100% success rate in a finite experiment is not a mathematical proof for every task set. Conversely, an analytical test is valid only under its assumptions and does not automatically include real overhead.
+
+
+# شکل‌های تکمیلی
+
+<!-- page 43 -->
+
+## EDF Gantt for scenario A
+
+![EDF Gantt for scenario A](../diagrams/gantt_A_fair_EDF.png)
+
+This figure is generated from the outputs in this branch. Read its axes and scale together with the input scenario; the image alone does not replace the raw data and experiment settings.
+
+<!-- page 44 -->
+
+## RM Gantt for scenario A
+
+![RM Gantt for scenario A](../diagrams/gantt_A_fair_RM.png)
+
+This figure is generated from the outputs in this branch. Read its axes and scale together with the input scenario; the image alone does not replace the raw data and experiment settings.
