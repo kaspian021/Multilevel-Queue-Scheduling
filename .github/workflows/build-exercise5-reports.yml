@@ -12,6 +12,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+concurrency:
+  group: exercise5-report-build-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   build:
     runs-on: ubuntu-latest
