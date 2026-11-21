@@ -69,3 +69,22 @@ The branch reference list deliberately separates entries with checked bibliograp
 ## Appendix 12 — Seminar presentation framework
 
 For the seminar, introduce the problem and research question with a small example; show why evaluation metrics conflict; distinguish measurement from model checking; and close with the main findings and their limits. Each figure should carry one clear message. Before showing it, explain the axes, units, sample count, and evidence type. Slides should support rather than replace spoken explanation; one claim and one visual per slide is usually easier to follow.
+
+
+# شکل‌های تکمیلی
+
+<!-- page 44 -->
+
+## Schedulability cliff at high load
+
+![Schedulability cliff at high load](../diagrams/fig_utilisation_cliff.png)
+
+This figure is generated from the outputs in this branch. Read its axes and scale together with the input scenario; the image alone does not replace the raw data and experiment settings.
+
+<!-- page 45 -->
+
+## Contention in threaded experiments
+
+![Contention in threaded experiments](../diagrams/fig_contention.png)
+
+This figure is generated from the outputs in this branch. Read its axes and scale together with the input scenario; the image alone does not replace the raw data and experiment settings.
