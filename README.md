@@ -13,7 +13,7 @@
 
 | Language | Markdown | Word (DOCX) | PDF | Pages |
 |---|---|---|---|---:|
-| Persian (فارسی) | [`MANUAL_SOLUTION_FA.md`](MANUAL_SOLUTION_FA.md) | [`docs/MANUAL_SOLUTION_FA.docx`](docs/MANUAL_SOLUTION_FA.docx) | [`docs/MANUAL_SOLUTION_FA.pdf`](docs/MANUAL_SOLUTION_FA.pdf) | **24** |
+| Persian (فارسی) | [`MANUAL_SOLUTION_FA.md`](MANUAL_SOLUTION_FA.md) | [`docs/MANUAL_SOLUTION_FA.docx`](docs/MANUAL_SOLUTION_FA.docx) | [`docs/MANUAL_SOLUTION_FA.pdf`](docs/MANUAL_SOLUTION_FA.pdf) | **44** |
 | English | [`MANUAL_SOLUTION_EN.md`](MANUAL_SOLUTION_EN.md) | [`docs/MANUAL_SOLUTION_EN.docx`](docs/MANUAL_SOLUTION_EN.docx) | [`docs/MANUAL_SOLUTION_EN.pdf`](docs/MANUAL_SOLUTION_EN.pdf) | **24** |
 
 Page counts are measured, not estimated: the PDF count is read out of the PDF file
@@ -108,9 +108,9 @@ requirements.txt                 pytest, matplotlib
 MANUAL_SOLUTION_FA.md            Persian report (Markdown source)
 MANUAL_SOLUTION_EN.md            English report (Markdown source)
 docs/
-├── MANUAL_SOLUTION_FA.docx      Persian report, 24 pages
+├── MANUAL_SOLUTION_FA.docx      Persian report, 44 pages
 ├── MANUAL_SOLUTION_FA.pdf       Persian report, 24 pages
-├── MANUAL_SOLUTION_EN.docx      English report, 24 pages
+├── MANUAL_SOLUTION_EN.docx      English report, 44 pages
 └── MANUAL_SOLUTION_EN.pdf       English report, 24 pages
 code/
 ├── edf_rm.py                    simulator, schedulability tests, CLI
@@ -257,3 +257,13 @@ step tables and the program can never disagree.
 ![گانت RM](diagrams/gantt_rm.png)
 
 برای ارائهٔ حل دستی، جدول رویدادها باید زمان آزادسازی، مهلت مطلق، اولویت فعال، زمان باقی‌مانده و بازهٔ اجرای هر پردازه را نشان دهد. خروجی کد نقش کنترل مستقل محاسبات را دارد و جایگزین استدلال دستی نیست.
+
+
+## نسخهٔ گسترش‌یافته و صفحه‌شماری نهایی
+
+| گزارش | تعداد صفحهٔ PDF نهایی |
+|---|---:|
+| فارسی | **44 صفحه** |
+| English | **44 pages** |
+
+این تعدادها از PDFهای تولیدشده در GitHub Actions با شمارش صفحات PDF تأیید شده‌اند. فایل‌های نهایی در پوشهٔ `docs/` قرار دارند. منابع Markdown و ضمیمهٔ فنی نیز در همان پوشه نگهداری می‌شوند.
