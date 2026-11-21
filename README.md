@@ -297,3 +297,18 @@ The content modules live in `tools/content/ex4_fa.py` and
 | English | **46 pages** |
 
 این تعدادها از PDFهای تولیدشده در GitHub Actions با شمارش صفحات PDF تأیید شده‌اند. فایل‌های نهایی در پوشهٔ `docs/` قرار دارند. منابع Markdown و ضمیمهٔ فنی نیز در همان پوشه نگهداری می‌شوند.
+
+ 
+## فلوچارت تحلیل سازوکارهای همگام‌سازی
+
+```mermaid
+flowchart TD
+    A[تعریف داده مشترک و بخش بحرانی] --> B[تعیین شرکت‌کنندگان و مدل حافظه]
+    B --> C[انتخاب راهکار: Dekker، Peterson، Semaphore یا Monitor]
+    C --> D[تعریف invariant و شرط انتظار]
+    D --> E[بررسی ایمنی و عدم ورود هم‌زمان]
+    E --> F[بررسی progress و bounded waiting]
+    F --> G[Model checking و ثبت مسیر نقض احتمالی]
+    G --> H[آزمون نخ‌محور و اندازه‌گیری رفتار]
+    H --> I[مقایسهٔ نتایج همراه با فرض‌ها و محدودیت‌ها]
+```
