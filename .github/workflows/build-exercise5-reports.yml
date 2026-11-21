@@ -1,0 +1,38 @@
+name: Build Exercise 5 reports
+on:
+  push:
+    branches:
+      - Exercise-5-MLQ-Synchronization
+    paths-ignore:
+      - 'docs/REPORT_FA.docx'
+      - 'docs/REPORT_FA.pdf'
+      - 'docs/REPORT_EN.docx'
+      - 'docs/REPORT_EN.pdf'
+      - 'docs/generated/**'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: Exercise-5-MLQ-Synchronization
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install report tools and fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libreoffice-writer fonts-noto-core fonts-noto-extra
+          python -m pip install --upgrade pip
+          python -m pip install python-docx pypdf matplotlib
+      - name: Build bilingual reports and generated charts
+        run: python tools/build_exercise5_reports.py
+      - name: Commit Word/PDF reports and charts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/REPORT_FA.docx docs/REPORT_FA.pdf docs/REPORT_EN.docx docs/REPORT_EN.pdf docs/generated/*.png
+          git diff --cached --quiet || (git commit -m "docs: build Exercise 5 bilingual 40-page reports" && git push)
