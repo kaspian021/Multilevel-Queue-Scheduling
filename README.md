@@ -18,8 +18,8 @@ which are inherited from `master` and are not part of this exercise.
 
 | Language | Markdown | Word (DOCX) | PDF | Pages |
 |---|---|---|---|---:|
-| Persian (فارسی) | [`COMPARISON_FA.md`](COMPARISON_FA.md) | [`docs/COMPARISON_FA.docx`](docs/COMPARISON_FA.docx) | [`docs/COMPARISON_FA.pdf`](docs/COMPARISON_FA.pdf) | **37** |
-| English | [`COMPARISON_EN.md`](COMPARISON_EN.md) | [`docs/COMPARISON_EN.docx`](docs/COMPARISON_EN.docx) | [`docs/COMPARISON_EN.pdf`](docs/COMPARISON_EN.pdf) | **38** |
+| Persian (فارسی) | [`COMPARISON_FA.md`](COMPARISON_FA.md) | [`docs/COMPARISON_FA.docx`](docs/COMPARISON_FA.docx) | [`docs/COMPARISON_FA.pdf`](docs/COMPARISON_FA.pdf) | **45** |
+| English | [`COMPARISON_EN.md`](COMPARISON_EN.md) | [`docs/COMPARISON_EN.docx`](docs/COMPARISON_EN.docx) | [`docs/COMPARISON_EN.pdf`](docs/COMPARISON_EN.pdf) | **46** |
 
 Page counts are measured, not estimated: the PDF count is read out of the PDF
 itself, and the DOCX count is a measured estimate of the Word reflow. Both
@@ -143,9 +143,9 @@ requirements.txt              pytest, matplotlib
 COMPARISON_FA.md              Persian report (Markdown source)
 COMPARISON_EN.md              English report (Markdown source)
 docs/
-├── COMPARISON_FA.docx        Persian report, 37 pages
+├── COMPARISON_FA.docx        Persian report, 45 pages
 ├── COMPARISON_FA.pdf         Persian report, 37 pages
-├── COMPARISON_EN.docx        English report, 38 pages
+├── COMPARISON_EN.docx        English report, 46 pages
 └── COMPARISON_EN.pdf         English report, 38 pages
 code/
 ├── sync_model.py             the model checker: 8 algorithms, verdicts, witnesses
@@ -287,3 +287,13 @@ The content modules live in `tools/content/ex4_fa.py` and
 ![خط زمانی مانیتور](diagrams/fig_monitor_timeline.png)
 
 در مقایسهٔ دکر و پترسون باید فرض دو شرکت‌کننده و اتمی بودن خواندن/نوشتن توضیح داده شود؛ نتیجهٔ الگوریتم‌های نرم‌افزاری کلاسیک را بدون بحث مدل حافظه به پیاده‌سازی چند‌هسته‌ای مدرن تعمیم ندهید.
+
+
+## نسخهٔ گسترش‌یافته و صفحه‌شماری نهایی
+
+| گزارش | تعداد صفحهٔ PDF نهایی |
+|---|---:|
+| فارسی | **45 صفحه** |
+| English | **46 pages** |
+
+این تعدادها از PDFهای تولیدشده در GitHub Actions با شمارش صفحات PDF تأیید شده‌اند. فایل‌های نهایی در پوشهٔ `docs/` قرار دارند. منابع Markdown و ضمیمهٔ فنی نیز در همان پوشه نگهداری می‌شوند.
