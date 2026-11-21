@@ -14,7 +14,7 @@
 | Language | Markdown | Word (DOCX) | PDF | Pages |
 |---|---|---|---|---:|
 | Persian (فارسی) | [`MANUAL_SOLUTION_FA.md`](MANUAL_SOLUTION_FA.md) | [`docs/MANUAL_SOLUTION_FA.docx`](docs/MANUAL_SOLUTION_FA.docx) | [`docs/MANUAL_SOLUTION_FA.pdf`](docs/MANUAL_SOLUTION_FA.pdf) | **44** |
-| English | [`MANUAL_SOLUTION_EN.md`](MANUAL_SOLUTION_EN.md) | [`docs/MANUAL_SOLUTION_EN.docx`](docs/MANUAL_SOLUTION_EN.docx) | [`docs/MANUAL_SOLUTION_EN.pdf`](docs/MANUAL_SOLUTION_EN.pdf) | **24** |
+| English | [`MANUAL_SOLUTION_EN.md`](MANUAL_SOLUTION_EN.md) | [`docs/MANUAL_SOLUTION_EN.docx`](docs/MANUAL_SOLUTION_EN.docx) | [`docs/MANUAL_SOLUTION_EN.pdf`](docs/MANUAL_SOLUTION_EN.pdf) | **44** |
 
 Page counts are measured, not estimated: the PDF count is read out of the PDF file
 itself, and the DOCX count is a measured estimate of the Word reflow. Both reports
@@ -109,9 +109,9 @@ MANUAL_SOLUTION_FA.md            Persian report (Markdown source)
 MANUAL_SOLUTION_EN.md            English report (Markdown source)
 docs/
 ├── MANUAL_SOLUTION_FA.docx      Persian report, 44 pages
-├── MANUAL_SOLUTION_FA.pdf       Persian report, 24 pages
+├── MANUAL_SOLUTION_FA.pdf       Persian report, 44 pages
 ├── MANUAL_SOLUTION_EN.docx      English report, 44 pages
-└── MANUAL_SOLUTION_EN.pdf       English report, 24 pages
+└── MANUAL_SOLUTION_EN.pdf       English report, 44 pages
 code/
 ├── edf_rm.py                    simulator, schedulability tests, CLI
 ├── run_experiments.py           writes every artefact under output/
@@ -248,7 +248,7 @@ step tables and the program can never disagree.
 | جدول مقایسه | موجود؛ جدول زمان‌بندی و مقایسهٔ گام‌به‌گام EDF/RM در راه‌حل |
 | کد اجرایی | موجود؛ کد مستقل برای محاسبه و کنترل حل دستی |
 | مستند فارسی و انگلیسی | موجود؛ Word و PDF هر دو زبان |
-| بیش از ۴۰ صفحه | **فعلاً احراز نمی‌شود: PDFها ۲۴ صفحه‌اند** |
+| بیش از ۴۰ صفحه | تأیید شد؛ هر دو PDF نهایی ۴۴ صفحه‌اند |
 
 **دو نمودار اصلی حل دستی**
 
