@@ -10,6 +10,9 @@ from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docxcompose.composer import Composer
 from pypdf import PdfReader
+import sys
+sys.path.insert(0,str(Path(__file__).resolve().parent))
+from build_fa_report import build as build_fa_markdown
 ROOT=Path(__file__).resolve().parents[1]; DOCS=ROOT/"docs"
 STEMS={"Exercise-1-Algorithm-Introduction":"REPORT","Exercise-2-MLQ-EDF-RM-Comparison":"COMPARISON","Exercise-3-EDF-RM-Manual-Scheduling":"MANUAL_SOLUTION","Exercise-4-Dekker-Peterson-Semaphore-Monitor":"COMPARISON","Exercise-6-Paper-And-Seminar":"PAPER","Exercise-7-Readers-Writers-Comparison":"REPORT"}
 MARKER=re.compile(r"<!--\s*page\s+\d+\s*-->"); IMG=re.compile(r"!\[([^\]]*)\]\(([^)]+)\)"); INLINE=re.compile(r"(\*\*.+?\*\*|\x60.+?\x60|\*.+?\*)")
@@ -89,7 +92,7 @@ def appendix_docx(md,out,lang):
     continue
    p=d.add_paragraph();p.paragraph_format.space_after=Pt(7);p.paragraph_format.line_spacing=1.12;runs(p," ".join(lines),is_rtl)
  d.save(out)
-def build(stem,lang):
+def build_en_legacy(stem,lang):
  name=f"{stem}_{lang}";docx=DOCS/f"{name}.docx";md=DOCS/f"APPENDIX_{lang}.md"
  base=DOCS/".base";base.mkdir(parents=True,exist_ok=True);original=base/f"{name}.docx"
  if not md.is_file():raise FileNotFoundError(md)
@@ -106,6 +109,17 @@ def build(stem,lang):
   pages=len(PdfReader(str(pdf)).pages);print(f"VERIFIED {name}: {pages} pages",flush=True)
   if pages<=40:raise RuntimeError(f"{name}: {pages} pages, expected >40")
   shutil.copy2(merged,docx);shutil.copy2(pdf,DOCS/f"{name}.pdf");return pages
+def build(stem,lang):
+ if lang=="FA":
+  # Persian: laid out directly from the Markdown source (continuous RTL layout,
+  # no forced page break per section, LTR code blocks, RTL tables).
+  name=f"{stem}_{lang}";md=ROOT/f"{name}.md"
+  if not md.is_file():raise FileNotFoundError(md)
+  pages=build_fa_markdown(md,DOCS/name,ROOT)
+  print(f"VERIFIED {name}: {pages} pages",flush=True)
+  if not 20<=pages<=40:raise RuntimeError(f"{name}: {pages} pages, expected 20-40")
+  return pages
+ return build_en_legacy(stem,lang)
 def main():
  branch=os.environ.get("GITHUB_REF_NAME") or subprocess.check_output(["git","branch","--show-current"],cwd=ROOT,text=True).strip()
  if branch not in STEMS:raise SystemExit("No report mapping for "+branch)
