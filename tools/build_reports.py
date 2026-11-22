@@ -10,6 +10,9 @@ from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docxcompose.composer import Composer
 from pypdf import PdfReader
+import sys
+sys.path.insert(0,str(Path(__file__).resolve().parent))
+from build_fa_report import build as build_fa_markdown
 ROOT=Path(__file__).resolve().parents[1]; DOCS=ROOT/"docs"
 REPORT_STEMS={"Exercise-1-Algorithm-Introduction":"REPORT","Exercise-2-MLQ-EDF-RM-Comparison":"COMPARISON","Exercise-3-EDF-RM-Manual-Scheduling":"MANUAL_SOLUTION","Exercise-4-Dekker-Peterson-Semaphore-Monitor":"COMPARISON","Exercise-6-Paper-And-Seminar":"PAPER","Exercise-7-Readers-Writers-Comparison":"REPORT"}
 PAGE_MARKER=re.compile(r"<!--\s*page\s+\d+\s*-->"); IMAGE=re.compile(r"!\[([^\]]*)\]\(([^)]+)\)"); INLINE=re.compile(r"(\*\*.+?\*\*|\x60.+?\x60|\*.+?\*)")
@@ -109,9 +112,20 @@ def build_one(stem,lang):
   pages=len(PdfReader(str(pdf)).pages); print(f"VERIFIED {name}: {pages} PDF pages",flush=True)
   if pages<=40: raise RuntimeError(f"{name} has {pages} pages; expected more than 40")
   shutil.copy2(merged,current); shutil.copy2(pdf,DOCS/f"{name}.pdf"); return pages
+def build(stem,lang):
+ if lang=="FA":
+  # Persian: laid out directly from the Markdown source (continuous RTL layout,
+  # no forced page break per section, LTR code blocks, RTL tables).
+  name=f"{stem}_{lang}";md=ROOT/f"{name}.md"
+  if not md.is_file():raise FileNotFoundError(md)
+  pages=build_fa_markdown(md,DOCS/name,ROOT)
+  print(f"VERIFIED {name}: {pages} pages",flush=True)
+  if not 20<=pages<=40:raise RuntimeError(f"{name}: {pages} pages, expected 20-40")
+  return pages
+ return build_one(stem,lang)
 def main():
  branch=os.environ.get("GITHUB_REF_NAME") or subprocess.check_output(["git","branch","--show-current"],cwd=ROOT,text=True).strip()
  if branch not in REPORT_STEMS: raise SystemExit(f"No report mapping for {branch!r}")
- stem=REPORT_STEMS[branch]; counts={l:build_one(stem,l) for l in ("FA","EN")}
+ stem=REPORT_STEMS[branch]; counts={l:build(stem,l) for l in ("FA","EN")}
  print(f"Final verified page counts for {branch}: {counts}",flush=True)
 if __name__=="__main__": main()
